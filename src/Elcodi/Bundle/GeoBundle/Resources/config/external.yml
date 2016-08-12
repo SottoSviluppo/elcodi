@@ -1,0 +1,6 @@
+elcodi_entity_translator:
+    configuration:
+        Elcodi\Plugin\NoGeoAddressBundle\Entity\Interfaces\CountryInterface:
+            alias: country
+            fields:
+                name: ~

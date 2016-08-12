@@ -59,7 +59,6 @@ class AddressFormatter
         //     ->locationProvider
         //     ->getHierarchy($cityLocationId);
         // $cityHierarchyAsc = array_reverse($cityHierarchy);
-
         $addressArray = [
             'id' => $address->getId(),
             'name' => $address->getName(),
@@ -68,6 +67,7 @@ class AddressFormatter
             'address' => $address->getAddress(),
             'addressMore' => $address->getAddressMore(),
             'city' => $address->getCity(),
+            'country' => $address->getCountry()->getName(),
             'postalCode' => $address->getPostalcode(),
             'phone' => $address->getPhone(),
             'mobile' => $address->getMobile(),
@@ -83,11 +83,10 @@ class AddressFormatter
         //         = $cityLocationNode->getName();
         // }
 
-        // $addressArray['fullAddress'] =
-        //     $this->buildFullAddressString(
-        //         $address,
-        //         $addressArray['city']
-        //     );
+        $addressArray['fullAddress'] =
+            $this->buildFullAddressString(
+                $address
+        );
 
         return $addressArray;
     }
@@ -101,17 +100,17 @@ class AddressFormatter
      * @return string
      */
     private function buildFullAddressString(
-        AddressInterface $address,
-        array $cityHierarchy
+        AddressInterface $address
     ) {
-        $cityString = implode(', ', $cityHierarchy);
+        // $cityString = implode(', ', $cityHierarchy);
 
         return sprintf(
-            '%s %s, %s %s',
+            '%s %s %s, %s, %s',
             $address->getAddress(),
             $address->getAddressMore(),
-            $cityString,
-            $address->getPostalcode()
+            $address->getCity(),
+            $address->getPostalcode(),
+            $address->getCountry()->getName()
         );
     }
 }
