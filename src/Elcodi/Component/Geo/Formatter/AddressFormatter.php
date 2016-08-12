@@ -53,10 +53,12 @@ class AddressFormatter
     public function toArray(AddressInterface $address)
     {
         $cityLocationId = $address->getCity();
-        $cityHierarchy = $this
-            ->locationProvider
-            ->getHierarchy($cityLocationId);
-        $cityHierarchyAsc = array_reverse($cityHierarchy);
+
+        // removed to bypass location
+        // $cityHierarchy = $this
+        //     ->locationProvider
+        //     ->getHierarchy($cityLocationId);
+        // $cityHierarchyAsc = array_reverse($cityHierarchy);
 
         $addressArray = [
             'id' => $address->getId(),
@@ -65,25 +67,27 @@ class AddressFormatter
             'recipientSurname' => $address->getRecipientSurname(),
             'address' => $address->getAddress(),
             'addressMore' => $address->getAddressMore(),
+            'city' => $address->getCity(),
             'postalCode' => $address->getPostalcode(),
             'phone' => $address->getPhone(),
             'mobile' => $address->getMobile(),
             'comment' => $address->getComments(),
         ];
 
-        foreach ($cityHierarchyAsc as $cityLocationNode) {
-            /**
-             * @var LocationData $cityLocationNode
-             */
-            $addressArray['city'][$cityLocationNode->getType()]
-                = $cityLocationNode->getName();
-        }
+        // removed to bypass location
+        // foreach ($cityHierarchyAsc as $cityLocationNode) {
+        //     /**
+        //      * @var LocationData $cityLocationNode
+        //      */
+        //     $addressArray['city'][$cityLocationNode->getType()]
+        //         = $cityLocationNode->getName();
+        // }
 
-        $addressArray['fullAddress'] =
-            $this->buildFullAddressString(
-                $address,
-                $addressArray['city']
-            );
+        // $addressArray['fullAddress'] =
+        //     $this->buildFullAddressString(
+        //         $address,
+        //         $addressArray['city']
+        //     );
 
         return $addressArray;
     }

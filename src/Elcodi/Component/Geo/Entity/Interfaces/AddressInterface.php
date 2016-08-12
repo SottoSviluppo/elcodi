@@ -189,4 +189,21 @@ interface AddressInterface
      * @return string Postalcode
      */
     public function getPostalcode();
+
+     /**
+     * Sets Country.
+     *
+     * @param entity $country
+     *
+     * @return $this Self object
+     */
+    public function setCountry($country);
+
+    /**
+     * Get Country.
+     *
+     * @return entity Country
+     */
+    public function getCountry();
+
 }

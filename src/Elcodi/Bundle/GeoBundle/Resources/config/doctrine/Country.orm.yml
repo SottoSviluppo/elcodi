@@ -1,0 +1,28 @@
+Elcodi\Component\Geo\Entity\Country:
+    type: entity
+    repositoryClass: Elcodi\Component\Geo\Repository\CountryRepository
+    table: country
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+        updatedAt:
+            column: updated_at
+            type: datetime
+        enabled:
+            column: enabled
+            type: boolean
+
+    lifecycleCallbacks:
+        preUpdate: [loadUpdateAt]
+        prePersist: [loadUpdateAt]

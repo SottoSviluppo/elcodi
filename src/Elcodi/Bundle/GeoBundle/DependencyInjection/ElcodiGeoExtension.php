@@ -88,6 +88,11 @@ class ElcodiGeoExtension extends AbstractExtension implements EntitiesOverridabl
             'elcodi.entity.location.manager' => $config['mapping']['location']['manager'],
             'elcodi.entity.location.enabled' => $config['mapping']['location']['enabled'],
 
+            'elcodi.entity.country.class' => $config['mapping']['country']['class'],
+            'elcodi.entity.country.mapping_file' => $config['mapping']['country']['mapping_file'],
+            'elcodi.entity.country.manager' => $config['mapping']['country']['manager'],
+            'elcodi.entity.country.enabled' => $config['mapping']['country']['enabled'],
+
             'elcodi.location_api_host' => $config['location']['api_host'],
         ];
     }
@@ -131,6 +136,7 @@ class ElcodiGeoExtension extends AbstractExtension implements EntitiesOverridabl
         return [
             'Elcodi\Component\Geo\Entity\Interfaces\AddressInterface' => 'elcodi.entity.address.class',
             'Elcodi\Component\Geo\Entity\Interfaces\LocationInterface' => 'elcodi.entity.location.class',
+            'Elcodi\Component\Geo\Entity\Interfaces\CountryInterface' => 'elcodi.entity.country.class',
         ];
     }
 

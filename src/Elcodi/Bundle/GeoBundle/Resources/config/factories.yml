@@ -18,6 +18,11 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.location.class%"]]
 
+    elcodi.factory.country:
+        class: Elcodi\Component\Geo\Factory\CountryFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.country.class%"]]
+
     elcodi.factory.location_data:
         class: Elcodi\Component\Geo\Factory\LocationDataFactory
 

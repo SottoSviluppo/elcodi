@@ -19,3 +19,8 @@ services:
         parent: elcodi.abstract_repository
         arguments:
             - %elcodi.entity.location.class%
+
+    elcodi.repository.country:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.country.class%

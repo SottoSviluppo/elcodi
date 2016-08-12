@@ -41,6 +41,7 @@ class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
                 [
                     'address',
                     'location',
+                    'country',
                 ]
             );
     }
