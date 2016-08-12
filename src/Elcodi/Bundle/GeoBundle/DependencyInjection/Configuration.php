@@ -52,6 +52,13 @@ class Configuration extends AbstractConfiguration
                             'default',
                             true
                         ))
+                        ->append($this->addMappingNode(
+                            'country',
+                            'Elcodi\Component\Geo\Entity\Country',
+                            '@ElcodiGeoBundle/Resources/config/doctrine/Country.orm.yml',
+                            'default',
+                            true
+                        ))
                     ->end()
                 ->end()
                 ->arrayNode('location')

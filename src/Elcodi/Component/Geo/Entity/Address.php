@@ -100,6 +100,12 @@ class Address implements AddressInterface
     protected $postalCode;
 
     /**
+     * @var entity
+     *
+     */
+    protected $country;
+
+    /**
      * Sets Address.
      *
      * @param string $address Address
@@ -338,4 +344,29 @@ class Address implements AddressInterface
     {
         return $this->postalCode;
     }
+    
+     /**
+     * Sets Country.
+     *
+     * @param entity $country
+     *
+     * @return $this Self object
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get Country.
+     *
+     * @return entity Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
 }

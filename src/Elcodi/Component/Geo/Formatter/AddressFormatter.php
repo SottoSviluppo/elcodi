@@ -53,11 +53,12 @@ class AddressFormatter
     public function toArray(AddressInterface $address)
     {
         $cityLocationId = $address->getCity();
-        $cityHierarchy = $this
-            ->locationProvider
-            ->getHierarchy($cityLocationId);
-        $cityHierarchyAsc = array_reverse($cityHierarchy);
 
+        // removed to bypass location
+        // $cityHierarchy = $this
+        //     ->locationProvider
+        //     ->getHierarchy($cityLocationId);
+        // $cityHierarchyAsc = array_reverse($cityHierarchy);
         $addressArray = [
             'id' => $address->getId(),
             'name' => $address->getName(),
@@ -65,25 +66,27 @@ class AddressFormatter
             'recipientSurname' => $address->getRecipientSurname(),
             'address' => $address->getAddress(),
             'addressMore' => $address->getAddressMore(),
+            'city' => $address->getCity(),
+            'country' => $address->getCountry()->getName(),
             'postalCode' => $address->getPostalcode(),
             'phone' => $address->getPhone(),
             'mobile' => $address->getMobile(),
             'comment' => $address->getComments(),
         ];
 
-        foreach ($cityHierarchyAsc as $cityLocationNode) {
-            /**
-             * @var LocationData $cityLocationNode
-             */
-            $addressArray['city'][$cityLocationNode->getType()]
-                = $cityLocationNode->getName();
-        }
+        // removed to bypass location
+        // foreach ($cityHierarchyAsc as $cityLocationNode) {
+        //     /**
+        //      * @var LocationData $cityLocationNode
+        //      */
+        //     $addressArray['city'][$cityLocationNode->getType()]
+        //         = $cityLocationNode->getName();
+        // }
 
         $addressArray['fullAddress'] =
             $this->buildFullAddressString(
-                $address,
-                $addressArray['city']
-            );
+                $address
+        );
 
         return $addressArray;
     }
@@ -97,17 +100,17 @@ class AddressFormatter
      * @return string
      */
     private function buildFullAddressString(
-        AddressInterface $address,
-        array $cityHierarchy
+        AddressInterface $address
     ) {
-        $cityString = implode(', ', $cityHierarchy);
+        // $cityString = implode(', ', $cityHierarchy);
 
         return sprintf(
-            '%s %s, %s %s',
+            '%s %s %s, %s, %s',
             $address->getAddress(),
             $address->getAddressMore(),
-            $cityString,
-            $address->getPostalcode()
+            $address->getCity(),
+            $address->getPostalcode(),
+            $address->getCountry()->getName()
         );
     }
 }
