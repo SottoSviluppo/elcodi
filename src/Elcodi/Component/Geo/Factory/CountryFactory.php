@@ -43,7 +43,8 @@ class CountryFactory extends AbstractFactory
         $country = new $classNamespace();
         $country
             ->setEnabled(true)
-            // ->setCreatedAt($this->now())
+            ->setCreatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime())
             ;
 
         return $country;

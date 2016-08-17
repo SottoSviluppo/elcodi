@@ -121,6 +121,7 @@ class CartLineOrderLineTransformer
             ->setPurchasable($cartLine->getPurchasable())
             ->setQuantity($cartLine->getQuantity())
             ->setPurchasableAmount($cartLine->getPurchasableAmount())
+            ->setTax($cartLine->getTax())
             ->setAmount($cartLine->getAmount())
             ->setHeight($cartLine->getHeight())
             ->setWidth($cartLine->getWidth())

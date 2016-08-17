@@ -26,6 +26,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
+use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 
 /**
  * A Customer is a User with shopping capabilities and associations,
@@ -33,6 +34,8 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
  */
 class Customer extends AbstractUser implements CustomerInterface
 {
+    use TaxableTrait;
+
     /**
      * @var Collection
      *

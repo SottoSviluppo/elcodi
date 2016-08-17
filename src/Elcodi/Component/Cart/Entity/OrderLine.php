@@ -23,6 +23,7 @@ use Elcodi\Component\Cart\Entity\Traits\PriceTrait;
 use Elcodi\Component\Cart\Entity\Traits\PurchasableWrapperTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Product\Entity\Traits\DimensionsTrait;
+use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 
 /**
  * OrderLine.
@@ -35,6 +36,7 @@ class OrderLine implements OrderLineInterface
     use IdentifiableTrait,
         PurchasableWrapperTrait,
         PriceTrait,
+        TaxableTrait,
         DimensionsTrait;
 
     /**
