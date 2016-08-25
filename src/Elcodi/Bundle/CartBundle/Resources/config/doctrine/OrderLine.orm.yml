@@ -67,3 +67,9 @@ Elcodi\Component\Cart\Entity\OrderLine:
                 name: purchasable_id
                 referencedColumnName: id
                 nullable: true
+        tax:
+            targetEntity: Elcodi\Component\Tax\Entity\Interfaces\TaxInterface
+            joinColumn:
+                 name: tax_id
+                 referencedColumnName: id
+                 nullable: true

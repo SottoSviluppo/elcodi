@@ -64,6 +64,7 @@ class CustomerFactory extends AbstractFactory
             ->setGender(ElcodiUserProperties::GENDER_UNKNOWN)
             ->setGuest(false)
             ->setNewsletter(false)
+            ->setCompany(false)
             ->setAddresses(new ArrayCollection())
             ->setCarts(new ArrayCollection())
             ->setOrders(new ArrayCollection())

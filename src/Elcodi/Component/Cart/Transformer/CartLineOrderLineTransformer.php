@@ -51,6 +51,10 @@ class CartLineOrderLineTransformer
      * OrderLine factory
      */
     private $orderLineFactory;
+    
+
+    private $customerWrapper;
+
 
     /**
      * Construct method.
@@ -60,10 +64,13 @@ class CartLineOrderLineTransformer
      */
     public function __construct(
         OrderLineEventDispatcher $orderLineEventDispatcher,
-        OrderLineFactory $orderLineFactory
+        OrderLineFactory $orderLineFactory,
+        $customerWrapper
+
     ) {
         $this->orderLineEventDispatcher = $orderLineEventDispatcher;
         $this->orderLineFactory = $orderLineFactory;
+        $this->customerWrapper = $customerWrapper;
     }
 
     /**
@@ -121,11 +128,22 @@ class CartLineOrderLineTransformer
             ->setPurchasable($cartLine->getPurchasable())
             ->setQuantity($cartLine->getQuantity())
             ->setPurchasableAmount($cartLine->getPurchasableAmount())
+            ->setTax($cartLine->getTax())
             ->setAmount($cartLine->getAmount())
             ->setHeight($cartLine->getHeight())
             ->setWidth($cartLine->getWidth())
             ->setDepth($cartLine->getDepth())
             ->setWeight($cartLine->getWeight());
+
+        // force different tax if customer has different tax
+        $customer = $this
+            ->customerWrapper
+            ->get();
+
+        if ($customer !== null && 
+            $customer->getTax() !== null &&
+            $customer->getTax() !== $cartLine->getTax())
+            $orderLine->setTax($customer->getTax());
 
         $this
             ->orderLineEventDispatcher

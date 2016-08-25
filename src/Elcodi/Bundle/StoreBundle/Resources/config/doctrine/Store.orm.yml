@@ -51,6 +51,9 @@ Elcodi\Component\Store\Entity\Store:
         useStock:
             column: use_stock
             type: boolean
+        taxIncluded:
+            column: tax_included
+            type: boolean
 
         createdAt:
             column: created_at
@@ -75,6 +78,12 @@ Elcodi\Component\Store\Entity\Store:
             joinColumn:
                 name: default_language_iso
                 referencedColumnName: iso
+                nullable: true
+        defaultTax:
+            targetEntity: Elcodi\Component\Tax\Entity\Interfaces\TaxInterface
+            joinColumn:
+                name: default_tax_id
+                referencedColumnName: id
                 nullable: true
         defaultCurrency:
             targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface

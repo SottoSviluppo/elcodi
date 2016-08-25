@@ -26,6 +26,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
+use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 
 /**
  * A Customer is a User with shopping capabilities and associations,
@@ -33,6 +34,8 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
  */
 class Customer extends AbstractUser implements CustomerInterface
 {
+    use TaxableTrait;
+
     /**
      * @var Collection
      *
@@ -60,6 +63,34 @@ class Customer extends AbstractUser implements CustomerInterface
      * Identity document
      */
     protected $identityDocument;
+
+    /**
+     * @var bool
+     *
+     * Is company
+     */
+    protected $company;
+
+    /**
+     * @var string
+     *
+     * Company name
+     */
+    protected $companyName;
+
+    /**
+     * @var string
+     *
+     * VAT
+     */
+    protected $vat;
+
+    /**
+     * @var string
+     *
+     * Fiscal code
+     */
+    protected $fiscalCode;
 
     /**
      * @var bool
@@ -186,6 +217,99 @@ class Customer extends AbstractUser implements CustomerInterface
     {
         return $this->guest;
     }
+
+    /**
+     * Sets company.
+     *
+     * @param bool $company Company
+     *
+     * @return $this Self object
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get Company.
+     *
+     * @return bool Company
+     */
+    public function isCompany()
+    {
+        return $this->company;
+    }
+
+
+    /**
+     *
+     * @param string $companyName
+     *
+     * @return $this
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get company name.
+     *
+     * @return string Identity document
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * Set vat.
+     *
+     * @param string $vat
+     *
+     * @return $this
+     */
+    public function setVat($vat)
+    {
+        $this->vat = $vat;
+
+        return $this;
+    }
+
+    /**
+     * @return string Vat
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+
+    /**
+     * @param string $fiscalCode
+     *
+     * @return $this
+     */
+    public function setFiscalCode($fiscalCode)
+    {
+        $this->fiscalCode = $fiscalCode;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @return string Fiscal code
+     */
+    public function getFiscalCode()
+    {
+        return $this->fiscalCode;
+    }
+
 
     /**
      * Sets Newsletter.

@@ -23,6 +23,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 
 /**
@@ -163,6 +164,22 @@ interface StoreInterface
     public function setUseStock($useStock);
 
     /**
+     * Get TaxIncluded.
+     *
+     * @return bool TaxIncluded
+     */
+    public function getTaxIncluded();
+
+    /**
+     * Sets TaxIncluded.
+     *
+     * @param bool $taxIncluded TaxIncluded
+     *
+     * @return $this Self object
+     */
+    public function setTaxIncluded($taxIncluded);
+
+    /**
      * Get Address.
      *
      * @return AddressInterface Address
@@ -193,6 +210,22 @@ interface StoreInterface
      * @return $this Self object
      */
     public function setDefaultLanguage(LanguageInterface $defaultLanguage);
+
+    /**
+     * Get DefaultTax.
+     *
+     * @return TaxInterface DefaultTax
+     */
+    public function getDefaultTax();
+
+    /**
+     * Sets DefaultTax.
+     *
+     * @param TaxInterface $defaultTax DefaultTax
+     *
+     * @return $this Self object
+     */
+    public function setDefaultTax(TaxInterface $defaultTax);
 
     /**
      * Get DefaultCurrency.
