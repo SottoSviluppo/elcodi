@@ -23,6 +23,7 @@ use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 
@@ -92,6 +93,13 @@ class Store implements StoreInterface
     protected $useStock;
 
     /**
+     * @var bool
+     *
+     * tax included
+     */
+    protected $taxIncluded;
+
+    /**
      * @var AddressInterface
      *
      * Address
@@ -104,6 +112,13 @@ class Store implements StoreInterface
      * Default language
      */
     protected $defaultLanguage;
+
+    /**
+     * @var TaxInterface
+     *
+     * Default tax
+     */
+    protected $defaultTax;
 
     /**
      * @var CurrencyInterface
@@ -346,6 +361,31 @@ class Store implements StoreInterface
         return $this;
     }
 
+
+    /**
+     * Get TaxIncluded.
+     *
+     * @return bool TaxIncluded
+     */
+    public function getTaxIncluded()
+    {
+        return $this->taxIncluded;
+    }
+
+    /**
+     * Sets TaxIncluded.
+     *
+     * @param bool $taxIncluded TaxIncluded
+     *
+     * @return $this Self object
+     */
+    public function setTaxIncluded($taxIncluded)
+    {
+        $this->taxIncluded = $taxIncluded;
+
+        return $this;
+    }
+
     /**
      * Get Address.
      *
@@ -393,6 +433,31 @@ class Store implements StoreInterface
 
         return $this;
     }
+
+    /**
+     * Get DefaultTax.
+     *
+     * @return TaxInterface DefaultTax
+     */
+    public function getDefaultTax()
+    {
+        return $this->defaultTax;
+    }
+
+    /**
+     * Sets DefaultTax.
+     *
+     * @param TaxInterface $defaultTax DefaultTax
+     *
+     * @return $this Self object
+     */
+    public function setDefaultTax(TaxInterface $defaultTax)
+    {
+        $this->defaultTax = $defaultTax;
+
+        return $this;
+    }
+
 
     /**
      * Get DefaultCurrency.

@@ -11,6 +11,7 @@ services:
             - '@elcodi.factory.cart'
             - '@elcodi.factory.cart_line'
             - '@elcodi.wrapper.customer'
+            - '@elcodi.store'
 
     elcodi.session_manager.cart:
         class: Elcodi\Component\Cart\Services\CartSessionManager

@@ -82,6 +82,8 @@ class CartManager
 
     private $customerWrapper;
 
+    private $store;
+
 
     /**
      * Construct method.
@@ -96,13 +98,15 @@ class CartManager
         CartLineEventDispatcher $cartLineEventDispatcher,
         CartFactory $cartFactory,
         CartLineFactory $cartLineFactory,
-        $customerWrapper
+        $customerWrapper,
+        $store
     ) {
         $this->cartEventDispatcher = $cartEventDispatcher;
         $this->cartLineEventDispatcher = $cartLineEventDispatcher;
         $this->cartFactory = $cartFactory;
         $this->cartLineFactory = $cartLineFactory;
         $this->customerWrapper = $customerWrapper;
+        $this->store = $store;
     }
 
     /**
@@ -407,8 +411,11 @@ class CartManager
             }
         }
 
+ 
         // find correct tax to use
-        $tax = $purchasable->getTax();
+        $tax = $this->store->getDefaultTax();
+        if ($purchasable->getTax() != null)
+            $tax = $purchasable->getTax();
         $customer = $this
             ->customerWrapper
             ->get();

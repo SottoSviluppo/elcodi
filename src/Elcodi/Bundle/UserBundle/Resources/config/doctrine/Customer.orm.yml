@@ -21,6 +21,24 @@ Elcodi\Component\User\Entity\Customer:
         guest:
             column: guest
             type: boolean
+        company:
+            column: company
+            type: boolean
+        companyName:
+            column: company_name
+            type: string
+            length: 255
+            nullable: true
+        vat:
+            column: vat
+            type: string
+            length: 255
+            nullable: true
+        fiscalCode:
+            column: fiscal_code
+            type: string
+            length: 255
+            nullable: true
         newsletter:
             column: newsletter
             type: boolean
