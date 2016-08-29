@@ -59,6 +59,7 @@ class AddressFormatter
         //     ->locationProvider
         //     ->getHierarchy($cityLocationId);
         // $cityHierarchyAsc = array_reverse($cityHierarchy);
+
         $addressArray = [
             'id' => $address->getId(),
             'name' => $address->getName(),
@@ -67,7 +68,7 @@ class AddressFormatter
             'address' => $address->getAddress(),
             'addressMore' => $address->getAddressMore(),
             'city' => $address->getCity(),
-            'country' => $address->getCountry()->getName(),
+            'country' => $this->getCountryName($address),
             'postalCode' => $address->getPostalcode(),
             'phone' => $address->getPhone(),
             'mobile' => $address->getMobile(),
@@ -110,7 +111,16 @@ class AddressFormatter
             $address->getAddressMore(),
             $address->getCity(),
             $address->getPostalcode(),
-            $address->getCountry()->getName()
+            $this->getCountryName($address)
         );
+    }
+
+    private function getCountryName($address)
+    {
+        $country = $address->getCountry();
+        $countryName = "";
+        if ($country !== null)
+            $countryName = $country->getName();
+        return $countryName;
     }
 }
