@@ -40,15 +40,14 @@ class PurchasableRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('p');
         $this->addPerformanceJoinsToQueryBuilder($queryBuilder);
 
-        return $queryBuilder
-            ->innerJoin('p.categories', 'c')
-            ->where('c.id IN (:categories)')
-            ->setParameters([
-                'categories' => $categories,
-            ])
-            ->getQuery()
-            ->getResult();
-    }
+		return $queryBuilder
+			->innerJoin('p.categories', 'c')
+			->where('c.id IN (:categories)')
+			->setParameters([
+				'categories' => $categories,
+			])
+			->getQuery();
+	}
 
     /**
      * Get purchasables that can be shown in Home.
