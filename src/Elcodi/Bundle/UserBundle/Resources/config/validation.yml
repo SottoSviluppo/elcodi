@@ -6,3 +6,7 @@ Elcodi\Component\User\Entity\Abstracts\AbstractUser:
             - Email: ~
             - NotBlank: ~
             - NotNull: ~
+
+Elcodi\Component\User\Entity\Customer:
+    constraints:
+        - Elcodi\Component\User\Validator\Constraints\CorrectCustomer: ~
