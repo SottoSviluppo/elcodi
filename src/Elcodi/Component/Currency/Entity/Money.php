@@ -95,19 +95,6 @@ class Money implements MoneyInterface
     }
 
     /**
-     * Gets the monetary value represented by this object converted to its base
-     * units.
-     *
-     * @return float
-     */
-    public function getConvertedAmount()
-    {
-        return $this
-            ->wrappedMoney
-            ->getConvertedAmount();
-    }
-
-    /**
      * Compares current Money object to another.
      *
      * Will return -1, 0, 1 if the amount of this Money object
@@ -124,7 +111,7 @@ class Money implements MoneyInterface
     {
         return $this
             ->wrappedMoney
-            ->compareTo($this->newWrappedMoneyFromMoney($other));
+            ->compare($this->newWrappedMoneyFromMoney($other));
     }
 
     /**
