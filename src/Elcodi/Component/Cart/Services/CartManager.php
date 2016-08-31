@@ -57,32 +57,32 @@ class CartManager
      *
      * Cart Event Dispatcher
      */
-    private $cartEventDispatcher;
+    protected $cartEventDispatcher;
 
     /**
      * @var CartLineEventDispatcher
      *
      * CartLine Event Dispatcher
      */
-    private $cartLineEventDispatcher;
+    protected $cartLineEventDispatcher;
 
     /**
      * @var CartFactory
      *
      * cartFactory
      */
-    private $cartFactory;
+    protected $cartFactory;
 
     /**
      * @var CartLineFactory
      *
      * CartLine Factory
      */
-    private $cartLineFactory;
+    protected $cartLineFactory;
 
-    private $customerWrapper;
+    protected $customerWrapper;
 
-    private $store;
+    protected $store;
 
 
     /**
