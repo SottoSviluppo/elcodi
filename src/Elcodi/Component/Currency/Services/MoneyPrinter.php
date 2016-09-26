@@ -182,7 +182,7 @@ class MoneyPrinter
         $cartLine
         )
     {
-        $price = $this->getSinglePrice($purchasable);
+        $price = $this->getSinglePrice($purchasable, $cartLine);
         return $this->printMoney($price);
     }
 
@@ -191,7 +191,7 @@ class MoneyPrinter
         $cartLine
         )
     {
-        $price = $this->getSinglePrice($purchasable);
+        $price = $this->getSinglePrice($purchasable, $cartLine);
         $price = $price->multiply($cartLine->getQuantity());
         return $this->printMoney($price);
     }
