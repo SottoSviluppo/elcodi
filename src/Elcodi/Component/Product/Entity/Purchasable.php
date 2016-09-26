@@ -99,6 +99,13 @@ abstract class Purchasable implements PurchasableInterface
     protected $showInHome;
 
     /**
+     * @var bool
+     *
+     * Keeps cart price without replacing it every time
+     */
+    protected $keepCartPrice;
+
+    /**
      * @var string
      *
      * Product dimensions
@@ -297,6 +304,30 @@ abstract class Purchasable implements PurchasableInterface
     public function setShowInHome($showInHome)
     {
         $this->showInHome = $showInHome;
+
+        return $this;
+    }
+
+    /**
+     * Get KeepCartPrice.
+     *
+     * @return bool KeepCartPrice
+     */
+    public function getKeepCartPrice()
+    {
+        return $this->keepCartPrice;
+    }
+
+    /**
+     * Sets KeepCartPrice.
+     *
+     * @param bool $keepCartPrice KeepCartPrice
+     *
+     * @return $this Self object
+     */
+    public function setKeepCartPrice($keepCartPrice)
+    {
+        $this->keepCartPrice = $keepCartPrice;
 
         return $this;
     }

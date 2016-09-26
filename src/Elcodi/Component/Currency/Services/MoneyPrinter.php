@@ -175,4 +175,30 @@ class MoneyPrinter
 
         return $this->printMoney($money);
     }
+
+    public function printConvertMoneyPurchasableCartLineSingle (
+        Purchasable $purchasable,
+        $cartLine
+        )
+    {
+        $price = $this->getSinglePrice($purchasable);
+        return $this->printMoney($price);
+    }
+
+    public function printConvertMoneyPurchasableCartLine (
+        Purchasable $purchasable,
+        $cartLine
+        )
+    {
+        $price = $this->getSinglePrice($purchasable);
+        $price = $price->multiply($cartLine->getQuantity());
+        return $this->printMoney($price);
+    }
+
+    protected function getSinglePrice(Purchasable $purchasable, $cartLine)
+    {
+        if ($purchasable->getKeepCartPrice())
+            return $cartLine->getPurchasableAmount();
+        return $purchasable->getResolvedPrice();
+    }
 }

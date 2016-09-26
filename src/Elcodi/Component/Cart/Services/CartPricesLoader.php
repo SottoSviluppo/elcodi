@@ -159,9 +159,12 @@ class CartPricesLoader
      *
      * @return CartLineInterface Line with prices loaded
      */
-    private function loadCartLinePrices(CartLineInterface $cartLine)
+    protected function loadCartLinePrices(CartLineInterface $cartLine)
     {
         $purchasable = $cartLine->getPurchasable();
+        if ($purchasable->getKeepCartPrice())
+            return $cartLine;
+
         $purchasablePrice = $purchasable->getPrice();
 
         /**

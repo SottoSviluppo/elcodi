@@ -70,6 +70,23 @@ class MoneyPrinterExtension extends Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('printConvertMoneyPurchasableCartLine', array(
+                $this->moneyPrinter, 
+                'printConvertMoneyPurchasableCartLine')
+            ),
+            new \Twig_SimpleFunction('printConvertMoneyPurchasableCartLineSingle', array(
+                $this->moneyPrinter, 
+                'printConvertMoneyPurchasableCartLineSingle')
+            ),
+        ];
+    }
+    
+    /**
      * return extension name.
      *
      * @return string extension name
