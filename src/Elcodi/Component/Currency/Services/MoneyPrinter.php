@@ -26,6 +26,7 @@ use Elcodi\Component\Currency\Exception\CurrencyNotAvailableException;
 use Elcodi\Component\Currency\Exception\CurrencyNotConvertibleException;
 use Elcodi\Component\Currency\Wrapper\CurrencyWrapper;
 use Elcodi\Component\Language\Entity\Interfaces\LocaleInterface;
+use Elcodi\Component\Product\Entity\Purchasable;
 
 /**
  * Class MoneyPrinter.
