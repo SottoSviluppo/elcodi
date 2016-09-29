@@ -25,39 +25,36 @@ use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 /**
  * Class CategoryRepository.
  */
-class CategoryRepository extends EntityRepository
-{
-    /**
-     * Get root categories.
-     *
-     * @return array Array of Root categories
-     */
-    public function getParentCategories()
-    {
-        return $this
-            ->createQueryBuilder('c')
-            ->where('c.root = :root')
-            ->setParameters([
-                'root' => true,
-            ])
-            ->getQuery()
-            ->getResult();
-    }
+class CategoryRepository extends EntityRepository {
+	/**
+	 * Get root categories.
+	 *
+	 * @return array Array of Root categories
+	 */
+	public function getParentCategories() {
+		return $this
+			->createQueryBuilder('c')
+			->where('c.root = :root')
+			->setParameters([
+				'root' => true,
+			])
+			->getQuery()
+			->getResult();
+	}
 
-    /**
-     * Get all categories ordered by parent elements and position, ascendant.
-     *
-     * @return array Categories sorted by parent and position, both ascending
-     */
-    public function getAllCategoriesSortedByParentAndPositionAsc()
-    {
-        return $this
-            ->createQueryBuilder('c')
-            ->addOrderBy('c.parent', 'asc')
-            ->addOrderBy('c.position', 'asc')
-            ->getQuery()
-            ->getResult();
-    }
+	/**
+	 * Get all categories ordered by parent elements and position, ascendant.
+	 *
+	 * @return array Categories sorted by parent and position, both ascending
+	 */
+	public function getAllCategoriesSortedByParentAndPositionAsc() {
+		return $this
+			->createQueryBuilder('c')
+			->addOrderBy('c.parent', 'asc')
+			->addOrderBy('c.position', 'asc')
+			->getQuery()
+			->getResult();
+	}
 
     /**
      * Get the children categories given a parent category.
@@ -113,6 +110,19 @@ class CategoryRepository extends EntityRepository
                 ->setParameter('parent_category', $categoryId);
         }
 
-        return $queryBuilder;
-    }
+		return $queryBuilder;
+	}
+
+	/**
+	 * Get the categories that have some purchasables associated
+	 *
+	 * @return array the list of categories
+	 */
+	public function getCategoriesWithPurchasables() {
+		$query = $this->createQueryBuilder('c')
+			->select('c')
+			->innerJoin('c.purchasables', 'purchasables')
+			->groupBy('c.id');
+		return $query->getQuery()->getArrayResult();
+	}
 }
