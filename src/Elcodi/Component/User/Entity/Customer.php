@@ -27,6 +27,7 @@ use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
+use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
 
 /**
  * A Customer is a User with shopping capabilities and associations,
@@ -133,6 +134,13 @@ class Customer extends AbstractUser implements CustomerInterface
      * Invoice address
      */
     protected $invoiceAddress;
+
+    /**
+     * @var CountryInterface
+     *
+     * country
+     */
+    protected $country;
 
     /**
      * User roles.
@@ -559,5 +567,30 @@ class Customer extends AbstractUser implements CustomerInterface
     public function getLanguage()
     {
         return $this->language;
+    }
+
+
+    /**
+     * Set country.
+     *
+     * @param CountryInterface $country The country
+     *
+     * @return $this Self object
+     */
+    public function setCountry(CountryInterface $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country.
+     *
+     * @return CountryInterface
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

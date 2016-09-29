@@ -23,6 +23,7 @@ use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
 
 /**
  * Interface CustomerInterface.
@@ -243,4 +244,20 @@ interface CustomerInterface extends AbstractUserInterface
      * @return LanguageInterface
      */
     public function getLanguage();
+
+    /**
+     * Set country.
+     *
+     * @param CountryInterface $country The country
+     *
+     * @return $this Self object
+     */
+    public function setCountry(CountryInterface $country);
+
+    /**
+     * Get country.
+     *
+     * @return CountryInterface
+     */
+    public function getCountry();
 }

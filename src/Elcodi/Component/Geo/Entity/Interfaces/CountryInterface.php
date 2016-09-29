@@ -18,7 +18,7 @@
 namespace Elcodi\Component\Geo\Entity\Interfaces;
 
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
-use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
+// use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 
 /**
@@ -27,8 +27,8 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 interface CountryInterface
     extends
     IdentifiableInterface,
-    DateTimeInterface,
-    EnabledInterface
+    DateTimeInterface
+    // EnabledInterface
 
 {
 
