@@ -42,7 +42,6 @@ class CartTest extends WebTestCase
     public function testDimensions()
     {
         $cart = $this->find('cart', 2);
-
         $this->assertEquals(25, $cart->getHeight());
         $this->assertEquals(30, $cart->getWidth());
         $this->assertEquals(35, $cart->getDepth());

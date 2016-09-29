@@ -24,14 +24,14 @@ use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
-
+use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
 /**
  * Interface CustomerInterface.
  *
  * Entities depending on CustomerInterfaces must implement shopping
  * capabilities and associations, such as addresses, orders, carts
  */
-interface CustomerInterface extends AbstractUserInterface
+interface CustomerInterface extends AbstractUserInterface, TaxableInterface
 {
     /**
      * Set phone.

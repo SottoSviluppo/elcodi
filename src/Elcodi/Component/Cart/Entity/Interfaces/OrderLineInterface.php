@@ -19,6 +19,7 @@ namespace Elcodi\Component\Cart\Entity\Interfaces;
 
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Product\Entity\Interfaces\DimensionableInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
 
 /**
  * Interface OrderLineInterface.
@@ -28,7 +29,8 @@ interface OrderLineInterface
     IdentifiableInterface,
     PurchasableWrapperInterface,
     PriceInterface,
-    DimensionableInterface
+    DimensionableInterface,
+    TaxableInterface
 {
     /**
      * Set Order.

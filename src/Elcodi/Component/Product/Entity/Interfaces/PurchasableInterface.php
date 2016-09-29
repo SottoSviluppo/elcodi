@@ -25,6 +25,8 @@ use Elcodi\Component\Core\Entity\Interfaces\ETaggableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
+
 
 /**
  * Interface PurchasableInterface.
@@ -48,7 +50,8 @@ interface PurchasableInterface
     ImagesContainerWithPrincipalImageInterface,
     EnabledInterface,
     PurchasablePriceInterface,
-    DimensionableInterface
+    DimensionableInterface,
+    TaxableInterface
 {
     /**
      * Gets the variant SKU.

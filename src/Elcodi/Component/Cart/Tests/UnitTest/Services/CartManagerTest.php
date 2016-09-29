@@ -91,11 +91,22 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
         $cartFactory = $this->getMock('Elcodi\Component\Cart\Factory\CartFactory', ['create'], [$emptyMoneyWrapper]);
         $cartLineFactory = $this->getMock('Elcodi\Component\Cart\Factory\CartLineFactory', ['create'], [$emptyMoneyWrapper]);
 
+
+        $customerFactory = $this->getMock('Elcodi\Component\User\Factory\CustomerFactory');
+        $tokenStorage = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
+        $customerWrapper = $this->getMock('Elcodi\Component\User\Wrapper\CustomerWrapper', ['create'], [$customerFactory, $tokenStorage]);
+
+        $store = $this
+            ->prophesize('Elcodi\Component\Store\Entity\Interfaces\StoreInterface')
+            ->reveal();
+
         $this->cartManager = new CartManager(
             $cartEventDispatcher,
             $cartLineEventDispatcher,
             $cartFactory,
-            $cartLineFactory
+            $cartLineFactory,
+            $customerWrapper,
+            $store
         );
 
         $this->cartFactory = $cartFactory;
