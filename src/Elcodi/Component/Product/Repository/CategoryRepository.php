@@ -90,19 +90,19 @@ class CategoryRepository extends EntityRepository {
         return $categories;
     }
 
-    /**
-     * Get the available parent categories for the received, usually the
-     * category itself and all the non root categories are excluded.
-     *
-     * @param int|null $categoryId The category id
-     *
-     * @return QueryBuilder
-     */
-    public function getAvailableParentCategoriesQueryBuilder($categoryId = null)
-    {
-        $queryBuilder = $this
-            ->createQueryBuilder('c')
-            ->where('c.root = 1');
+	/**
+	 * Get the available parent categories for the received, usually the
+	 * category itself and all the non root categories are excluded.
+	 *
+	 * @param int|null $categoryId The category id
+	 *
+	 * @return QueryBuilder
+	 */
+	public function getAvailableParentCategoriesQueryBuilder($categoryId = null) {
+		$queryBuilder = $this
+			->createQueryBuilder('c')
+			->where('c.enabled = 1');
+		// ->where('c.root = 1');
 
         if (null !== $categoryId) {
             $queryBuilder
