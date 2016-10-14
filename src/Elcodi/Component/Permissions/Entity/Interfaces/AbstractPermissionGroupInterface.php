@@ -4,11 +4,12 @@ namespace Elcodi\Component\Permission\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
+use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 
 /**
 * Represents a permission group API
 */
-interface AbstractPermissionGroupInterface
+interface AbstractPermissionGroupInterface extends IdentifiableInterface
 {
     /**
     * Get the associated user

@@ -24,11 +24,11 @@ class PermissionGroup extends AbstractPermissionGroup
     public function addPermission($entityType, $canRead, $canCreate, $canUpdate, $canDelete)
     {
         $permission = new Permission();
-        $permission->setEntityType($entityType);
-        $permission->setCanRead($canRead);
-        $permission->setCanCreate($canCreate);
-        $permission->setCanUpdate($canUpdate);
-        $permission->setCanDelete($canDelete);
+        $permission->setEntityType($entityType)
+            ->setCanRead($canRead)
+            ->setCanCreate($canCreate)
+            ->setCanUpdate($canUpdate)
+            ->setCanDelete($canDelete);
 
         if ($this->hasPermission($permission)) {
             throw new Exception("Permission already in collection");

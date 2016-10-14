@@ -103,8 +103,8 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     */
     public function removePermission(AbstractPermissionInterface $permission)
     {
-        if (!$this->permissions->contains($permission)) {
-            throw new Exception("No item found");
+        if (!$this->hasPermission($permission)) {
+            throw new Exception("Item not found");
         }
 
         $this->permissions->removeElement($permission);
@@ -122,13 +122,13 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
             return true;
         }
 
-        $exist = $this->permissions->exists(function($item) use ($permission) {
+        $exist = $this->permissions->exists(function($key, $element) use ($permission) {
             return (
-                $permission->getEntityType() === $item->getEntityType() &&
-                $permission->getCanRead() === $item->getCanRead() &&
-                $permission->getCanCreate() === $item->getCanCreate() &&
-                $permission->getCanUpdate() === $item->getCanUpdate() &&
-                $permission->getCanDelete() === $item->getCanDelete()
+                $permission->getEntityType() === $element->getEntityType() &&
+                $permission->getCanRead() === $element->getCanRead() &&
+                $permission->getCanCreate() === $element->getCanCreate() &&
+                $permission->getCanUpdate() === $element->getCanUpdate() &&
+                $permission->getCanDelete() === $element->getCanDelete()
             );
         });
 

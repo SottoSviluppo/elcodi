@@ -2,10 +2,12 @@
 
 namespace Elcodi\Component\Permission\Entity\Interfaces;
 
+use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+
 /**
 * Represents a permission API
 */
-interface AbstractPermissionInterface
+interface AbstractPermissionInterface extends IdentifiableInterface
 {
     /**
     * Get the entity type for the permission
