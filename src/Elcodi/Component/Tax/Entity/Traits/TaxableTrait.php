@@ -2,6 +2,8 @@
 
 namespace Elcodi\Component\Tax\Entity\Traits;
 
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
+
 trait TaxableTrait
 {
     /**

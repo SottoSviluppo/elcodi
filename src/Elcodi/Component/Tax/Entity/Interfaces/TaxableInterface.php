@@ -17,7 +17,6 @@
 
 namespace Elcodi\Component\Tax\Entity\Interfaces;
 
-
 /**
  * Interface TaxableInterface.
  */
