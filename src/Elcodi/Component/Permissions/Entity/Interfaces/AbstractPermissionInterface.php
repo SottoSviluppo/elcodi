@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcodi\Component\Permission\Entity\Interfaces;
+namespace Elcodi\Component\Permissions\Entity\Interfaces;
 
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 

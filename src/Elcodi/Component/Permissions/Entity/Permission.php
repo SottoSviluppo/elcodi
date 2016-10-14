@@ -1,8 +1,8 @@
 <?php
 
-namespace Elcodi\Component\Permission\Entity;
+namespace Elcodi\Component\Permissions\Entity;
 
-use Elcodi\Component\Permission\Entity\Abstracts\AbstractPermission;
+use Elcodi\Component\Permissions\Entity\Abstracts\AbstractPermission;
 
 class Permission extends AbstractPermission
 {

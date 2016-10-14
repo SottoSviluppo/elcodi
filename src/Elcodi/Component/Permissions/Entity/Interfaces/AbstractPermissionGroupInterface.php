@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcodi\Component\Permission\Entity\Interfaces;
+namespace Elcodi\Component\Permissions\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;

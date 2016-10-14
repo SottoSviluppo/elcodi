@@ -1,8 +1,8 @@
 <?php
 
-namespace Elcodi\Component\Permission\Entity\Abstracts;
+namespace Elcodi\Component\Permissions\Entity\Abstracts;
 
-use Elcodi\Component\Permission\Entity\Interfaces\IAbstractPermission;
+use Elcodi\Component\Permissions\Entity\Interfaces\IAbstractPermission;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 
 abstract class AbstractPermission implements IAbstractPermission
