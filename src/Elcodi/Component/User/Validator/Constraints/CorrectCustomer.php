@@ -8,11 +8,11 @@ use Symfony\Component\Validator\Constraint;
  */
 class CorrectCustomer extends Constraint
 {
-	public $messageCompany = 'The company data are not complete.';
-	public $messagePrivate = 'First name and last name are required.';
+    public $messageCompany = 'customer.error.company_data_not_complete';
+    public $messagePrivate = 'customer.error.first_last_required';
 
-	public function getTargets()
-	{
-		return self::CLASS_CONSTRAINT;
-	}
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
+    }
 }
