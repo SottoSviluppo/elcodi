@@ -13,7 +13,7 @@ abstract class AbstractPermission implements IAbstractPermission
     * @var string
     * The entity type
     */
-    protected $entityType;
+    protected $resource;
 
     /**
     * @var bool
@@ -40,22 +40,22 @@ abstract class AbstractPermission implements IAbstractPermission
     protected $canDelete;
 
     /**
-    * Get the entity type for the permission
+    * Get the resource for the permission
     * @return string
     */
-    public function getEntityType()
+    public function getResource()
     {
         return $this->entityType;
     }
 
     /**
-    * Set the entity type
-    * @param string the entityType type name
+    * Set the resource
+    * @param string the resource name
     * @return $this Self object
     */
-    public function setEntityType($entityType)
+    public function setResource($resource)
     {
-        $this->entityType = $entityType;
+        $this->resource = $resource;
         return $this;
     }
 

@@ -10,17 +10,17 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 interface AbstractPermissionInterface extends IdentifiableInterface
 {
     /**
-    * Get the entity type for the permission
+    * Get the resource for the permission
     * @return string
     */
-    function getEntityType();
+    function getResource();
 
     /**
-    * Set the entity type
-    * @param string the entity type name
+    * Set the resource
+    * @param string the resource name
     * @return $this Self object
     */
-    function setEntityType($entityType);
+    function setResource($entityType);
 
     /**
     * Get the read permission

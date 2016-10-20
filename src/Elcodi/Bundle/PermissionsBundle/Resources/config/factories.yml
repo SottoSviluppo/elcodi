@@ -1,0 +1,12 @@
+services:
+    #
+    # Factories
+    #
+
+    #
+    # Factory for permission group entity
+    #
+    elcodi.factory.permission_group:
+        class: Elcodi\Component\Permissions\Factory\PermissionGroupFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.permission_group.class%"]]

@@ -21,10 +21,10 @@ class PermissionGroup extends AbstractPermissionGroup
     * @param bool whether the user can delete the entity
     * @return $this Self object
     */
-    public function addPermission($entityType, $canRead, $canCreate, $canUpdate, $canDelete)
+    public function addPermission($resource, $canRead, $canCreate, $canUpdate, $canDelete)
     {
         $permission = new Permission();
-        $permission->setEntityType($entityType)
+        $permission->setResource($resource)
             ->setCanRead($canRead)
             ->setCanCreate($canCreate)
             ->setCanUpdate($canUpdate)

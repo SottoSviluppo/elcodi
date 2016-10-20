@@ -1,0 +1,20 @@
+services:
+    #
+    # Repositories
+    #
+
+    #
+    # Repository for permission group entity
+    #
+    elcodi.repository.permission_group:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.permission_group.class%
+
+    #
+    # Repository for permission entity
+    #
+    elcodi.repository.permission:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.permission.class%

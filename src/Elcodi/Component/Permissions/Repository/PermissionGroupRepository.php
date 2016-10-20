@@ -32,7 +32,7 @@ class PermissionGroupRepository extends EntityRepository
     * @param AdminUserInterface the current user
     * @return bool
     */
-    public function canReadEntity($entityType, AdminUserInterface $adminUser)
+    public function canReadEntity($resource, AdminUserInterface $adminUser)
     {
         $queryBuilder = $this->createQueryBuilder('pg');
         
@@ -41,10 +41,10 @@ class PermissionGroupRepository extends EntityRepository
             ->innerJoin('pg.permissions', 'p')
             ->innerJoin('pg.adminUser', 'a')
             ->where('a.id = :adminUserId')
-            ->andWhere('p.entityType = :entityType')
+            ->andWhere('p.resource = :resource')
             ->andWhere('p.canRead = true')
             ->setParameter('adminUserId', $adminUser->getId())
-            ->setParameter('entityType', $entityType)
+            ->setParameter('resource', $resource)
             ->getQuery()
             ->getResult();
 
