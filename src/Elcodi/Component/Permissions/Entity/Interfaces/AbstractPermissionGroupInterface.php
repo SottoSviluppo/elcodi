@@ -38,6 +38,13 @@ interface AbstractPermissionGroupInterface extends IdentifiableInterface
     function setName($name);
 
     /**
+    * Set the list of permissions
+    * @param Collection the list of permissions
+    * @return $this Self object
+    */
+    function setPermissions(Collection $permissions);
+
+    /**
     * Get the list of permissions
     * @return Collection
     */

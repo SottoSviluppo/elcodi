@@ -5,6 +5,8 @@ namespace Elcodi\Component\Permissions\Entity\Abstracts;
 use Elcodi\Component\Permissions\Entity\Interfaces\IAbstractPermission;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 
+use InvalidArgumentException;
+
 abstract class AbstractPermission implements IAbstractPermission
 {
     use IdentifiableTrait;
@@ -55,6 +57,10 @@ abstract class AbstractPermission implements IAbstractPermission
     */
     public function setResource($resource)
     {
+        if (empty($resource)) {
+            throw new InvalidArgumentException('resource');
+        }
+
         $this->resource = $resource;
         return $this;
     }
@@ -75,6 +81,10 @@ abstract class AbstractPermission implements IAbstractPermission
     */
     public function setCanRead($canRead)
     {
+        if (!is_bool($canRead)) {
+            throw new InvalidArgumentException('canRead');
+        }
+
         $this->canRead = $canRead;
         return $this;
     }
@@ -95,6 +105,10 @@ abstract class AbstractPermission implements IAbstractPermission
     */
     public function setCanCreate($canCreate)
     {
+        if (!is_bool($canCreate)) {
+            throw new InvalidArgumentException('canCreate');
+        }
+
         $this->canCreate = $canCreate;
         return $this;
     }
@@ -115,6 +129,10 @@ abstract class AbstractPermission implements IAbstractPermission
     */
     public function setCanUpdate($canUpdate)
     {
+        if (!is_bool($canUpdate)) {
+            throw new InvalidArgumentException('canUpdate');
+        }
+
         $this->canUpdate = $canUpdate;
         return $this;
     }
@@ -135,6 +153,10 @@ abstract class AbstractPermission implements IAbstractPermission
     */
     public function setCanDelete($canDelete)
     {
+        if (!is_bool($canDelete)) {
+            throw new InvalidArgumentException('canDelete');
+        }
+
         $this->canDelete = $canDelete;
         return $this;
     }

@@ -7,7 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionGroupInterface;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+
 use Exception;
+use InvalidArgumentException;
 
 abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterface
 {
@@ -52,6 +54,10 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     */
     public function setAdminUser(AdminUserInterface $adminUser)
     {
+        if ($adminUser == null) {
+            throw new InvalidArgumentException('adminUser');
+        }
+
         $this->adminUser = $adminUser;
         return $this;
     }
@@ -77,6 +83,17 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     }
 
     /**
+    * Set the list of permissions
+    * @param Collection the list of permissions
+    * @return $this Self object
+    */
+    public function setPermissions(Collection $permissions)
+    {
+        $this->permissions = $permissions;
+        return $this;
+    }
+
+    /**
     * Get the list of permissions
     * @return Collection
     */
@@ -87,14 +104,14 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
 
     /**
     * Add a new permission
-    * @param string the entity type
+    * @param string the resource
     * @param bool whether the user can read the entity
     * @param bool whether the user can create the entity
     * @param bool whether the user can update the entity
     * @param bool whether the user can delete the entity
     * @return $this Self object
     */
-    public abstract function addPermission($entityType, $canRead, $canCreate, $canUpdate, $canDelete);
+    public abstract function addPermission($resource, $canRead, $canCreate, $canUpdate, $canDelete);
 
     /**
     * Remove the permission

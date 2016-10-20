@@ -4,6 +4,7 @@ namespace Elcodi\Component\Permission\Entity;
 
 use Elcodi\Component\Permission\Entity\Abstracts\AbstractPermissionGroup;
 use Exception;
+use InvalidArgumentException;
 
 class PermissionGroup extends AbstractPermissionGroup
 {
