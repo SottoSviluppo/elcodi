@@ -121,7 +121,7 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     public function removePermission(AbstractPermissionInterface $permission)
     {
         if (!$this->hasPermission($permission)) {
-            throw new Exception("Item not found");
+            throw new Exception("item not found");
         }
 
         $this->permissions->removeElement($permission);

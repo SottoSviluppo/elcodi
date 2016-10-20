@@ -4,6 +4,9 @@ namespace Elcodi\Component\Permissions\Tests\UnitTest\Entity;
 
 use Elcodi\Component\Permissions\Entity\PermissionGroup;
 use Elcodi\Component\Core\Tests\UnitTest\Entity\AbstractEntityTest;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Exception;
 
 class PermissionGroupTest extends AbstractEntityTest
 {
@@ -46,5 +49,58 @@ class PermissionGroupTest extends AbstractEntityTest
         $pg->addPermission('my-resource', true, true, true, true);
 
         $this->assertEquals($permissionNumber+1, $pg->getPermissions()->count());
+    }
+
+    public function testAddPermissionShouldThrowExceptionIfAlreadyInCollection()
+    {
+        $pg = new PermissionGroup();
+        $pg->setName('my-group');
+
+        $permissionNumber = $pg->getPermissions()->count();
+        $pg->addPermission('my-resource', true, true, true, true);
+        $pg->addPermission('my-resource', true, true, true, true);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Permission already in collection');
+    }
+
+    public function testRemovePermissionShouldDecrementPermissions()
+    {
+        $pg = new PermissionGroup();
+        $pg->setName('my-group');
+
+        $p = new Permission;
+        $p->setid(1)
+            ->setResource('my-resource')
+            ->setCanRead(true)
+            ->setCanCreate(true)
+            ->setCanUpdate(true)
+            ->setCanDelete(true);
+
+        $pg->setPermissions(new ArrayCollection([$p]));
+        $permissionNumber = $pg->getPermissions()->count();
+
+        $pg->removePermission($p);
+
+        $this->assertEquals($permissionNumber-1, $pg->getPermissions()->count());
+    }
+
+    public function testRemovePermissionShouldThrowExceptionIfNotInCollection()
+    {
+        $pg = new PermissionGroup();
+        $pg->setName('my-group');
+
+        $p = new Permission;
+        $p->setid(1)
+            ->setResource('my-resource')
+            ->setCanRead(true)
+            ->setCanCreate(true)
+            ->setCanUpdate(true)
+            ->setCanDelete(true);
+
+        $pg->removePermission($p);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('item not found');
     }
 }
