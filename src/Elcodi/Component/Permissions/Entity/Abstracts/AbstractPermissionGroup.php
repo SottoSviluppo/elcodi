@@ -141,7 +141,7 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
 
         $exist = $this->permissions->exists(function($key, $element) use ($permission) {
             return (
-                $permission->getEntityType() === $element->getEntityType() &&
+                $permission->getResource() === $element->getResource() &&
                 $permission->getCanRead() === $element->getCanRead() &&
                 $permission->getCanCreate() === $element->getCanCreate() &&
                 $permission->getCanUpdate() === $element->getCanUpdate() &&
