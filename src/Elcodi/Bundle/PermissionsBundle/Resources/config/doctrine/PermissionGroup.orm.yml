@@ -1,6 +1,6 @@
 Elcodi\Component\Permissions\Entity\PermissionGroup:
     type: entity
-    repositoryClass: Elcodi\Component\Permissions\Repository\PermissionRepository
+    repositoryClass: Elcodi\Component\Permissions\Repository\PermissionGroupRepository
     table: permission_groups
     id:
         id:
