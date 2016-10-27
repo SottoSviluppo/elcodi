@@ -68,6 +68,11 @@ Elcodi\Component\Coupon\Entity\Coupon:
             column: valid_to
             type: datetime
             nullable: true
+        color:
+            column: color
+            type: string
+            length: 255
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

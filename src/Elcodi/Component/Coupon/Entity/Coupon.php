@@ -33,8 +33,8 @@ use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
 class Coupon implements CouponInterface
 {
     use IdentifiableTrait,
-        DateTimeTrait,
-        EnabledTrait,
+    DateTimeTrait,
+    EnabledTrait,
         ValidIntervalTrait;
 
     /**
@@ -155,6 +155,13 @@ class Coupon implements CouponInterface
      * Rule to check to be applicable
      */
     protected $rule;
+
+    /**
+     * @var string
+     *
+     * Color
+     */
+    protected $color;
 
     /**
      * Set code.
@@ -502,6 +509,30 @@ class Coupon implements CouponInterface
         $this->stackable = $stackable;
 
         return $this;
+    }
+
+    /**
+     * Set color.
+     *
+     * @param string $color Color
+     *
+     * @return $this Self object
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color.
+     *
+     * @return string Color
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 
     /**
