@@ -2,12 +2,12 @@
 
 namespace Elcodi\Component\Permissions\Entity\Abstracts;
 
-use Elcodi\Component\Permissions\Entity\Interfaces\IAbstractPermission;
+use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionInterface;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 
 use InvalidArgumentException;
 
-abstract class AbstractPermission implements IAbstractPermission
+abstract class AbstractPermission implements AbstractPermissionInterface
 {
     use IdentifiableTrait;
     

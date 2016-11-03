@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcodi\Bundle\PermissionsBundle;
+namespace Elcodi\Bundle\PermissionsBundle\CompilerPass;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
