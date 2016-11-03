@@ -73,4 +73,17 @@ interface AbstractPermissionInterface extends IdentifiableInterface
     * @return $this Self object
     */
     function setCanDelete($canDelete);
+
+    /**
+    * Set the permission group
+    * @param AbstractPermissionGroupInterface
+    * @return $this Self object
+    */
+    function setPermissionGroup(AbstractPermissionGroupInterface $permissionGroup);
+
+    /**
+    * Get the permission group
+    * @return AbstractPermissionGroupInterface
+    */
+    function getPermissionGroup();
 }

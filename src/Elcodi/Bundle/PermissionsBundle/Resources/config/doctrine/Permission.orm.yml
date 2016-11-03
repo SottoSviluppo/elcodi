@@ -28,3 +28,10 @@ Elcodi\Component\Permissions\Entity\Permission:
             column: can_delete
             type: boolean
             nullable: false
+    manyToOne:
+        permissionGroup:
+            targetEntity: Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionGroupInterface
+            inversedBy: permissions
+            joinColumn:
+                name: permission_group_id
+                referencedColumnName: id

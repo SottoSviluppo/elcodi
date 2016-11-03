@@ -3,6 +3,7 @@
 namespace Elcodi\Component\Permissions\Entity\Abstracts;
 
 use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionInterface;
+use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionGroupInterface;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 
 use InvalidArgumentException;
@@ -40,6 +41,12 @@ abstract class AbstractPermission implements AbstractPermissionInterface
     * Whether the user can delete the entity
     */
     protected $canDelete;
+
+    /**
+    * @var AbstractPermissionGroupInterface
+    * The associated permission group
+    */
+    protected $permissionGroup;
 
     /**
     * Get the resource for the permission
@@ -159,5 +166,25 @@ abstract class AbstractPermission implements AbstractPermissionInterface
 
         $this->canDelete = $canDelete;
         return $this;
+    }
+
+    /**
+    * Set the permission group
+    * @param AbstractPermissionGroupInterface
+    * @return $this Self object
+    */
+    public function setPermissionGroup(AbstractPermissionGroupInterface $permissionGroup)
+    {
+        $this->permissionGroup = $permissionGroup;
+        return $this;
+    }
+
+    /**
+    * Get the permission group
+    * @return AbstractPermissionGroupInterface
+    */
+    public function getPermissionGroup()
+    {
+        return $this->permissionGroup;
     }
 }
