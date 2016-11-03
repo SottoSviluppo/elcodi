@@ -1,8 +1,8 @@
 <?php
 
-namespace Elcodi\Component\Permission\Entity;
+namespace Elcodi\Component\Permissions\Entity;
 
-use Elcodi\Component\Permission\Entity\Abstracts\AbstractPermissionGroup;
+use Elcodi\Component\Permissions\Entity\Abstracts\AbstractPermissionGroup;
 use Exception;
 use InvalidArgumentException;
 
