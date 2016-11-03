@@ -5,6 +5,7 @@ namespace Elcodi\Component\Permissions\Entity\Abstracts;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionGroupInterface;
+use Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionInterface;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 
