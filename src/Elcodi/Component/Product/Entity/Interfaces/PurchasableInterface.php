@@ -150,6 +150,22 @@ interface PurchasableInterface
     public function setDescription($description);
 
     /**
+     * Get Barcode.
+     *
+     * @return string Barcode
+     */
+    public function getBarcode();
+
+    /**
+     * Sets Barcode.
+     *
+     * @param string $barcode Barcode
+     *
+     * @return $this Self object
+     */
+    public function setBarcode($barcode);
+
+    /**
      * Get ShowInHome.
      *
      * @return bool ShowInHome

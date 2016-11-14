@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ETaggableTrait;
@@ -39,14 +38,14 @@ use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 abstract class Purchasable implements PurchasableInterface
 {
     use IdentifiableTrait,
-        DateTimeTrait,
-        ETaggableTrait,
-        MetaDataTrait,
-        ImagesContainerTrait,
-        PrincipalImageTrait,
-        EnabledTrait,
-        DimensionsTrait,
-        TaxableTrait,
+    DateTimeTrait,
+    ETaggableTrait,
+    MetaDataTrait,
+    ImagesContainerTrait,
+    PrincipalImageTrait,
+    EnabledTrait,
+    DimensionsTrait,
+    TaxableTrait,
         PurchasablePriceTrait;
 
     /**
@@ -90,6 +89,13 @@ abstract class Purchasable implements PurchasableInterface
      * Description
      */
     protected $description;
+
+    /**
+     * @var string
+     *
+     * Barcode
+     */
+    protected $barcode;
 
     /**
      * @var bool
@@ -280,6 +286,30 @@ abstract class Purchasable implements PurchasableInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get Barcode.
+     *
+     * @return string Barcode
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * Sets Barcode.
+     *
+     * @param string $barcode Barcode
+     *
+     * @return $this Self object
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
 
         return $this;
     }

@@ -33,6 +33,11 @@ Elcodi\Component\Product\Entity\Purchasable:
             type: string
             length: 255
             nullable: true
+        barcode:
+            column: barcode
+            type: string
+            length: 255
+            nullable: true
         description:
             column: description
             type: text
