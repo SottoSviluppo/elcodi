@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Media\Entity\Traits\IconsContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -35,6 +36,7 @@ class Category implements CategoryInterface
     DateTimeTrait,
     EnabledTrait,
     ImagesContainerTrait,
+    IconsContainerTrait,
     PrincipalImageTrait,
         MetaDataTrait;
 

@@ -100,7 +100,18 @@ Elcodi\Component\Product\Entity\Category:
                     image_id:
                         referencedColumnName: id
                         onDelete: "CASCADE"
-
+        icons:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinTable:
+                name: category_icons
+                joinColumns:
+                    category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    image_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
