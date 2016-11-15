@@ -18,21 +18,21 @@
 namespace Elcodi\Component\Product\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 
 /**
  * Interface CategoryInterface.
  */
-interface CategoryInterface
-    extends
-    IdentifiableInterface,
-    DateTimeInterface,
-    MetaDataInterface,
-    EnabledInterface
+interface CategoryInterface extends
+IdentifiableInterface,
+DateTimeInterface,
+MetaDataInterface,
+EnabledInterface,
+ImagesContainerWithPrincipalImageInterface
 {
     /**
      * Set id.
@@ -161,4 +161,9 @@ interface CategoryInterface
      * @return int Category relative position
      */
     public function getPosition();
+
+    public function setCssClass($cssClass);
+
+    public function getCssClass();
+
 }

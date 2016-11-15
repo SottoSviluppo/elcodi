@@ -26,6 +26,11 @@ Elcodi\Component\Product\Entity\Category:
             column: position
             type: integer
             nullable: false
+        cssClass:
+            column: css_class
+            type: string
+            length: 255
+            nullable: true
         metaTitle:
             column: meta_title
             type: string
@@ -40,6 +45,11 @@ Elcodi\Component\Product\Entity\Category:
             column: meta_keywords
             type: string
             length: 255
+            nullable: true
+        imagesSort:
+            column: images_sort
+            type: string
+            length: 2048
             nullable: true
         createdAt:
             column: created_at
@@ -66,11 +76,31 @@ Elcodi\Component\Product\Entity\Category:
                 nullable: true
                 onDelete: "SET NULL"
                 onUpdate: "CASCADE"
-
+        principalImage:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinColumn:
+                onDelete: SET NULL
+                name: principal_image_id
+                referencedColumnName: id
+                nullable: true
+                
     manyToMany:
         purchasables:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface
             mappedBy: categories
+        images:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinTable:
+                name: category_image
+                joinColumns:
+                    category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    image_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
