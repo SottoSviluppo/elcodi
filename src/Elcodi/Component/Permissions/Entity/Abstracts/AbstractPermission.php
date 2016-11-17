@@ -54,7 +54,7 @@ abstract class AbstractPermission implements AbstractPermissionInterface
     */
     public function getResource()
     {
-        return $this->entityType;
+        return $this->resource;
     }
 
     /**
