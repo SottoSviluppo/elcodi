@@ -91,6 +91,10 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     public function setPermissions(Collection $permissions)
     {
         $this->permissions = $permissions;
+        $this->permissions->forAll(function ($p) {
+            $p->setPermissionGroup($this);
+        });
+        
         return $this;
     }
 

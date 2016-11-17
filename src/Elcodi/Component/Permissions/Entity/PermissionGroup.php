@@ -35,6 +35,7 @@ class PermissionGroup extends AbstractPermissionGroup
             throw new Exception("Permission already in collection");
         }
 
+        $permission->setPermissionGroup($this);
         $this->permissions->add($permission);
 
         return $this;
