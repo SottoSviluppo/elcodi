@@ -77,6 +77,20 @@ trait IconsContainerTrait
     }
 
     /**
+     * Get first icon if is defined.
+     *
+     * @return \Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+     */
+    public function getIcon()
+    {
+        $icons = $this->getIcons();
+        if (empty($icons)) {
+            return null;
+        }
+        return $icons[0];
+    }
+
+    /**
      * Get sorted icons.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
