@@ -17,6 +17,8 @@
 
 namespace Elcodi\Component\Tax\Entity\Interfaces;
 
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
+
 /**
  * Interface TaxableInterface.
  */
@@ -24,5 +26,5 @@ interface TaxableInterface
 {
     public function getTax();
 
-    public function setTax($tax);
+    public function setTax(TaxInterface $tax);
 }

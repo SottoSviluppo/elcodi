@@ -16,7 +16,7 @@ trait TaxableTrait
         return $this->tax;
     }
 
-    public function setTax($tax)
+    public function setTax(TaxInterface $tax = null)
     {
         $this->tax = $tax;
 
