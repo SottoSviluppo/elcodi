@@ -52,14 +52,10 @@ interface AbstractPermissionGroupInterface extends IdentifiableInterface
 
     /**
     * Add a new permission
-    * @param string the entity type
-    * @param bool whether the user can read the entity
-    * @param bool whether the user can create the entity
-    * @param bool whether the user can update the entity
-    * @param bool whether the user can delete the entity
+    * @param AbstractPermissionInterface the permission to add
     * @return $this Self object
     */
-    function addPermission($entityType, $canRead, $canCreate, $canUpdate, $canDelete);
+    function addPermission(AbstractPermissionInterface $permission);
 
     /**
     * Remove the permission

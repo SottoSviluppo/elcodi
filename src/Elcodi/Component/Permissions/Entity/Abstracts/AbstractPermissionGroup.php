@@ -109,14 +109,16 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
 
     /**
     * Add a new permission
-    * @param string the resource
-    * @param bool whether the user can read the entity
-    * @param bool whether the user can create the entity
-    * @param bool whether the user can update the entity
-    * @param bool whether the user can delete the entity
+    * @param AbstractPermissionInterface the permission to add
     * @return $this Self object
     */
-    public abstract function addPermission($resource, $canRead, $canCreate, $canUpdate, $canDelete);
+    public function addPermission(AbstractPermissionInterface $permission)
+    {
+        $permission->setPermissionGroup($this);
+        $this->permissions->add($permission);
+
+        return $this;
+    }
 
     /**
     * Remove the permission
