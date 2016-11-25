@@ -26,6 +26,6 @@ Elcodi\Component\Permissions\Entity\PermissionGroup:
         permissions:
             targetEntity: Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionInterface
             mappedBy: permissionGroup
-            cascade: [ "all", "persist" ]
+            cascade: [ "all" ]
             orphanRemoval: true
             fetch: EAGER
