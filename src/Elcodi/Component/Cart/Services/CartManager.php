@@ -84,7 +84,6 @@ class CartManager
 
     protected $store;
 
-
     /**
      * Construct method.
      *
@@ -123,7 +122,7 @@ class CartManager
      *
      * @return $this Self object
      */
-    private function addLine(
+    protected function addLine(
         CartInterface $cart,
         CartLineInterface $cartLine
     ) {
@@ -411,23 +410,25 @@ class CartManager
             }
         }
 
- 
         // find correct tax to use
         $tax = $this->store->getDefaultTax();
-        if ($purchasable->getTax() != null)
+        if ($purchasable->getTax() != null) {
             $tax = $purchasable->getTax();
+        }
+
         $customer = $this
             ->customerWrapper
             ->get();
-        if ($customer !== null && $customer->getTax() !== null)
+        if ($customer !== null && $customer->getTax() !== null) {
             $tax = $customer->getTax();
+        }
 
         $cartLine = $this->cartLineFactory->create();
         $cartLine
             ->setPurchasable($purchasable)
             ->setQuantity($quantity)
             ->setTax($tax)
-            ;
+        ;
 
         $this->addLine($cart, $cartLine);
 
