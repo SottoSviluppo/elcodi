@@ -410,7 +410,20 @@ class CartManager
             }
         }
 
-        // find correct tax to use
+        $cartLine = $this->cartLineFactory->create();
+        $cartLine
+            ->setPurchasable($purchasable)
+            ->setQuantity($quantity)
+        ;
+        $cartLine->setTax($this->getTax($purchasable));
+
+        $this->addLine($cart, $cartLine);
+
+        return $this;
+    }
+
+    protected function getTax($purchasable)
+    {
         $tax = $this->store->getDefaultTax();
         if ($purchasable->getTax() != null) {
             $tax = $purchasable->getTax();
@@ -422,17 +435,7 @@ class CartManager
         if ($customer !== null && $customer->getTax() !== null) {
             $tax = $customer->getTax();
         }
-
-        $cartLine = $this->cartLineFactory->create();
-        $cartLine
-            ->setPurchasable($purchasable)
-            ->setQuantity($quantity)
-            ->setTax($tax)
-        ;
-
-        $this->addLine($cart, $cartLine);
-
-        return $this;
+        return $tax;
     }
 
     /**
