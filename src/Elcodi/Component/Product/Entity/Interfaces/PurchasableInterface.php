@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\ETaggableInterface;
@@ -26,7 +25,6 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
-
 
 /**
  * Interface PurchasableInterface.
@@ -41,17 +39,16 @@ use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
  * these features (such as CartManager) will have a shallow dependency
  * with more concrete product classes or interfaces
  */
-interface PurchasableInterface
-    extends
-    IdentifiableInterface,
-    DateTimeInterface,
-    ETaggableInterface,
-    MetaDataInterface,
-    ImagesContainerWithPrincipalImageInterface,
-    EnabledInterface,
-    PurchasablePriceInterface,
-    DimensionableInterface,
-    TaxableInterface
+interface PurchasableInterface extends
+IdentifiableInterface,
+DateTimeInterface,
+ETaggableInterface,
+MetaDataInterface,
+ImagesContainerWithPrincipalImageInterface,
+EnabledInterface,
+PurchasablePriceInterface,
+DimensionableInterface,
+TaxableInterface
 {
     /**
      * Gets the variant SKU.
@@ -180,6 +177,38 @@ interface PurchasableInterface
      * @return $this Self object
      */
     public function setShowInHome($showInHome);
+
+    /**
+     * Get KeepCartPrice.
+     *
+     * @return bool KeepCartPrice
+     */
+    public function getKeepCartPrice();
+
+    /**
+     * Sets KeepCartPrice.
+     *
+     * @param bool $keepCartPrice KeepCartPrice
+     *
+     * @return $this Self object
+     */
+    public function setKeepCartPrice($keepCartPrice);
+
+    /**
+     * Get UserCustomizable.
+     *
+     * @return bool UserCustomizable
+     */
+    public function getUserCustomizable();
+
+    /**
+     * Sets UserCustomizable.
+     *
+     * @param bool $userCustomizable UserCustomizable
+     *
+     * @return $this Self object
+     */
+    public function setUserCustomizable($userCustomizable);
 
     /**
      * Get Dimensions.

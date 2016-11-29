@@ -50,6 +50,10 @@ Elcodi\Component\Product\Entity\Purchasable:
             column: keep_cart_price
             type: boolean
             nullable: true
+        userCustomizable:
+            column: user_customizable
+            type: boolean
+            nullable: true
         dimensions:
             column: dimensions
             type: string

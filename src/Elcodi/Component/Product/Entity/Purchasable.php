@@ -112,6 +112,13 @@ abstract class Purchasable implements PurchasableInterface
     protected $keepCartPrice;
 
     /**
+     * @var bool
+     *
+     * Adds a cartline every different purchase
+     */
+    protected $userCustomizable;
+
+    /**
      * @var string
      *
      * Product dimensions
@@ -358,6 +365,30 @@ abstract class Purchasable implements PurchasableInterface
     public function setKeepCartPrice($keepCartPrice)
     {
         $this->keepCartPrice = $keepCartPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get UserCustomizable.
+     *
+     * @return bool UserCustomizable
+     */
+    public function getUserCustomizable()
+    {
+        return $this->userCustomizable;
+    }
+
+    /**
+     * Sets UserCustomizable.
+     *
+     * @param bool $userCustomizable UserCustomizable
+     *
+     * @return $this Self object
+     */
+    public function setUserCustomizable($userCustomizable)
+    {
+        $this->userCustomizable = $userCustomizable;
 
         return $this;
     }

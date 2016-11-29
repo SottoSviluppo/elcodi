@@ -84,6 +84,8 @@ class CartManager
 
     protected $store;
 
+    private $lastCartLineAdded;
+
     /**
      * Construct method.
      *
@@ -126,6 +128,8 @@ class CartManager
         CartInterface $cart,
         CartLineInterface $cartLine
     ) {
+        $this->lastCartLineAdded = $cartLine;
+
         $cartLine->setCart($cart);
         $cart->addCartLine($cartLine);
 
@@ -141,6 +145,11 @@ class CartManager
             ->dispatchCartLoadEvents($cart);
 
         return $this;
+    }
+
+    public function getLastCartLineAdded()
+    {
+        return $this->lastCartLineAdded;
     }
 
     /**
@@ -392,21 +401,19 @@ class CartManager
             return $this;
         }
 
-        foreach ($cart->getCartLines() as $cartLine) {
+        if (!$purchasable->getUserCustomizable()) {
+            foreach ($cart->getCartLines() as $cartLine) {
+                if (
+                    (get_class($cartLine->getPurchasable()) === get_class($purchasable)) &&
+                    ($cartLine->getPurchasable()->getId() == $purchasable->getId())
+                ) {
 
-            /**
-             * @var CartLineInterface $cartLine
-             */
-            if (
-                (get_class($cartLine->getPurchasable()) === get_class($purchasable)) &&
-                ($cartLine->getPurchasable()->getId() == $purchasable->getId())
-            ) {
+                    /**
+                     * Product already in the Cart, increase quantity.
+                     */
 
-                /**
-                 * Product already in the Cart, increase quantity.
-                 */
-
-                return $this->increaseCartLineQuantity($cartLine, $quantity);
+                    return $this->increaseCartLineQuantity($cartLine, $quantity);
+                }
             }
         }
 
