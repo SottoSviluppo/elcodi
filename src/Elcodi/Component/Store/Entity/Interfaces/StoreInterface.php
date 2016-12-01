@@ -23,17 +23,16 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
-use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 
 /**
  * Interface StoreInterface.
  */
-interface StoreInterface
-    extends
-    IdentifiableInterface,
-    DateTimeInterface,
-    EnabledInterface
+interface StoreInterface extends
+IdentifiableInterface,
+DateTimeInterface,
+EnabledInterface
 {
     /**
      * Get Name.
@@ -178,6 +177,33 @@ interface StoreInterface
      * @return $this Self object
      */
     public function setTaxIncluded($taxIncluded);
+
+    /**
+     * Set vat.
+     *
+     * @param string $vat
+     *
+     * @return $this
+     */
+    public function setVat($vat);
+
+    /**
+     * @return string Vat
+     */
+    public function getVat();
+
+    /**
+     * @param string $fiscalCode
+     *
+     * @return $this
+     */
+    public function setFiscalCode($fiscalCode);
+
+    /**
+     *
+     * @return string Fiscal code
+     */
+    public function getFiscalCode();
 
     /**
      * Get Address.

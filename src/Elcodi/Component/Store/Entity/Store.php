@@ -23,9 +23,9 @@ use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
-use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 
 /**
  * Class Store.
@@ -33,7 +33,7 @@ use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 class Store implements StoreInterface
 {
     use IdentifiableTrait,
-        DateTimeTrait,
+    DateTimeTrait,
         EnabledTrait;
 
     /**
@@ -98,6 +98,20 @@ class Store implements StoreInterface
      * tax included
      */
     protected $taxIncluded;
+
+    /**
+     * @var string
+     *
+     * VAT
+     */
+    protected $vat;
+
+    /**
+     * @var string
+     *
+     * Fiscal code
+     */
+    protected $fiscalCode;
 
     /**
      * @var AddressInterface
@@ -361,7 +375,6 @@ class Store implements StoreInterface
         return $this;
     }
 
-
     /**
      * Get TaxIncluded.
      *
@@ -384,6 +397,49 @@ class Store implements StoreInterface
         $this->taxIncluded = $taxIncluded;
 
         return $this;
+    }
+
+    /**
+     * Set vat.
+     *
+     * @param string $vat
+     *
+     * @return $this
+     */
+    public function setVat($vat)
+    {
+        $this->vat = $vat;
+
+        return $this;
+    }
+
+    /**
+     * @return string Vat
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+    /**
+     * @param string $fiscalCode
+     *
+     * @return $this
+     */
+    public function setFiscalCode($fiscalCode)
+    {
+        $this->fiscalCode = $fiscalCode;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @return string Fiscal code
+     */
+    public function getFiscalCode()
+    {
+        return $this->fiscalCode;
     }
 
     /**
@@ -457,7 +513,6 @@ class Store implements StoreInterface
 
         return $this;
     }
-
 
     /**
      * Get DefaultCurrency.
