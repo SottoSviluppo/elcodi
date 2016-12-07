@@ -26,6 +26,12 @@ services:
             - '@elcodi.wrapper.currency'
             - '@elcodi.converter.currency'
 
+    elcodi.loader.order_prices:
+        class: Elcodi\Component\Cart\Services\OrderPricesLoader
+        arguments:
+            - '@elcodi.wrapper.currency'
+            - '@elcodi.converter.currency'
+
     elcodi.cart_saver:
         class: Elcodi\Component\Cart\Services\CartSaver
         arguments:
