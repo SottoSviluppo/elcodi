@@ -37,7 +37,6 @@ class PermissionGroupRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('pg');
         
         $result = $queryBuilder
-            ->select('p')
             ->innerJoin('pg.permissions', 'p')
             ->innerJoin('pg.adminUser', 'a')
             ->where('a.id = :adminUserId')
@@ -57,19 +56,18 @@ class PermissionGroupRepository extends EntityRepository
     * @param AdminUserInterface the current user
     * @return bool
     */
-    public function canCreateEntity($entityType, AdminUserInterface $adminUser)
+    public function canCreateEntity($resource, AdminUserInterface $adminUser)
     {
         $queryBuilder = $this->createQueryBuilder('pg');
         
         $result = $queryBuilder
-            ->select('p')
             ->innerJoin('pg.permissions', 'p')
             ->innerJoin('pg.adminUser', 'a')
             ->where('a.id = :adminUserId')
-            ->andWhere('p.entityType = :entityType')
+            ->andWhere('p.resource = :resource')
             ->andWhere('p.canCreate = true')
             ->setParameter('adminUserId', $adminUser->getId())
-            ->setParameter('entityType', $entityType)
+            ->setParameter('resource', $resource)
             ->getQuery()
             ->getResult();
 
@@ -82,19 +80,18 @@ class PermissionGroupRepository extends EntityRepository
     * @param AdminUserInterface the current user
     * @return bool
     */
-    public function canUpdateEntity($entityType, AdminUserInterface $adminUser)
+    public function canUpdateEntity($resource, AdminUserInterface $adminUser)
     {
         $queryBuilder = $this->createQueryBuilder('pg');
         
         $result = $queryBuilder
-            ->select('p')
             ->innerJoin('pg.permissions', 'p')
             ->innerJoin('pg.adminUser', 'a')
             ->where('a.id = :adminUserId')
-            ->andWhere('p.entityType = :entityType')
-            ->andWhere('p.canUpdate = true')
+            ->andWhere('p.resource = :resource')
+            ->andWhere('p.canCreate = true')
             ->setParameter('adminUserId', $adminUser->getId())
-            ->setParameter('entityType', $entityType)
+            ->setParameter('resource', $resource)
             ->getQuery()
             ->getResult();
 
@@ -107,19 +104,18 @@ class PermissionGroupRepository extends EntityRepository
     * @param AdminUserInterface the current user
     * @return bool
     */
-    public function canDeleteEntity($entityType, AdminUserInterface $adminUser)
+    public function canDeleteEntity($resource, AdminUserInterface $adminUser)
     {
         $queryBuilder = $this->createQueryBuilder('pg');
         
         $result = $queryBuilder
-            ->select('p')
             ->innerJoin('pg.permissions', 'p')
             ->innerJoin('pg.adminUser', 'a')
             ->where('a.id = :adminUserId')
-            ->andWhere('p.entityType = :entityType')
-            ->andWhere('p.canDelete = true')
+            ->andWhere('p.resource = :resource')
+            ->andWhere('p.canCreate = true')
             ->setParameter('adminUserId', $adminUser->getId())
-            ->setParameter('entityType', $entityType)
+            ->setParameter('resource', $resource)
             ->getQuery()
             ->getResult();
 
