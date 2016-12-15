@@ -17,9 +17,8 @@
 
 namespace Elcodi\Bundle\TaxBundle\CompilerPass;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Elcodi\Bundle\CoreBundle\CompilerPass\Abstracts\AbstractElcodiMappingCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class MappingCompilerPass.

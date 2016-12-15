@@ -18,10 +18,12 @@
 namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Media\Entity\Traits\IconsContainerTrait;
+use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
+use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 
@@ -31,8 +33,11 @@ use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 class Category implements CategoryInterface
 {
     use IdentifiableTrait,
-        DateTimeTrait,
-        EnabledTrait,
+    DateTimeTrait,
+    EnabledTrait,
+    ImagesContainerTrait,
+    IconsContainerTrait,
+    PrincipalImageTrait,
         MetaDataTrait;
 
     /**
@@ -84,6 +89,13 @@ class Category implements CategoryInterface
      * Position order to show in menu
      */
     protected $position;
+
+    /**
+     * @var string
+     *
+     * class
+     */
+    protected $cssClass;
 
     /**
      * Set name.
@@ -272,6 +284,18 @@ class Category implements CategoryInterface
     public function getPurchasables()
     {
         return $this->purchasables;
+    }
+
+    public function setCssClass($cssClass)
+    {
+        $this->cssClass = $cssClass;
+
+        return $this;
+    }
+
+    public function getCssClass()
+    {
+        return $this->cssClass;
     }
 
     /**

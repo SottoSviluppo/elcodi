@@ -33,6 +33,11 @@ Elcodi\Component\Product\Entity\Purchasable:
             type: string
             length: 255
             nullable: true
+        barcode:
+            column: barcode
+            type: string
+            length: 255
+            nullable: true
         description:
             column: description
             type: text
@@ -43,6 +48,10 @@ Elcodi\Component\Product\Entity\Purchasable:
             nullable: true
         keepCartPrice:
             column: keep_cart_price
+            type: boolean
+            nullable: true
+        userCustomizable:
+            column: user_customizable
             type: boolean
             nullable: true
         dimensions:

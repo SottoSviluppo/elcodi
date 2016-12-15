@@ -19,7 +19,6 @@ namespace Elcodi\Component\Geo\Formatter;
 
 use Elcodi\Component\Geo\Adapter\LocationProvider\Interfaces\LocationProviderAdapterInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
-use Elcodi\Component\Geo\ValueObject\LocationData;
 
 /**
  * Class AddressFormatter.
@@ -85,8 +84,8 @@ class AddressFormatter
         // }
 
         $addressArray['fullAddress'] =
-            $this->buildFullAddressString(
-                $address
+        $this->buildFullAddressString(
+            $address
         );
 
         return $addressArray;
@@ -119,8 +118,10 @@ class AddressFormatter
     {
         $country = $address->getCountry();
         $countryName = "";
-        if ($country !== null)
+        if ($country !== null) {
             $countryName = $country->getName();
+        }
+
         return $countryName;
     }
 }

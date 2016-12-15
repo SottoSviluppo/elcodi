@@ -17,8 +17,6 @@
 
 namespace Elcodi\Component\Currency\Services;
 
-use NumberFormatter;
-
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Currency\Entity\Money;
@@ -27,6 +25,7 @@ use Elcodi\Component\Currency\Exception\CurrencyNotConvertibleException;
 use Elcodi\Component\Currency\Wrapper\CurrencyWrapper;
 use Elcodi\Component\Language\Entity\Interfaces\LocaleInterface;
 use Elcodi\Component\Product\Entity\Purchasable;
+use NumberFormatter;
 
 /**
  * Class MoneyPrinter.
@@ -177,29 +176,40 @@ class MoneyPrinter
         return $this->printMoney($money);
     }
 
-    public function printConvertMoneyPurchasableCartLineSingle (
+    public function printConvertMoneyPurchasableCartLineSingle(
         Purchasable $purchasable,
         $cartLine
-        )
-    {
+    ) {
         $price = $this->getSinglePrice($purchasable, $cartLine);
         return $this->printMoney($price);
     }
 
-    public function printConvertMoneyPurchasableCartLine (
+    public function printConvertMoneyPurchasableCartLine(
         Purchasable $purchasable,
         $cartLine
-        )
-    {
+    ) {
         $price = $this->getSinglePrice($purchasable, $cartLine);
         $price = $price->multiply($cartLine->getQuantity());
         return $this->printMoney($price);
     }
 
+    public function getDecimalSinglePrice($purchasable)
+    {
+        return $this->getDecimalPriceFromPrice($this->getSinglePrice($purchasable));
+    }
+
+    private function getDecimalPriceFromPrice($price)
+    {
+        $decimalPrice = $price->getAmount() / 100;
+        return $decimalPrice;
+    }
+
     protected function getSinglePrice(Purchasable $purchasable, $cartLine)
     {
-        if ($purchasable->getKeepCartPrice())
+        if ($purchasable->getKeepCartPrice()) {
             return $cartLine->getPurchasableAmount();
+        }
+
         return $purchasable->getResolvedPrice();
     }
 }

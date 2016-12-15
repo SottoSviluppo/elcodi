@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Product\Entity\Category;
 
@@ -44,6 +43,8 @@ class CategoryFactory extends AbstractFactory
             ->setRoot(true)
             ->setPosition(0)
             ->setEnabled(true)
+            ->setImages(new ArrayCollection())
+            ->setImagesSort('')
             ->setCreatedAt($this->now());
 
         return $category;

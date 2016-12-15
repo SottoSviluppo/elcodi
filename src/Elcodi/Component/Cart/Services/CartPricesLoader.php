@@ -41,14 +41,14 @@ class CartPricesLoader
      *
      * Currency Wrapper
      */
-    private $currencyWrapper;
+    protected $currencyWrapper;
 
     /**
      * @var CurrencyConverter
      *
      * Currency Converter
      */
-    private $currencyConverter;
+    protected $currencyConverter;
 
     /**
      * Built method.
@@ -162,8 +162,9 @@ class CartPricesLoader
     protected function loadCartLinePrices(CartLineInterface $cartLine)
     {
         $purchasable = $cartLine->getPurchasable();
-        if ($purchasable->getKeepCartPrice())
+        if ($purchasable->getKeepCartPrice()) {
             return $cartLine;
+        }
 
         $purchasablePrice = $purchasable->getPrice();
 

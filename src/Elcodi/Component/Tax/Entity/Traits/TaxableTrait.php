@@ -2,6 +2,8 @@
 
 namespace Elcodi\Component\Tax\Entity\Traits;
 
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
+
 trait TaxableTrait
 {
     /**
@@ -14,7 +16,7 @@ trait TaxableTrait
         return $this->tax;
     }
 
-    public function setTax($tax)
+    public function setTax(TaxInterface $tax = null)
     {
         $this->tax = $tax;
 

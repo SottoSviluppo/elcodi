@@ -19,7 +19,6 @@ namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-
 use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
 use Elcodi\Bundle\ProductBundle\DataFixtures\ORM\Traits\ProductWithImagesTrait;
 use Elcodi\Component\Core\Services\ObjectDirector;
@@ -56,6 +55,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         $manufacturer = $this->getReference('manufacturer');
         $currency = $this->getReference('currency-dollar');
         $productDirector = $this->getDirector('product');
+        $tax = $this->getReference('tax-vat-21');
 
         $product = $productDirector
             ->create()
@@ -72,6 +72,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
             ->setHeight(10)
             ->setWidth(15)
             ->setDepth(20)
+            ->setTax($tax)
             ->setWeight(100)
             ->setEnabled(true);
 
@@ -94,6 +95,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
             ->setHeight(25)
             ->setWidth(30)
             ->setDepth(35)
+            ->setTax($tax)
             ->setWeight(200)
             ->setEnabled(true);
 
@@ -125,6 +127,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
             ->setHeight(40)
             ->setWidth(45)
             ->setDepth(50)
+            ->setTax($tax)
             ->setWeight(500)
             ->setEnabled(true);
 
@@ -151,6 +154,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
             ->setHeight(10)
             ->setWidth(15)
             ->setDepth(20)
+            ->setTax($tax)
             ->setWeight(100)
             ->setEnabled(true);
 
@@ -168,6 +172,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
     {
         return [
             'Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM\CurrencyData',
+            'Elcodi\Bundle\TaxBundle\DataFixtures\ORM\TaxData',
             'Elcodi\Bundle\ProductBundle\DataFixtures\ORM\CategoryData',
             'Elcodi\Bundle\ProductBundle\DataFixtures\ORM\ManufacturerData',
             'Elcodi\Bundle\StoreBundle\DataFixtures\ORM\StoreData',

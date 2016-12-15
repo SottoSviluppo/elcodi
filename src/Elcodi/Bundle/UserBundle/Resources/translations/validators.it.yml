@@ -1,0 +1,4 @@
+customer:
+    error:
+        first_last_required: 'Il nome ed il cognome sono richiesti'
+        company_data_not_complete: 'I dati aziendali sono richiesti'

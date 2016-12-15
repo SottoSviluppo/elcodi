@@ -54,7 +54,16 @@ Elcodi\Component\Store\Entity\Store:
         taxIncluded:
             column: tax_included
             type: boolean
-
+        vat:
+            column: vat
+            type: string
+            length: 255
+            nullable: true
+        fiscalCode:
+            column: fiscal_code
+            type: string
+            length: 255
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

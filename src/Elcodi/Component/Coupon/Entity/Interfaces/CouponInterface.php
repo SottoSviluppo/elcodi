@@ -27,12 +27,11 @@ use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
 /**
  * Interface CouponInterface.
  */
-interface CouponInterface
-    extends
-    IdentifiableInterface,
-    DateTimeInterface,
-    EnabledInterface,
-    ValidIntervalInterface
+interface CouponInterface extends
+IdentifiableInterface,
+DateTimeInterface,
+EnabledInterface,
+ValidIntervalInterface
 {
     /**
      * Set code.
@@ -263,6 +262,22 @@ interface CouponInterface
      * @return RuleInterface Current rule
      */
     public function getRule();
+
+    /**
+     * Set color.
+     *
+     * @param string $color Color
+     *
+     * @return $this Self object
+     */
+    public function setColor($color);
+
+    /**
+     * Get color.
+     *
+     * @return string Color
+     */
+    public function getColor();
 
     /**
      * Increment used variable by one, and disables it if there are no more
