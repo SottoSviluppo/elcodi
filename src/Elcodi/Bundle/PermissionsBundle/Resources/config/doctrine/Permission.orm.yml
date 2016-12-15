@@ -1,0 +1,37 @@
+Elcodi\Component\Permissions\Entity\Permission:
+    type: entity
+    repositoryClass: Elcodi\Component\Permissions\Repository\PermissionRepository
+    table: permissions
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        resource:
+            column: resource
+            type: string
+            nullable: false
+        canRead:
+            column: can_read
+            type: boolean
+            nullable: false
+        canCreate:
+            column: can_create
+            type: boolean
+            nullable: false
+        canUpdate:
+            column: can_update
+            type: boolean
+            nullable: false
+        canDelete:
+            column: can_delete
+            type: boolean
+            nullable: false
+    manyToOne:
+        permissionGroup:
+            targetEntity: Elcodi\Component\Permissions\Entity\Interfaces\AbstractPermissionGroupInterface
+            inversedBy: permissions
+            joinColumn:
+                name: permission_group_id
+                referencedColumnName: id

@@ -1,0 +1,13 @@
+services:
+    #
+    # Object Managers
+    #
+    elcodi.object_manager.permission_group:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.permission_group.class%
+
+    elcodi.object_manager.permission:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.permission.class%
