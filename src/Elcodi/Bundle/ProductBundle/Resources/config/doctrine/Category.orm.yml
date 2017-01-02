@@ -60,6 +60,10 @@ Elcodi\Component\Product\Entity\Category:
         enabled:
             column: enabled
             type: boolean
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     oneToMany:
         subCategories:

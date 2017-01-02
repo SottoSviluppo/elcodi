@@ -18,16 +18,16 @@
 namespace Elcodi\Component\User\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Security\Core\Role\Role;
-
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
+use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
-use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
-use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
+use Symfony\Component\Security\Core\Role\Role;
 
 /**
  * A Customer is a User with shopping capabilities and associations,
@@ -35,7 +35,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
  */
 class Customer extends AbstractUser implements CustomerInterface
 {
-    use TaxableTrait;
+    use TaxableTrait, ExtraDataTrait;
 
     /**
      * @var Collection
@@ -250,7 +250,6 @@ class Customer extends AbstractUser implements CustomerInterface
         return $this->company;
     }
 
-
     /**
      *
      * @param string $companyName
@@ -296,7 +295,6 @@ class Customer extends AbstractUser implements CustomerInterface
         return $this->vat;
     }
 
-
     /**
      * @param string $fiscalCode
      *
@@ -317,7 +315,6 @@ class Customer extends AbstractUser implements CustomerInterface
     {
         return $this->fiscalCode;
     }
-
 
     /**
      * Sets Newsletter.
@@ -568,7 +565,6 @@ class Customer extends AbstractUser implements CustomerInterface
     {
         return $this->language;
     }
-
 
     /**
      * Set country.

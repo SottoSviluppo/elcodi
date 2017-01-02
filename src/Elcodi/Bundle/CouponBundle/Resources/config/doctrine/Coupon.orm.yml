@@ -84,6 +84,10 @@ Elcodi\Component\Coupon\Entity\Coupon:
         enabled:
             column: enabled
             type: boolean
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     manyToOne:
         priceCurrency:

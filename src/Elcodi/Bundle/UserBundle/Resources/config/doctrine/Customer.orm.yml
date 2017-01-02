@@ -42,6 +42,10 @@ Elcodi\Component\User\Entity\Customer:
         newsletter:
             column: newsletter
             type: boolean
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     oneToMany:
         carts:

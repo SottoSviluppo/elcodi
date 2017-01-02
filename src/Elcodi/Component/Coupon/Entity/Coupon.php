@@ -19,6 +19,7 @@ namespace Elcodi\Component\Coupon\Entity;
 
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Core\Entity\Traits\ValidIntervalTrait;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
@@ -35,7 +36,7 @@ class Coupon implements CouponInterface
     use IdentifiableTrait,
     DateTimeTrait,
     EnabledTrait,
-        ValidIntervalTrait;
+    ValidIntervalTrait, ExtraDataTrait;
 
     /**
      * @var string

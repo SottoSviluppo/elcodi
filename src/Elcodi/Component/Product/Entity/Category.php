@@ -20,6 +20,7 @@ namespace Elcodi\Component\Product\Entity;
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Media\Entity\Traits\IconsContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
@@ -38,7 +39,7 @@ class Category implements CategoryInterface
     ImagesContainerTrait,
     IconsContainerTrait,
     PrincipalImageTrait,
-        MetaDataTrait;
+    MetaDataTrait, ExtraDataTrait;
 
     /**
      * @var string
