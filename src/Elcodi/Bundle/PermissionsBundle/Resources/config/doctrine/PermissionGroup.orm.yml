@@ -12,6 +12,18 @@ Elcodi\Component\Permissions\Entity\PermissionGroup:
             column: name
             type: string
             nullable: true
+        viewStore:
+            column: view_store
+            type: boolean
+            nullable: false
+        viewShipping:
+            column: view_shipping
+            type: boolean
+            nullable: false
+        viewAppStore:
+            column: view_app_store
+            type: boolean
+            nullable: false
     
     manyToOne:
         adminUser:

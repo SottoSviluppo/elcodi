@@ -34,6 +34,24 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     */
     protected $permissions;
 
+    /**
+    * @var bool
+    * Whether the user can view the store menu item
+    */
+    protected $viewStore;
+
+    /**
+    * @var bool
+    * Whether the user can view the shipping menu item
+    */
+    protected $viewShipping;
+
+    /**
+    * @var bool
+    * Whether the user can view the app store menu item
+    */
+    protected $viewAppStore;
+
     function __construct()
     {
         $this->permissions = new ArrayCollection();
@@ -81,6 +99,39 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     {
         $this->name = $name;
         return $this;
+    }
+
+    public function setViewStore($viewStore)
+    {
+        $this->viewStore = $viewStore;
+        return $this;
+    }
+
+    public function getViewStore()
+    {
+        return $this->viewStore;
+    }
+
+    public function setViewShipping($viewShipping)
+    {
+        $this->viewShipping = $viewShipping;
+        return $this;
+    }
+
+    public function getViewShipping()
+    {
+        return $this->viewShipping;
+    }
+
+    public function setViewAppStore($viewAppStore)
+    {
+        $this->viewAppStore = $viewAppStore;
+        return $this;
+    }
+
+    public function getViewAppStore()
+    {
+        return $this->viewAppStore;
     }
 
     /**
