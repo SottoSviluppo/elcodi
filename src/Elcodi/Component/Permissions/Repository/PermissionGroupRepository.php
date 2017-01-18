@@ -121,4 +121,64 @@ class PermissionGroupRepository extends EntityRepository
 
         return count($result) > 0;
     }
+
+    /**
+    * Check whether the specified user can view the store area
+    * @param AdminUserInterface the current user
+    * @return bool
+    */
+    public function canViewStore(AdminUserInterface $adminUser)
+    {
+        $queryBuilder = $this->createQueryBuilder('pg');
+
+        $result = $queryBuilder
+            ->innerJoin('pg.adminUser', 'a')
+            ->where('a.id = :adminUserId')
+            ->andWhere('pg.viewStore = true')
+            ->setParameter('adminUserId', $adminUser->getId())
+            ->getQuery()
+            ->getResult();
+
+        return count($result) > 0;
+    }
+
+    /**
+    * Check whether the specified user can view the shipping area
+    * @param AdminUserInterface the current user
+    * @return bool
+    */
+    public function canViewShipping(AdminUserInterface $adminUser)
+    {
+        $queryBuilder = $this->createQueryBuilder('pg');
+
+        $result = $queryBuilder
+            ->innerJoin('pg.adminUser', 'a')
+            ->where('a.id = :adminUserId')
+            ->andWhere('pg.viewShipping = true')
+            ->setParameter('adminUserId', $adminUser->getId())
+            ->getQuery()
+            ->getResult();
+
+        return count($result) > 0;
+    }
+
+    /**
+    * Check whether the specified user can view the app store area
+    * @param AdminUserInterface the current user
+    * @return bool
+    */
+    public function canViewAppStore(AdminUserInterface $adminUser)
+    {
+        $queryBuilder = $this->createQueryBuilder('pg');
+
+        $result = $queryBuilder
+            ->innerJoin('pg.adminUser', 'a')
+            ->where('a.id = :adminUserId')
+            ->andWhere('pg.viewAppStore = true')
+            ->setParameter('adminUserId', $adminUser->getId())
+            ->getQuery()
+            ->getResult();
+
+        return count($result) > 0;
+    }
 }
