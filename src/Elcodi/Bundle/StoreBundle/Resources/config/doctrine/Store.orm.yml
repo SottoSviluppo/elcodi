@@ -77,7 +77,7 @@ Elcodi\Component\Store\Entity\Store:
         privateProduct:
             column: private_product
             type: boolean
-            nullable: false
+            nullable: true
     manyToOne:
         address:
             targetEntity: Elcodi\Component\Geo\Entity\Interfaces\AddressInterface
