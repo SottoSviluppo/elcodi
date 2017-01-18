@@ -34,6 +34,24 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     */
     protected $permissions;
 
+    /**
+    * @var bool
+    * Whether the user can view the store menu item
+    */
+    protected $viewStore;
+
+    /**
+    * @var bool
+    * Whether the user can view the shipping menu item
+    */
+    protected $viewShipping;
+
+    /**
+    * @var bool
+    * Whether the user can view the app store menu item
+    */
+    protected $viewAppStore;
+
     function __construct()
     {
         $this->permissions = new ArrayCollection();
@@ -81,6 +99,66 @@ abstract class AbstractPermissionGroup implements AbstractPermissionGroupInterfa
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+    * Set whether the user can view the store
+    * @param bool whether the user can view the store
+    * @return $this Self object
+    */
+    public function setViewStore($viewStore)
+    {
+        $this->viewStore = $viewStore;
+        return $this;
+    }
+
+    /**
+    * Get whether the user can view the store
+    * @return bool
+    */
+    public function getViewStore()
+    {
+        return $this->viewStore;
+    }
+
+    /**
+    * Set whether the user can view the shipping admin area
+    * @param bool whether the user can view the shipping area
+    * @return $this Self object
+    */
+    public function setViewShipping($viewShipping)
+    {
+        $this->viewShipping = $viewShipping;
+        return $this;
+    }
+
+    /**
+    * Get whether the user can view the shipping admin area
+    * @return bool
+    */
+    public function getViewShipping()
+    {
+        return $this->viewShipping;
+    }
+
+    /**
+    * Set whether the user can view the app store
+    * @param bool whether the user can view the app store
+    * @return $this Self object
+    */
+    public function setViewAppStore($viewAppStore)
+    {
+        $this->viewAppStore = $viewAppStore;
+        return $this;
+    }
+
+    /**
+    * Get whether the user can view the app store
+    * @return bool
+    */
+    public function getViewAppStore()
+    {
+        return $this->viewAppStore;
     }
 
     /**
