@@ -143,6 +143,12 @@ class Customer extends AbstractUser implements CustomerInterface
     protected $country;
 
     /**
+     * @var string
+     *
+     */
+    protected $salt;
+
+    /**
      * User roles.
      *
      * @return string[] Roles
@@ -588,5 +594,29 @@ class Customer extends AbstractUser implements CustomerInterface
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Sets Salt.
+     *
+     * @param string $salt
+     *
+     * @return $this Self object
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get Salt.
+     *
+     * @return string Salt
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 }

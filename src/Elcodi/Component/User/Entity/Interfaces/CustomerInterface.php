@@ -18,13 +18,13 @@
 namespace Elcodi\Component\User\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
-use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
+use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
+
 /**
  * Interface CustomerInterface.
  *
@@ -260,4 +260,20 @@ interface CustomerInterface extends AbstractUserInterface, TaxableInterface
      * @return CountryInterface
      */
     public function getCountry();
+
+    /**
+     * Sets Salt.
+     *
+     * @param string $salt
+     *
+     * @return $this Self object
+     */
+    public function setSalt($salt);
+
+    /**
+     * Get Salt.
+     *
+     * @return string Salt
+     */
+    public function getSalt();
 }

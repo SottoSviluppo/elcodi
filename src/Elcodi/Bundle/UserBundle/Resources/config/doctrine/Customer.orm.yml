@@ -46,6 +46,11 @@ Elcodi\Component\User\Entity\Customer:
             column: extra_data
             type: json_array
             nullable: true 
+        salt:
+            column: salt
+            type: string
+            length: 255
+            nullable: true
 
     oneToMany:
         carts:

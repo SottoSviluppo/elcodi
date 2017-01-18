@@ -58,7 +58,7 @@ abstract class AbstractPasswordEventListener
             if ($eventArgs->hasChangedField('password')) {
                 $password = $entity->getPassword();
                 if (!empty($password)) {
-                    $encodedPassword = $this->encryptPassword($password);
+                    $encodedPassword = $this->callCorrectEncryptPassword($entity, $password);
                     $eventArgs->setNewValue('password', $encodedPassword);
                 }
             }
@@ -78,9 +78,18 @@ abstract class AbstractPasswordEventListener
             $password = $entity->getPassword();
 
             if (!empty($password)) {
-                $encodedPassword = $this->encryptPassword($password);
+                $encodedPassword = $this->callCorrectEncryptPassword($entity, $password);
                 $entity->setPassword($encodedPassword);
             }
+        }
+    }
+
+    private function callCorrectEncryptPassword($entity, $password)
+    {
+        if (property_exists($entity, 'salt')) {
+            return $this->encryptPassword($password, $entity->getSalt());
+        } else {
+            return $this->encryptPassword($password);
         }
     }
 

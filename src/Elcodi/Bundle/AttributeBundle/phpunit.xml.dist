@@ -28,6 +28,6 @@
     </filter>
 
     <php>
-        <server name="KERNEL_DIR" value="./vendor/elcodi/elcodi/Elcodi/app/" />
+        <server name="KERNEL_DIR" value="./vendor/sottosviluppo/elcodi/Elcodi/app/" />
     </php>
 </phpunit>
