@@ -147,6 +147,7 @@ class CartManager
         return $this;
     }
 
+    // deprecato da togliere: usare $cart->getLastCartLineAdded();
     public function getLastCartLineAdded()
     {
         return $this->lastCartLineAdded;
