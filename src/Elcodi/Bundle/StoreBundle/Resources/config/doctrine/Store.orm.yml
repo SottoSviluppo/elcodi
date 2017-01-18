@@ -74,6 +74,10 @@ Elcodi\Component\Store\Entity\Store:
             column: enabled
             type: boolean
             nullable: false
+        privateProduct:
+            column: private_product
+            type: boolean
+       
 
     manyToOne:
         address:

@@ -16,6 +16,18 @@ services:
             - '@elcodi.store'
             - getUseStock
 
+    elcodi.store_private_product:
+        class: StdClass
+        factory:
+            - '@elcodi.store'
+            - getPrivateProduct
+
+    elcodi.store_public_user_registered:
+        class: StdClass
+        factory:
+            - '@elcodi.store'
+            - getPublicUserRegistered
+
     elcodi.store_tracker:
         class: StdClass
         factory:

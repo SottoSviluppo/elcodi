@@ -364,4 +364,20 @@ EnabledInterface
      * @return $this Self object
      */
     public function setBackgroundImage(ImageInterface $backgroundImage = null);
+
+    /**
+     * Get PrivateProduct.
+     *
+     * @return bool PrivateProduct
+     */
+    public function getPrivateProduct();
+
+    /**
+     * Sets PrivateProduct.
+     *
+     * @param bool $privateProduct PrivateProduct
+     *
+     * @return $this Self object
+     */
+    public function setPrivateProduct($privateProduct);
 }
