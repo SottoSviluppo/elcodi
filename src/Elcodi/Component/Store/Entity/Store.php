@@ -184,6 +184,13 @@ class Store implements StoreInterface
     protected $backgroundImage;
 
     /**
+     * @var boolean PrivateProduct
+     *
+     * Set if the product is private or public
+     */
+    protected $privateProduct;
+
+    /**
      * Get Name.
      *
      * @return string Name
@@ -681,4 +688,29 @@ class Store implements StoreInterface
 
         return $this;
     }
+
+    /**
+     * Get PrivateProduct.
+     *
+     * @return bool PrivateProduct
+     */
+    public function getPrivateProduct()
+    {
+        return $this->privateProduct;
+    }
+
+    /**
+     * Sets PrivateProduct.
+     *
+     * @param bool $privateProduct PrivateProduct
+     *
+     * @return $this Self object
+     */
+    public function setPrivateProduct($privateProduct)
+    {
+        $this->privateProduct = $privateProduct;
+
+        return $this;
+    }
+
 }

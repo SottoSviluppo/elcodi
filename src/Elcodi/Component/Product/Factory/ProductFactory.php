@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 use Elcodi\Component\Product\ElcodiProductStock;
 use Elcodi\Component\Product\ElcodiProductTypes;
@@ -35,6 +34,12 @@ class ProductFactory extends AbstractPurchasableFactory
      * Use use stock
      */
     public $useStock = false;
+    /**
+     * @var bool
+     *
+     * Set product private
+     */
+    public $productPrivate = true;
 
     /**
      * Set use stock.
@@ -46,6 +51,19 @@ class ProductFactory extends AbstractPurchasableFactory
     public function setUseStock($useStock = false)
     {
         $this->useStock = $useStock;
+
+        return $this;
+    }
+
+    /**
+     * Set product private
+     *
+     * @param bool $productPrivate set visibility of product for users
+     * @return $this Self object
+     */
+    public function setProductPrivate($productPrivate = true)
+    {
+        $this->productPrivate = $productPrivate;
 
         return $this;
     }
@@ -68,9 +86,7 @@ class ProductFactory extends AbstractPurchasableFactory
         $classNamespace = $this->getEntityNamespace();
         $product = new $classNamespace();
 
-        $stock = $this->useStock
-            ? 0
-            : ElcodiProductStock::INFINITE_STOCK;
+        $stock = $this->useStock ? 0 : ElcodiProductStock::INFINITE_STOCK;
 
         $product
             ->setStock($stock)
@@ -89,7 +105,8 @@ class ProductFactory extends AbstractPurchasableFactory
             ->setWeight(0)
             ->setImagesSort('')
             ->setEnabled(true)
-            ->setCreatedAt($this->now());
+            ->setCreatedAt($this->now())
+            ->setPrivate($this->productPrivate);
 
         return $product;
     }

@@ -123,7 +123,10 @@ Elcodi\Component\Product\Entity\Purchasable:
             column: extra_data
             type: json_array
             nullable: true  
-
+        private:
+            column: private
+            type: boolean
+            nullable: true  
     manyToOne:
         principalCategory:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface

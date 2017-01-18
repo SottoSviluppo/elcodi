@@ -155,6 +155,13 @@ abstract class Purchasable implements PurchasableInterface
     protected $purchasableType;
 
     /**
+     * @var boolean
+     *
+     * Indicate if a porchusable object is for all user or not.
+     */
+    protected $private;
+
+    /**
      * Get Slug.
      *
      * @return string Slug
@@ -419,6 +426,30 @@ abstract class Purchasable implements PurchasableInterface
     }
 
     /**
+     * Get private.
+     *
+     * @return boolean private
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * Sets private.
+     *
+     * @param boolean $private private
+     *
+     * @return $this Self object
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
      * Get categories.
      *
      * @return Collection Categories
@@ -457,4 +488,5 @@ abstract class Purchasable implements PurchasableInterface
     {
         return 'purchasable';
     }
+
 }
