@@ -13,7 +13,7 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.product.class%"]]
             - [setUseStock, ["@elcodi.store_uses_stock"]]
-            - [setProductPrivate, ["@elcodi.store_private_product"]]
+            - [setProductPrivate, ["@elcodi.store_private_product_creation"]]
             - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
 
     #

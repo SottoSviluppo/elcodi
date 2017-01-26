@@ -16,11 +16,11 @@ services:
             - '@elcodi.store'
             - getUseStock
 
-    elcodi.store_private_product:
+    elcodi.store_private_product_creation:
         class: StdClass
         factory:
             - '@elcodi.store'
-            - getPrivateProduct
+            - getPrivateProductOnCreation
 
     elcodi.store_public_user_registered:
         class: StdClass
