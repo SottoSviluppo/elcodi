@@ -186,9 +186,9 @@ class Store implements StoreInterface
     /**
      * @var boolean PrivateProduct
      *
-     * Set if the product is private or public
+     * Set if the product is private or public on creation
      */
-    protected $privateProduct;
+    protected $privateProductOnCreation;
 
     /**
      * Get Name.
@@ -690,25 +690,25 @@ class Store implements StoreInterface
     }
 
     /**
-     * Get PrivateProduct.
+     * Get PrivateProductOnCreation.
      *
-     * @return bool PrivateProduct
+     * @return bool privateProductOnCreation
      */
-    public function getPrivateProduct()
+    public function getPrivateProductOnCreation()
     {
-        return $this->privateProduct;
+        return $this->privateProductOnCreation;
     }
 
     /**
-     * Sets PrivateProduct.
+     * Sets PrivateProductOnCreation.
      *
-     * @param bool $privateProduct PrivateProduct
+     * @param bool $privateProductOnCreation PrivateProductOnCreation
      *
      * @return $this Self object
      */
-    public function setPrivateProduct($privateProduct)
+    public function setPrivateProductOnCreation($privateProductOnCreation)
     {
-        $this->privateProduct = $privateProduct;
+        $this->privateProductOnCreation = $privateProductOnCreation;
 
         return $this;
     }

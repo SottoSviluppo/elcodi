@@ -366,18 +366,18 @@ EnabledInterface
     public function setBackgroundImage(ImageInterface $backgroundImage = null);
 
     /**
-     * Get PrivateProduct.
+     * Get PrivateProductOnCreation.
      *
-     * @return bool PrivateProduct
+     * @return bool PrivateProductOnCreation
      */
-    public function getPrivateProduct();
+    public function getPrivateProductOnCreation();
 
     /**
-     * Sets PrivateProduct.
+     * Sets PrivateProductOnCreation.
      *
-     * @param bool $privateProduct PrivateProduct
+     * @param bool $privateProductOnCreation PrivateProductOnCreation
      *
      * @return $this Self object
      */
-    public function setPrivateProduct($privateProduct);
+    public function setPrivateProductOnCreation($privateProductOnCreation);
 }

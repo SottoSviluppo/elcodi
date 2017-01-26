@@ -74,8 +74,8 @@ Elcodi\Component\Store\Entity\Store:
             column: enabled
             type: boolean
             nullable: false
-        privateProduct:
-            column: private_product
+        privateProductOnCreation:
+            column: private_product_creation
             type: boolean
             nullable: true
     manyToOne:

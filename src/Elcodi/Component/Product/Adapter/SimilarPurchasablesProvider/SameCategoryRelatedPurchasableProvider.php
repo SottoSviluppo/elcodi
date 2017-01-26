@@ -18,11 +18,11 @@
 namespace Elcodi\Component\Product\Adapter\SimilarPurchasablesProvider;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Product\Adapter\SimilarPurchasablesProvider\Interfaces\RelatedPurchasablesProviderInterface;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 use Elcodi\Component\Product\Repository\PurchasableRepository;
+use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 
 /**
  * Class SameCategoryRelatedPurchasableProvider.
@@ -38,14 +38,17 @@ class SameCategoryRelatedPurchasableProvider implements RelatedPurchasablesProvi
      */
     private $purchasableRepository;
 
+    private $tokenStorage;
+
     /**
      * Construct method.
      *
      * @param PurchasableRepository $purchasableRepository Purchasable Repository
      */
-    public function __construct(PurchasableRepository $purchasableRepository)
+    public function __construct(PurchasableRepository $purchasableRepository, $tokenStorage)
     {
         $this->purchasableRepository = $purchasableRepository;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -94,7 +97,7 @@ class SameCategoryRelatedPurchasableProvider implements RelatedPurchasablesProvi
             return [];
         }
 
-        return $this
+        $queryBuilder = $this
             ->purchasableRepository
             ->createQueryBuilder('p')
             ->where('p.principalCategory IN(:categories)')
@@ -104,9 +107,13 @@ class SameCategoryRelatedPurchasableProvider implements RelatedPurchasablesProvi
                 'categories' => $categories,
                 'purchasables' => $purchasables,
                 'enabled' => true,
-            ])
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ]);
+
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (!($user instanceof CustomerInterface)) {
+            $queryBuilder->andWhere('p.private = false');
+        }
+
+        return $queryBuilder->setMaxResults($limit)->getQuery()->getResult();
     }
 }
