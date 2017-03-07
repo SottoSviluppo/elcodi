@@ -73,6 +73,12 @@ Elcodi\Component\Coupon\Entity\Coupon:
             type: string
             length: 255
             nullable: true
+        freeShipping:
+            column: free_shipping
+            type: boolean
+            nullable: true
+            options:
+                default: false
         createdAt:
             column: created_at
             type: datetime

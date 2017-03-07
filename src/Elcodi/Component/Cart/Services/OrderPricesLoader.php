@@ -28,6 +28,30 @@ class OrderPricesLoader
             ->currencyWrapper
             ->get();
 
+        $finalAmount = $this->getOrderAmountWithShipping($order);
+
+        /**
+         * Calculates the coupon amount.
+         */
+        $couponAmount = $order->getCouponAmount();
+        if ($couponAmount instanceof MoneyInterface) {
+            $convertedCouponAmount = $this
+                ->currencyConverter
+                ->convertMoney(
+                    $couponAmount,
+                    $currency
+                );
+            $finalAmount = $finalAmount->subtract($convertedCouponAmount);
+        }
+        return $finalAmount;
+    }
+
+    public function getOrderAmountWithShipping($order)
+    {
+        $currency = $this
+            ->currencyWrapper
+            ->get();
+
         $finalAmount = clone $order->getPurchasableAmount();
 
         /**
@@ -44,19 +68,6 @@ class OrderPricesLoader
             $finalAmount = $finalAmount->add($convertedShippingAmount);
         }
 
-        /**
-         * Calculates the coupon amount.
-         */
-        $couponAmount = $order->getCouponAmount();
-        if ($couponAmount instanceof MoneyInterface) {
-            $convertedCouponAmount = $this
-                ->currencyConverter
-                ->convertMoney(
-                    $couponAmount,
-                    $currency
-                );
-            $finalAmount = $finalAmount->subtract($convertedCouponAmount);
-        }
         return $finalAmount;
     }
 

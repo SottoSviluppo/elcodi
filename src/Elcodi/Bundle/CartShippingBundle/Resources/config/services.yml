@@ -4,8 +4,12 @@ services:
         class: Elcodi\Component\CartShipping\Services\CartShippingAmountLoader
         arguments:
             - '@elcodi.wrapper.shipping_methods'
+            - '@elcodi.repository.cart_coupon'
+            - "@elcodi.wrapper.empty_money"
 
     elcodi.loader.order_shipping_method:
         class: Elcodi\Component\CartShipping\Services\OrderShippingMethodLoader
         arguments:
             - '@elcodi.wrapper.shipping_methods'
+            - '@elcodi.repository.cart_coupon'
+            - "@elcodi.wrapper.empty_money"

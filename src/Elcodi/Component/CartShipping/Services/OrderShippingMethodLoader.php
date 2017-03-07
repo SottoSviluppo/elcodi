@@ -22,26 +22,17 @@ use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Shipping\Entity\ShippingMethod;
 use Elcodi\Component\Shipping\Wrapper\ShippingWrapper;
 
-/**
- * Class OrderShippingMethodLoader.
- */
 class OrderShippingMethodLoader
 {
-    /**
-     * @var ShippingWrapper
-     *
-     * Shipping wrapper
-     */
     private $shippingWrapper;
+    private $cartCouponRepository;
+    private $emptyMoneyWrapper;
 
-    /**
-     * Construct.
-     *
-     * @param ShippingWrapper $shippingWrapper Shipping wrapper
-     */
-    public function __construct(ShippingWrapper $shippingWrapper)
+    public function __construct(ShippingWrapper $shippingWrapper, $cartCouponRepository, $emptyMoneyWrapper)
     {
         $this->shippingWrapper = $shippingWrapper;
+        $this->cartCouponRepository = $cartCouponRepository;
+        $this->emptyMoneyWrapper = $emptyMoneyWrapper;
     }
 
     /**
@@ -71,6 +62,26 @@ class OrderShippingMethodLoader
         if ($shippingMethod instanceof ShippingMethod) {
             $order->setShippingAmount($shippingMethod->getPrice());
             $order->setShippingMethod($shippingMethod);
+        }
+
+        $this->applyFreeShippingCoupons($cart, $order);
+    }
+
+    private function applyFreeShippingCoupons($cart, $order)
+    {
+        // if coupon has freeshipping sets value to zero
+        $cartCoupons = $this->cartCouponRepository->findByCart($cart);
+        foreach ($cartCoupons as $cartCoupon) {
+            $coupon = $cartCoupon->getCoupon();
+            if ($coupon != null && $coupon->getFreeShipping()) {
+                $zeroPrice = $this
+                    ->emptyMoneyWrapper
+                    ->get();
+
+                $order->setShippingAmount(
+                    $zeroPrice
+                );
+            }
         }
     }
 }

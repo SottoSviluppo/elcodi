@@ -165,6 +165,12 @@ class Coupon implements CouponInterface
     protected $color;
 
     /**
+     * @var bool
+     *
+     */
+    protected $freeShipping;
+
+    /**
      * Set code.
      *
      * @param string $code Code
@@ -534,6 +540,30 @@ class Coupon implements CouponInterface
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set freeShipping.
+     *
+     * @param string $freeShipping FreeShipping
+     *
+     * @return $this Self object
+     */
+    public function setFreeShipping($freeShipping)
+    {
+        $this->freeShipping = $freeShipping;
+
+        return $this;
+    }
+
+    /**
+     * Get freeShipping.
+     *
+     * @return string FreeShipping
+     */
+    public function getFreeShipping()
+    {
+        return $this->freeShipping;
     }
 
     /**

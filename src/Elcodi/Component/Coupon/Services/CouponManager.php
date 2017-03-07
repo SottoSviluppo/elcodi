@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Coupon\Services;
 
 use DateTime;
-
 use Elcodi\Component\Core\Factory\DateTimeFactory;
 use Elcodi\Component\Core\Generator\Interfaces\GeneratorInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
@@ -70,6 +69,38 @@ class CouponManager
         $this->couponFactory = $couponFactory;
         $this->couponCodeGenerator = $couponCodeGenerator;
         $this->dateTimeFactory = $dateTimeFactory;
+    }
+
+    public function generateBaseCoupon($name, $length)
+    {
+        $dateFrom = $this
+            ->dateTimeFactory
+            ->create();
+
+        $dateTo = null;
+
+        $couponGenerated = $this->couponFactory->create();
+        $couponCode = $this
+            ->couponCodeGenerator
+            ->randomUpperString($length);
+
+        $couponGenerated
+            ->setCode($couponCode)
+            ->setName($name . '_' . $couponCode)
+            // ->setType($coupon->getType())
+            // ->setPrice($coupon->getPrice())
+            // ->setDiscount($coupon->getDiscount())
+            ->setCount(1)
+            // ->setPriority($coupon->getPriority())
+            // ->setMinimumPurchase($coupon->getMinimumPurchase())
+            ->setValidFrom($dateFrom)
+            ->setValidTo($dateTo)
+            // ->setValue($coupon->getValue())
+            // ->setRule($coupon->getRule())
+            // ->setEnforcement($coupon->getEnforcement())
+            ->setEnabled(true);
+
+        return $couponGenerated;
     }
 
     /**
