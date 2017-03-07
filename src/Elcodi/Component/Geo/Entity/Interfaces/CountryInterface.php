@@ -24,11 +24,10 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface CountryInterface.
  */
-interface CountryInterface
-    extends
-    IdentifiableInterface,
-    DateTimeInterface
-    // EnabledInterface
+interface CountryInterface extends
+IdentifiableInterface,
+DateTimeInterface
+// EnabledInterface
 
 {
 
@@ -48,4 +47,19 @@ interface CountryInterface
      */
     public function getName();
 
+    /**
+     * Sets IsUe.
+     *
+     * @param string $isUe
+     *
+     * @return $this Self object
+     */
+    public function setIsUe($isUe);
+
+    /**
+     * Get IsUe.
+     *
+     * @return string IsUe
+     */
+    public function getIsUe();
 }

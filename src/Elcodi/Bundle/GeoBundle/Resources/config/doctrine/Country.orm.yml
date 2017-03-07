@@ -19,9 +19,11 @@ Elcodi\Component\Geo\Entity\Country:
         updatedAt:
             column: updated_at
             type: datetime
-        # enabled:
-        #     column: enabled
-        #     type: boolean
+        isUe:
+            column: is_ue
+            type: boolean
+            options:
+                default: false
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

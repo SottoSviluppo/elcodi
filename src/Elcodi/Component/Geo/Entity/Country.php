@@ -28,7 +28,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
  */
 class Country implements CountryInterface
 {
-    use IdentifiableTrait, 
+    use IdentifiableTrait,
     DateTimeTrait
     // EnabledTrait
     ;
@@ -39,7 +39,13 @@ class Country implements CountryInterface
      */
     protected $name;
 
-	public function __construct()
+    /**
+     * @var bool
+     *
+     */
+    protected $isUe;
+
+    public function __construct()
     {
     }
 
@@ -65,6 +71,30 @@ class Country implements CountryInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Sets IsUe.
+     *
+     * @param string $isUe
+     *
+     * @return $this Self object
+     */
+    public function setIsUe($isUe)
+    {
+        $this->isUe = $isUe;
+
+        return $this;
+    }
+
+    /**
+     * Get IsUe.
+     *
+     * @return string IsUe
+     */
+    public function getIsUe()
+    {
+        return $this->isUe;
     }
 
     public function __toString()
