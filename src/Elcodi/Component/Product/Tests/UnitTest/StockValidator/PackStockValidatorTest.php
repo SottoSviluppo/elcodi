@@ -18,13 +18,12 @@
 namespace Elcodi\Component\Product\Tests\UnitTest\StockValidator;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit_Framework_TestCase;
-
 use Elcodi\Component\Product\ElcodiProductStock;
 use Elcodi\Component\Product\StockValidator\PackStockValidator;
 use Elcodi\Component\Product\StockValidator\ProductStockValidator;
 use Elcodi\Component\Product\StockValidator\PurchasableStockValidator;
 use Elcodi\Component\Product\StockValidator\VariantStockValidator;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class PackStockValidatorTest.

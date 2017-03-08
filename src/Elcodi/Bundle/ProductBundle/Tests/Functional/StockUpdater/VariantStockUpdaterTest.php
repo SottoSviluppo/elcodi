@@ -47,7 +47,6 @@ class VariantStockUpdaterTest extends WebTestCase
             20
         );
         // $this->clear($variant);
-        $this->detach($variant);
         $variant = $this->find('product_variant', 6);
         $this->assertEquals(
             80,

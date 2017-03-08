@@ -17,11 +17,10 @@
 
 namespace Elcodi\Component\Geo\Tests\UnitTest\Adapter;
 
-use PHPUnit_Framework_TestCase;
-
 use Elcodi\Component\Geo\Adapter\LocationProvider\Interfaces\LocationProviderAdapterInterface;
 use Elcodi\Component\Geo\Formatter\AddressFormatter;
 use Elcodi\Component\Geo\ValueObject\LocationData;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class AddressManagerTest.
@@ -91,7 +90,7 @@ class AddressFormatterTest extends PHPUnit_Framework_TestCase
             'city_id'
         );
 
-        $expectedFullAddress = 'C/ engonga 43, Estudis de TV3, Catalunya 06580';
+        $expectedFullAddress = 'C/ engonga 43 city_id, 06580, ';
 
         $expectedResponse = [
             'id' => '42',
@@ -100,14 +99,12 @@ class AddressFormatterTest extends PHPUnit_Framework_TestCase
             'recipientSurname' => 'Robirosa',
             'address' => 'C/ engonga',
             'addressMore' => '43',
+            'city' => 'city_id',
+            'country' => '',
             'postalCode' => '06580',
             'phone' => '958652654',
             'mobile' => '647852365',
             'comment' => 'Aixo en el basquetbol es veu molt clar',
-            'city' => [
-                'city' => 'Estudis de TV3',
-                'country' => 'Catalunya',
-            ],
             'fullAddress' => $expectedFullAddress,
         ];
 

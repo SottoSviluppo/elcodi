@@ -66,7 +66,8 @@ class PackStockUpdaterTest extends WebTestCase
             $pack,
             3
         );
-        $this->detach($pack);
+
+        // $this->clear($pack);
         $pack = $this->find('purchasable_pack', 10);
         $this->assertEquals(
             2,
@@ -103,7 +104,6 @@ class PackStockUpdaterTest extends WebTestCase
             9
         );
         // $this->clear($pack);
-        $this->detach($product);
         $pack = $this->find('purchasable_pack', 10);
         $this->assertEquals(
             0,

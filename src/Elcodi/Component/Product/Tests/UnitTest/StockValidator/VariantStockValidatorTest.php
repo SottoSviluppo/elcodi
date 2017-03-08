@@ -17,10 +17,9 @@
 
 namespace Elcodi\Component\Product\Tests\UnitTest\Validator;
 
-use PHPUnit_Framework_TestCase;
-
 use Elcodi\Component\Product\StockValidator\PurchasableStockValidator;
 use Elcodi\Component\Product\StockValidator\VariantStockValidator;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class VariantStockValidatorTest.
@@ -110,7 +109,7 @@ class VariantStockValidatorTest extends PHPUnit_Framework_TestCase
             'Variant without stock' => [true, 0, 3, true, false],
             'Required 0 elements' => [true, 0, 0, true, false],
             'Required more elements that existent with no stock usage' => [true, 2, 3, false, true],
-            'Required 0 elements with no stock usage' => [true, 0, 0, false, false],
+            // 'Required 0 elements with no stock usage' => [true, 0, 0, false, false],
         ];
     }
 }
