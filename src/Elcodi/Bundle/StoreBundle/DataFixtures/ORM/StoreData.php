@@ -51,6 +51,7 @@ class StoreData extends AbstractFixture implements DependentFixtureInterface
             ->setTracker('123456')
             ->setTemplate('fhsjkhfjklsa')
             ->setUseStock(true)
+            ->setTaxIncluded(false)
             ->setAddress($address)
             ->setDefaultLanguage($language)
             ->setDefaultCurrency($currency);

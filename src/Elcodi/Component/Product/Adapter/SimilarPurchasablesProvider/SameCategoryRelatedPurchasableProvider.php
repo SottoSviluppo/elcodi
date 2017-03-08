@@ -109,9 +109,11 @@ class SameCategoryRelatedPurchasableProvider implements RelatedPurchasablesProvi
                 'enabled' => true,
             ]);
 
+        if ($this->tokenStorage != null) {
         $user = $this->tokenStorage->getToken()->getUser();
         if (!($user instanceof CustomerInterface)) {
             $queryBuilder->andWhere('p.private = false');
+            }
         }
 
         return $queryBuilder->setMaxResults($limit)->getQuery()->getResult();

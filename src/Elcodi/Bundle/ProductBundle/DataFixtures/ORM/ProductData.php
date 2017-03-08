@@ -55,7 +55,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         $manufacturer = $this->getReference('manufacturer');
         $currency = $this->getReference('currency-dollar');
         $productDirector = $this->getDirector('product');
-        $tax = $this->getReference('tax-vat-21');
+        $tax = null; //$this->getReference('tax-vat-21');
 
         $product = $productDirector
             ->create()

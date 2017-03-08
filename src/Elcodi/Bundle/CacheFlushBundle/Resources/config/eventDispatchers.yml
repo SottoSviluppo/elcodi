@@ -1,0 +1,9 @@
+services:
+
+    #
+    # Event Dispatchers
+    #
+    cache_flusher.event_dispatcher:
+        class: Elcodi\Bundle\CacheFlushBundle\EventDispatcher\CacheFlusherEventDispatcher
+        arguments:
+            - @event_dispatcher

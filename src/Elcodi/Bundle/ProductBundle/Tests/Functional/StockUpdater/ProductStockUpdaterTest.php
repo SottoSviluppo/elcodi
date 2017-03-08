@@ -46,7 +46,8 @@ class ProductStockUpdaterTest extends WebTestCase
             $product,
             2
         );
-        $this->clear($product);
+
+        $this->detach($product);
         $product = $this->find('product', 1);
         $this->assertEquals(
             8,

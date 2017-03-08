@@ -87,9 +87,10 @@ class PurchasableRepositoryTest extends WebTestCase
             ->categoryRepository
             ->findOneBy(['slug' => 'root-category']);
 
-        $purchasables = $this
+        $purchasablesQuery = $this
             ->purchasableRepository
             ->getAllFromCategories([$rootCategory]);
+        $purchasables = $purchasablesQuery->getResult();
 
         $this->assertCount(
             1,
@@ -122,7 +123,7 @@ class PurchasableRepositoryTest extends WebTestCase
             ->categoryRepository
             ->findOneBy(['slug' => 'category']);
 
-        $purchasables = $this
+        $purchasablesQuery = $this
             ->purchasableRepository
             ->getAllFromCategories(
                 [
@@ -130,6 +131,8 @@ class PurchasableRepositoryTest extends WebTestCase
                     $category,
                 ]
             );
+
+        $purchasables = $purchasablesQuery->getResult();
 
         $this->assertCount(
             5,

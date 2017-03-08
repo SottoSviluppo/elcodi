@@ -44,6 +44,7 @@ class CountryFactory extends AbstractFactory
         $country
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime())
+            ->setIsUe(false)
             ;
 
         return $country;
