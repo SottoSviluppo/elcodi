@@ -108,15 +108,15 @@ class AddressFormatterTest extends PHPUnit_Framework_TestCase
             'fullAddress' => $expectedFullAddress,
         ];
 
-        $this
-            ->locationProvider
-            ->expects($this->once())
-            ->method('getHierarchy')
-            ->with('city_id')
-            ->will($this->returnValue([
-                $country,
-                $city,
-            ]));
+        // $this
+        //     ->locationProvider
+        //     ->expects($this->once())
+        //     ->method('getHierarchy')
+        //     ->with('city_id')
+        //     ->will($this->returnValue([
+        //         $country,
+        //         $city,
+        //     ]));
 
         $response = $this
             ->addressFormatter

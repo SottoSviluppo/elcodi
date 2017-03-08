@@ -186,7 +186,7 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \SebastianBergmann\Money\CurrencyMismatchException
+     * @expectedException \Money\InvalidArgumentException
      */
     public function testCurrencyMismatchException()
     {
