@@ -37,4 +37,14 @@ trait ExtraDataTrait
 
         return $this;
     }
+
+    public function getExtraDataValue($key)
+    {
+        return $this->extraData[$key];
+    }
+
+    public function setExtraDataValue($key, $value)
+    {
+        $this->extraData[$key] = $value;
+    }
 }
