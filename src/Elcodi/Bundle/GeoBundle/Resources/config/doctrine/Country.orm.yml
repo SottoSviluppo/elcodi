@@ -24,6 +24,10 @@ Elcodi\Component\Geo\Entity\Country:
             type: boolean
             options:
                 default: false
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

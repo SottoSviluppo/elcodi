@@ -11,6 +11,14 @@ services:
             - '@elcodi.repository.address'
             - '@elcodi.factory.address'
 
+    elcodi.director.country:
+        class: Elcodi\Component\Core\Services\ObjectDirector
+        lazy: true
+        arguments:
+            - '@elcodi.object_manager.country'
+            - '@elcodi.repository.country'
+            - '@elcodi.factory.country'
+
     elcodi.director.location:
         class: Elcodi\Component\Core\Services\ObjectDirector
         lazy: true

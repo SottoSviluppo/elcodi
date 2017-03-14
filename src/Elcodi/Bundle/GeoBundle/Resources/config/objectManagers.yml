@@ -8,6 +8,11 @@ services:
         arguments:
             - %elcodi.entity.address.class%
 
+    elcodi.object_manager.country:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.country.class%
+
     elcodi.object_manager.location:
         parent: elcodi.abstract_manager
         arguments:

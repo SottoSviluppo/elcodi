@@ -19,6 +19,7 @@ namespace Elcodi\Component\Geo\Entity;
 
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 
@@ -27,7 +28,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
  */
 class Address implements AddressInterface
 {
-    use IdentifiableTrait,DateTimeTrait, EnabledTrait;
+    use IdentifiableTrait, DateTimeTrait, EnabledTrait, ExtraDataTrait;
 
     /**
      * @var string
@@ -344,8 +345,8 @@ class Address implements AddressInterface
     {
         return $this->postalCode;
     }
-    
-     /**
+
+    /**
      * Sets Country.
      *
      * @param entity $country
