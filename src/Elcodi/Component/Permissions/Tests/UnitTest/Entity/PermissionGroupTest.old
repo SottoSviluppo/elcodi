@@ -2,10 +2,9 @@
 
 namespace Elcodi\Component\Permissions\Tests\UnitTest\Entity;
 
-use Elcodi\Component\Permissions\Entity\PermissionGroup;
-use Elcodi\Component\Core\Tests\UnitTest\Entity\AbstractEntityTest;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Elcodi\Component\Core\Tests\UnitTest\Entity\AbstractEntityTest;
+use Elcodi\Component\Permissions\Entity\PermissionGroup;
 use Exception;
 
 class PermissionGroupTest extends AbstractEntityTest
@@ -36,7 +35,7 @@ class PermissionGroupTest extends AbstractEntityTest
                 'setter' => 'setName',
                 'value' => 'my-group',
                 'nullable' => false,
-            ]]
+            ]],
         ];
     }
 
@@ -48,7 +47,7 @@ class PermissionGroupTest extends AbstractEntityTest
         $permissionNumber = $pg->getPermissions()->count();
         $pg->addPermission('my-resource', true, true, true, true);
 
-        $this->assertEquals($permissionNumber+1, $pg->getPermissions()->count());
+        $this->assertEquals($permissionNumber + 1, $pg->getPermissions()->count());
     }
 
     public function testAddPermissionShouldThrowExceptionIfAlreadyInCollection()
@@ -82,7 +81,7 @@ class PermissionGroupTest extends AbstractEntityTest
 
         $pg->removePermission($p);
 
-        $this->assertEquals($permissionNumber-1, $pg->getPermissions()->count());
+        $this->assertEquals($permissionNumber - 1, $pg->getPermissions()->count());
     }
 
     public function testRemovePermissionShouldThrowExceptionIfNotInCollection()

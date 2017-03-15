@@ -2,9 +2,8 @@
 
 namespace Elcodi\Component\Permissions\Tests\UnitTest\Entity;
 
-use Elcodi\Component\Permissions\Entity\Permission;
 use Elcodi\Component\Core\Tests\UnitTest\Entity\AbstractEntityTest;
-
+use Elcodi\Component\Permissions\Entity\Permission;
 use InvalidArgumentException;
 
 class PermissionTest extends AbstractEntityTest
@@ -56,7 +55,7 @@ class PermissionTest extends AbstractEntityTest
                 'setter' => 'setCanDelete',
                 'value' => true,
                 'nullable' => false,
-            ]]
+            ]],
         ];
     }
 
@@ -98,7 +97,6 @@ class PermissionTest extends AbstractEntityTest
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('canUpdate');
     }
-
 
     public function testSetCanDeleteShouldThrowInvalidArgumentExceptionIfIsNotBool()
     {
