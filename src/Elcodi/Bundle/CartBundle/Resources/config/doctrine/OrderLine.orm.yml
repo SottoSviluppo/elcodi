@@ -39,6 +39,10 @@ Elcodi\Component\Cart\Entity\OrderLine:
         quantity:
             column: quantity
             type: integer
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     manyToOne:
         order:

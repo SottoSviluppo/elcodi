@@ -21,6 +21,7 @@ use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface;
 use Elcodi\Component\Cart\Entity\Traits\PriceTrait;
 use Elcodi\Component\Cart\Entity\Traits\PurchasableWrapperTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Product\Entity\Traits\DimensionsTrait;
 use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
@@ -34,9 +35,10 @@ use Elcodi\Component\Tax\Entity\Traits\TaxableTrait;
 class OrderLine implements OrderLineInterface
 {
     use IdentifiableTrait,
-        PurchasableWrapperTrait,
-        PriceTrait,
-        TaxableTrait,
+    PurchasableWrapperTrait,
+    PriceTrait,
+    TaxableTrait,
+    ExtraDataTrait,
         DimensionsTrait;
 
     /**

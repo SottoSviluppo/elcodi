@@ -18,12 +18,12 @@
 namespace Elcodi\Component\Cart\Entity;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface;
 use Elcodi\Component\Cart\Entity\Traits\PriceTrait;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
@@ -41,7 +41,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
  */
 class Order implements OrderInterface
 {
-    use IdentifiableTrait, DateTimeTrait, PriceTrait, DimensionsTrait;
+    use IdentifiableTrait, DateTimeTrait, PriceTrait, DimensionsTrait, ExtraDataTrait;
 
     /**
      * @var CustomerInterface
