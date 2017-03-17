@@ -24,6 +24,11 @@ Elcodi\Component\Geo\Entity\Country:
             type: boolean
             options:
                 default: false
+        enabled:
+            column: enabled
+            type: boolean
+            options:
+                default: true
         extraData:
             column: extra_data
             type: json_array

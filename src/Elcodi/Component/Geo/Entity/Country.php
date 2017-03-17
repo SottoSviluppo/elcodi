@@ -19,6 +19,7 @@ namespace Elcodi\Component\Geo\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
+use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Geo\Entity\Interfaces\CountryInterface;
@@ -30,7 +31,8 @@ class Country implements CountryInterface
 {
     use IdentifiableTrait,
     DateTimeTrait,
-        ExtraDataTrait
+    ExtraDataTrait,
+        EnabledTrait
     ;
 
     /**
