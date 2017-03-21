@@ -18,10 +18,9 @@
 namespace Elcodi\Component\CartCoupon\Transformer;
 
 use Doctrine\Common\Persistence\ObjectManager;
-
-use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\CartCoupon\Entity\Interfaces\OrderCouponInterface;
 use Elcodi\Component\CartCoupon\Factory\OrderCouponFactory;
+use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Coupon\EventDispatcher\CouponEventDispatcher;
 
@@ -107,9 +106,9 @@ class CouponToOrderCouponTransformer
             ->orderCouponObjectManager
             ->flush($orderCoupon);
 
-        $this
-            ->couponEventDispatcher
-            ->notifyCouponUsage($coupon);
+        // $this
+        //     ->couponEventDispatcher
+        //     ->notifyCouponUsage($coupon);
 
         return $orderCoupon;
     }

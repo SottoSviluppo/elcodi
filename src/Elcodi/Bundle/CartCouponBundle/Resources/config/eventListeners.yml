@@ -101,3 +101,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: cart_coupon.onapply, method: updateCart, priority: 0 }
             - { name: kernel.event_listener, event: cart_coupon.onremove, method: updateCart, priority: 0 }
+
+    elcodi.event_listener.coupon_usage_on_payment:
+        class: Elcodi\Component\CartCoupon\EventListener\CouponUsageOnPaymentEventListener
+        arguments:
+            - '@elcodi.event_dispatcher.coupon'
+            - '@elcodi.repository.order_coupon'
+        tags:
+            - { name: kernel.event_listener, event: payment.order.success, method: notifyCouponUsage }
