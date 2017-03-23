@@ -172,7 +172,7 @@ class CartWrapper implements WrapperInterface
         $customerCartsFlaggedToUse = $customer
             ->getCarts()
             ->filter(function (CartInterface $cart) {
-                return $cart->isIfNotOrderedUseThis();
+                return !$cart->isOrdered() && $cart->isIfNotOrderedUseThis();
             });
 
         if (count($customerCartsFlaggedToUse) > 0) {
