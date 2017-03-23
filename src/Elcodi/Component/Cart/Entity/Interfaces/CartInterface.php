@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Cart\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
@@ -29,11 +28,10 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 /**
  * Interface CartInterface.
  */
-interface CartInterface
-    extends
-        DateTimeInterface,
-        DimensionableInterface,
-        IdentifiableInterface
+interface CartInterface extends
+DateTimeInterface,
+DimensionableInterface,
+IdentifiableInterface
 {
     /**
      * Get Loaded.
@@ -196,6 +194,10 @@ interface CartInterface
      * @return bool is ordered
      */
     public function isOrdered();
+
+    public function setIfNotOrderedUseThis($ifNotOrderedUseThis);
+
+    public function isIfNotOrderedUseThis();
 
     /**
      * Return the total amount of items added to the Cart.

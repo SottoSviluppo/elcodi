@@ -64,6 +64,13 @@ class Cart implements CartInterface
     protected $ordered;
 
     /**
+     * @var bool
+     *
+     * ifNotOrderedUseThis
+     */
+    protected $ifNotOrderedUseThis;
+
+    /**
      * @var Collection
      *
      * Lines
@@ -238,6 +245,30 @@ class Cart implements CartInterface
     public function isOrdered()
     {
         return $this->ordered;
+    }
+
+    /**
+     * Set ifNotOrderedUseThis.
+     *
+     * @param bool $ifNotOrderedUseThis Has been ifNotOrderedUseThis
+     *
+     * @return $this Self object
+     */
+    public function setIfNotOrderedUseThis($ifNotOrderedUseThis)
+    {
+        $this->ifNotOrderedUseThis = $ifNotOrderedUseThis;
+
+        return $this;
+    }
+
+    /**
+     * Is ifNotOrderedUseThis.
+     *
+     * @return bool is ifNotOrderedUseThis
+     */
+    public function isIfNotOrderedUseThis()
+    {
+        return $this->ifNotOrderedUseThis;
     }
 
     /**

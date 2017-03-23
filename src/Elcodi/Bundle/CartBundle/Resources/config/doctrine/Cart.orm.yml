@@ -12,6 +12,10 @@ Elcodi\Component\Cart\Entity\Cart:
             column: ordered
             type: boolean
             nullable: false
+        ifNotOrderedUseThis:
+            column: if_not_ordered_use_this
+            type: boolean
+            nullable: true
         shippingMethod:
             column: shipping_method
             type: string
