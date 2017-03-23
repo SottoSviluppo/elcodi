@@ -163,12 +163,23 @@ class CartWrapper implements WrapperInterface
      */
     private function getCustomerCart(CustomerInterface $customer)
     {
-        $customerCart = $customer
+        $customerCarts = $customer
             ->getCarts()
             ->filter(function (CartInterface $cart) {
                 return !$cart->isOrdered();
-            })
-            ->first();
+            });
+
+        $customerCartsFlaggedToUse = $customer
+            ->getCarts()
+            ->filter(function (CartInterface $cart) {
+                return $cart->isIfNotOrderedUseThis();
+            });
+
+        if (count($customerCartsFlaggedToUse) > 0) {
+            return $customerCartsFlaggedToUse->first();
+        }
+
+        $customerCart = $customerCarts->first();
 
         if ($customerCart instanceof CartInterface) {
             return $customerCart;

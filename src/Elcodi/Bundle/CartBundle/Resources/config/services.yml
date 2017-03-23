@@ -37,6 +37,13 @@ services:
         arguments:
             - '@elcodi.object_manager.cart'
 
+    elcodi.cart_restorer:
+        class: Elcodi\Component\Cart\Services\CartRestorer
+        arguments:            
+            - '@elcodi.repository.order'
+            - '@elcodi.object_manager.cart'
+            - '@elcodi.wrapper.customer'
+
     elcodi.validator.cart_integrity:
         class: Elcodi\Component\Cart\Services\CartIntegrityValidator
         arguments:
