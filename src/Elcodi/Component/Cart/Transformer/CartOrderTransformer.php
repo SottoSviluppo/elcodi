@@ -58,6 +58,8 @@ class CartOrderTransformer
      */
     private $orderFactory;
 
+    private $orderObjectManager;
+
     /**
      * Construct method.
      *
@@ -68,11 +70,13 @@ class CartOrderTransformer
     public function __construct(
         OrderEventDispatcher $orderEventDispatcher,
         CartLineOrderLineTransformer $cartLineOrderLineTransformer,
-        OrderFactory $orderFactory
+        OrderFactory $orderFactory,
+        $orderObjectManager
     ) {
         $this->orderEventDispatcher = $orderEventDispatcher;
         $this->cartLineOrderLineTransformer = $cartLineOrderLineTransformer;
         $this->orderFactory = $orderFactory;
+        $this->orderObjectManager = $orderObjectManager;
     }
 
     /**
@@ -100,8 +104,8 @@ class CartOrderTransformer
             );
 
         $order = $cart->getOrder() instanceof OrderInterface
-            ? $cart->getOrder()
-            : $this->orderFactory->create();
+        ? $cart->getOrder()
+        : $this->orderFactory->create();
 
         $cart->setOrder($order);
 
@@ -135,13 +139,18 @@ class CartOrderTransformer
             $order->setCouponAmount($couponAmount);
         }
 
+        // aggiunto per poter recuperare l'ordine, altrimenti modifiche alle
+        // cart line non venivano riportate nelle order lines
+        $this->orderObjectManager->persist($order);
+        $this->orderObjectManager->flush();
+
         $this
             ->orderEventDispatcher
             ->dispatchOrderOnCreatedEvent(
                 $cart,
                 $order
             );
-        
+
         return $order;
     }
 }

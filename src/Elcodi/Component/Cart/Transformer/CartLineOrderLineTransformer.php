@@ -19,7 +19,6 @@ namespace Elcodi\Component\Cart\Transformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface;
@@ -51,10 +50,8 @@ class CartLineOrderLineTransformer
      * OrderLine factory
      */
     private $orderLineFactory;
-    
 
     private $customerWrapper;
-
 
     /**
      * Construct method.
@@ -117,8 +114,8 @@ class CartLineOrderLineTransformer
         CartLineInterface $cartLine
     ) {
         $orderLine = ($cartLine->getOrderLine() instanceof OrderLineInterface)
-            ? $cartLine->getOrderLine()
-            : $this->orderLineFactory->create();
+        ? $cartLine->getOrderLine()
+        : $this->orderLineFactory->create();
 
         /**
          * @var OrderLineInterface $orderLine
@@ -140,10 +137,11 @@ class CartLineOrderLineTransformer
             ->customerWrapper
             ->get();
 
-        if ($customer !== null && 
+        if ($customer !== null &&
             $customer->getTax() !== null &&
-            $customer->getTax() !== $cartLine->getTax())
+            $customer->getTax() !== $cartLine->getTax()) {
             $orderLine->setTax($customer->getTax());
+        }
 
         $this
             ->orderLineEventDispatcher
