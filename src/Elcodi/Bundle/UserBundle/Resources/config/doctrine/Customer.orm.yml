@@ -51,6 +51,10 @@ Elcodi\Component\User\Entity\Customer:
             type: string
             length: 255
             nullable: true
+        roles:
+            column: roles
+            type: array
+            nullable: true 
 
     oneToMany:
         carts:

@@ -149,15 +149,34 @@ class Customer extends AbstractUser implements CustomerInterface
     protected $salt;
 
     /**
+     * @var json
+     *
+     */
+    protected $roles;
+
+    /**
      * User roles.
      *
      * @return string[] Roles
      */
     public function getRoles()
     {
-        return [
-            new Role('ROLE_CUSTOMER'),
-        ];
+        $realRoles = array();
+
+        $roles = $this->roles;
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                $realRoles[] = new Role($role);
+            }
+        }
+
+        $realRoles[] = new Role('ROLE_CUSTOMER');
+
+        return $realRoles;
+
+        // return [
+        //     new Role('ROLE_CUSTOMER'),
+        // ];
     }
 
     /**
