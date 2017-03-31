@@ -17,14 +17,13 @@
 
 namespace Elcodi\Component\Currency\ExpressionLanguage;
 
-use RuntimeException;
-use Symfony\Component\ExpressionLanguage\ExpressionFunction;
-use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
-
 use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Currency\Repository\CurrencyRepository;
+use RuntimeException;
+use Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
 /**
  * Class MoneyProvider.
@@ -97,7 +96,7 @@ class MoneyProvider implements ExpressionFunctionProviderInterface
                     }
 
                     return Money::create(
-                        $amount * 100,
+                        $amount * $currency->getDivideBy(),
                         $currency
                     );
                 }

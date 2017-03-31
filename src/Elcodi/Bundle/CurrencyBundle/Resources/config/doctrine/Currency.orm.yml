@@ -21,9 +21,9 @@ Elcodi\Component\Currency\Entity\Currency:
             length: 15
             nullable: false
             unique: false
-        createdAt:
-            column: created_at
-            type: datetime
+        precision:
+            column: currency_precision
+            type: integer
             nullable: true
         updatedAt:
             column: updated_at
@@ -32,6 +32,14 @@ Elcodi\Component\Currency\Entity\Currency:
         enabled:
             column: enabled
             type: boolean
+        showRoundedTo:
+            column: show_rounded_to
+            type: integer
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: true
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

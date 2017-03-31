@@ -51,6 +51,20 @@ class Currency implements CurrencyInterface
     protected $symbol;
 
     /**
+     * @var integer
+     *
+     * precision for decimals
+     */
+    protected $precision;
+
+    /**
+     * @var integer
+     *
+     * how much digits to show for decimals
+     */
+    protected $showRoundedTo;
+
+    /**
      * Set iso.
      *
      * @param string $iso Iso
@@ -121,4 +135,66 @@ class Currency implements CurrencyInterface
     {
         return $this->symbol;
     }
+
+    /**
+     * Set precision.
+     *
+     * @param integer $precision Precision
+     *
+     * @return $this Self object
+     */
+    public function setPrecision($precision)
+    {
+        $this->precision = $precision;
+
+        return $this;
+    }
+
+    /**
+     * Get precision.
+     *
+     * @return integer
+     */
+    public function getPrecision()
+    {
+        if ($this->precision == null) {
+            return 2;
+        }
+
+        return $this->precision;
+    }
+
+    /**
+     * Set showRoundedTo.
+     *
+     * @param integer $showRoundedTo ShowRoundedTo
+     *
+     * @return $this Self object
+     */
+    public function setShowRoundedTo($showRoundedTo)
+    {
+        $this->showRoundedTo = $showRoundedTo;
+
+        return $this;
+    }
+
+    /**
+     * Get showRoundedTo.
+     *
+     * @return integer
+     */
+    public function getShowRoundedTo()
+    {
+        if ($this->showRoundedTo == null) {
+            return 2;
+        }
+
+        return $this->showRoundedTo;
+    }
+
+    public function getDivideBy()
+    {
+        return pow(10, $this->getPrecision());
+    }
+
 }

@@ -23,10 +23,9 @@ use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 /**
  * Interface CurrencyInterface.
  */
-interface CurrencyInterface
-    extends
-    DateTimeInterface,
-    EnabledInterface
+interface CurrencyInterface extends
+DateTimeInterface,
+EnabledInterface
 {
     /**
      * Get currency iso.
@@ -75,4 +74,36 @@ interface CurrencyInterface
      * @return $this Self object
      */
     public function setSymbol($symbol);
+
+    /**
+     * Set precision.
+     *
+     * @param integer $precision Precision
+     *
+     * @return $this Self object
+     */
+    public function setPrecision($precision);
+
+    /**
+     * Get precision.
+     *
+     * @return integer
+     */
+    public function getPrecision();
+
+    /**
+     * Set showRoundedTo.
+     *
+     * @param integer $showRoundedTo ShowRoundedTo
+     *
+     * @return $this Self object
+     */
+    public function setShowRoundedTo($showRoundedTo);
+
+    /**
+     * Get showRoundedTo.
+     *
+     * @return integer
+     */
+    public function getShowRoundedTo();
 }

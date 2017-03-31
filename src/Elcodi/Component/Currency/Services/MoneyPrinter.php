@@ -26,6 +26,7 @@ use Elcodi\Component\Currency\Wrapper\CurrencyWrapper;
 use Elcodi\Component\Language\Entity\Interfaces\LocaleInterface;
 use Elcodi\Component\Product\Entity\Purchasable;
 use NumberFormatter;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Class MoneyPrinter.
@@ -39,21 +40,21 @@ class MoneyPrinter
      *
      * Currency converter
      */
-    private $currencyConverter;
+    protected $currencyConverter;
 
     /**
      * @var CurrencyWrapper
      *
      * Currency Wrapper
      */
-    private $currencyWrapper;
+    protected $currencyWrapper;
 
     /**
      * @var LocaleInterface
      *
      * Locale
      */
-    private $locale;
+    protected $locale;
 
     /**
      * Construct method.
@@ -131,26 +132,37 @@ class MoneyPrinter
             return $money->getAmount();
         }
 
+        $divideBy = $money->getCurrency()->getDivideBy();
+
+        return $this
+            ->formatCurrency(
+                $money->getAmount() / $divideBy,
+                $money->getCurrency()
+            );
+    }
+
+    public function formatCurrency($value, $currency)
+    {
         $moneyFormatter = new NumberFormatter(
             $this->locale->getIso(),
-            NumberFormatter::CURRENCY
+            NumberFormatter::DECIMAL
         );
+        $moneyFormatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $currency->getShowRoundedTo());
+        $moneyFormatter->setAttribute(NumberFormatter::FRACTION_DIGITS, $currency->getShowRoundedTo());
 
-        /**
-         * The precision of the integer amount for a given Money
-         * (cents, thousandths, 10-thousandths, etc) should be
-         * stored in the Currency object. We assume amounts are
-         * represented in cents.
-         *
-         * Loss of precision due to conversion is possible, but only when
-         * displaying prices. This operation does not affect amounts
-         */
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($currency->getIso(), 'en');
 
-        return $moneyFormatter
-            ->formatCurrency(
-                $money->getAmount() / 100,
-                $money->getCurrency()->getIso()
-            );
+        $negative = false;
+        if (0 > $value) {
+            $negative = true;
+            $value *= -1;
+        }
+
+        $value = number_format($value, $currency->getShowRoundedTo(), '.', ',');
+
+        $ret = $value . ' ' . $symbol;
+
+        return $negative ? '-' . $ret : $ret;
     }
 
     /**
@@ -200,7 +212,8 @@ class MoneyPrinter
 
     private function getDecimalPriceFromPrice($price)
     {
-        $decimalPrice = $price->getAmount() / 100;
+        $divideBy = $price->getCurrency()->getDivideBy();
+        $decimalPrice = $price->getAmount() / $divideBy;
         return $decimalPrice;
     }
 
@@ -212,4 +225,5 @@ class MoneyPrinter
 
         return $purchasable->getResolvedPrice();
     }
+
 }
