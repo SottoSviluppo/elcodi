@@ -1,0 +1,9 @@
+services:
+
+    #
+    # Commands
+    #
+    elcodi.command.coupons_create:
+        class: Elcodi\Component\Coupon\Command\CouponsCreateCommand
+        tags:
+            -  { name: console.command }

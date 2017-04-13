@@ -17,10 +17,9 @@
 
 namespace Elcodi\Bundle\CouponBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-
 use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
 use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -94,6 +93,7 @@ class ElcodiCouponExtension extends AbstractExtension implements EntitiesOverrid
     public function getConfigFiles(array $config)
     {
         return [
+            'commands',
             'services',
             'factories',
             'eventDispatchers',
