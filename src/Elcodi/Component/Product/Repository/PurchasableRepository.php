@@ -19,7 +19,6 @@ namespace Elcodi\Component\Product\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-
 use Elcodi\Component\Product\ElcodiProductStock;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 
@@ -40,14 +39,15 @@ class PurchasableRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('p');
         $this->addPerformanceJoinsToQueryBuilder($queryBuilder);
 
-		return $queryBuilder
-			->innerJoin('p.categories', 'c')
-			->where('c.id IN (:categories)')
-			->setParameters([
-				'categories' => $categories,
-			])
-			->getQuery();
-	}
+        return $queryBuilder
+            ->innerJoin('p.categories', 'c')
+            ->where('c.id IN (:categories)')
+            ->andWhere('p.enabled = true')
+            ->setParameters([
+                'categories' => $categories,
+            ])
+            ->getQuery();
+    }
 
     /**
      * Get purchasables that can be shown in Home.
