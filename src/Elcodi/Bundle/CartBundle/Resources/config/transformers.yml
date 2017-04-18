@@ -10,6 +10,7 @@ services:
             - '@elcodi.transformer.cart_line_order_line'
             - '@elcodi.factory.order'
             - '@elcodi.object_manager.order'
+            - '@elcodi.formatter.address'
 
     elcodi.transformer.cart_line_order_line:
         class: Elcodi\Component\Cart\Transformer\CartLineOrderLineTransformer

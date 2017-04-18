@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Cart\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
@@ -31,11 +30,10 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 /**
  * Interface OrderInterface.
  */
-interface OrderInterface
-    extends
-    PriceInterface,
-    DimensionableInterface,
-    IdentifiableInterface
+interface OrderInterface extends
+PriceInterface,
+DimensionableInterface,
+IdentifiableInterface
 {
     /**
      * Sets Customer.
@@ -318,4 +316,36 @@ interface OrderInterface
      * @return $this Self object
      */
     public function setBillingAddress(AddressInterface $billingAddress);
+
+    /**
+     * Get DeliveryAddressText.
+     *
+     * @return String DeliveryAddressText
+     */
+    public function getDeliveryAddressText();
+
+    /**
+     * Sets DeliveryAddressText.
+     *
+     * @param String|null $deliveryAddressText DeliveryAddressText
+     *
+     * @return $this Self object
+     */
+    public function setDeliveryAddressText($deliveryAddressText = '');
+
+    /**
+     * Get BillingAddressText.
+     *
+     * @return String BillingAddressText
+     */
+    public function getBillingAddressText();
+
+    /**
+     * Sets BillingAddressText.
+     *
+     * @param String|null $billingAddressText BillingAddressText
+     *
+     * @return $this Self object
+     */
+    public function setBillingAddressText($billingAddressText = '');
 }

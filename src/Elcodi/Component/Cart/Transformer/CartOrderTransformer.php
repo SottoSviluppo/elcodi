@@ -59,6 +59,7 @@ class CartOrderTransformer
     private $orderFactory;
 
     private $orderObjectManager;
+    private $addressFormatter;
 
     /**
      * Construct method.
@@ -71,12 +72,14 @@ class CartOrderTransformer
         OrderEventDispatcher $orderEventDispatcher,
         CartLineOrderLineTransformer $cartLineOrderLineTransformer,
         OrderFactory $orderFactory,
-        $orderObjectManager
+        $orderObjectManager,
+        $addressFormatter
     ) {
         $this->orderEventDispatcher = $orderEventDispatcher;
         $this->cartLineOrderLineTransformer = $cartLineOrderLineTransformer;
         $this->orderFactory = $orderFactory;
         $this->orderObjectManager = $orderObjectManager;
+        $this->addressFormatter = $addressFormatter;
     }
 
     /**
@@ -133,6 +136,18 @@ class CartOrderTransformer
             ->setBillingAddress($cart->getBillingAddress())
             ->setDeliveryAddress($cart->getDeliveryAddress())
             ->setOrderLines($orderLines);
+
+        $deliveryAddress = $order->getDeliveryAddress();
+        if ($deliveryAddress != null) {
+            $array = $this->addressFormatter->toArray($deliveryAddress);
+            $order->setDeliveryAddressText($array['fullAddress']);
+        }
+
+        $billingAddress = $order->getBillingAddress();
+        if ($billingAddress != null) {
+            $array = $this->addressFormatter->toArray($billingAddress);
+            $order->setBillingAddressText($array['fullAddress']);
+        }
 
         $couponAmount = $cart->getCouponAmount();
         if ($couponAmount instanceof MoneyInterface) {

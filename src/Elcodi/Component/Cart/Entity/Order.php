@@ -170,6 +170,20 @@ class Order implements OrderInterface
     protected $billingAddress;
 
     /**
+     * @var string
+     *
+     * delivery address text
+     */
+    protected $deliveryAddressText;
+
+    /**
+     * @var string
+     *
+     * billing address text
+     */
+    protected $billingAddressText;
+
+    /**
      * Sets Customer.
      *
      * @param CustomerInterface $customer Customer
@@ -547,6 +561,54 @@ class Order implements OrderInterface
     public function setBillingAddress(AddressInterface $billingAddress = null)
     {
         $this->billingAddress = $billingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get DeliveryAddressText.
+     *
+     * @return String DeliveryAddressText
+     */
+    public function getDeliveryAddressText()
+    {
+        return $this->deliveryAddressText;
+    }
+
+    /**
+     * Sets DeliveryAddressText.
+     *
+     * @param String|null $deliveryAddressText DeliveryAddressText
+     *
+     * @return $this Self object
+     */
+    public function setDeliveryAddressText($deliveryAddressText = '')
+    {
+        $this->deliveryAddressText = $deliveryAddressText;
+
+        return $this;
+    }
+
+    /**
+     * Get BillingAddressText.
+     *
+     * @return String BillingAddressText
+     */
+    public function getBillingAddressText()
+    {
+        return $this->billingAddressText;
+    }
+
+    /**
+     * Sets BillingAddressText.
+     *
+     * @param String|null $billingAddressText BillingAddressText
+     *
+     * @return $this Self object
+     */
+    public function setBillingAddressText($billingAddressText = '')
+    {
+        $this->billingAddressText = $billingAddressText;
 
         return $this;
     }

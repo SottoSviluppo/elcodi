@@ -58,6 +58,14 @@ Elcodi\Component\Cart\Entity\Order:
             column: weight
             type: integer
             nullable: false
+        deliveryAddressText:
+            column: delivery_address_text
+            type: text
+            nullable: true
+        billingAddressText:
+            column: billing_address_text
+            type: text
+            nullable: true
         createdAt:
             column: created_at
             type: datetime
