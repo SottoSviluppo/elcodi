@@ -18,8 +18,6 @@
 namespace Elcodi\Component\Cart\Tests\UnitTest\Transformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit_Framework_TestCase;
-
 use Elcodi\Component\Cart\Entity\Cart;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Cart\Entity\Order;
@@ -30,6 +28,7 @@ use Elcodi\Component\Cart\Transformer\CartOrderTransformer;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\User\Entity\Customer;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class CartOrderTransformerTest.
@@ -92,12 +91,17 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
                 'Doctrine\Common\Persistence\ObjectManager',
                 [], [], '', false
             );
+        $addressFormatter = $this->getMock(
+            'Elcodi\Component\Geo\Formatter\AddressFormatter',
+            [], [], '', false
+        );
 
         $cartOrderTransformer = new CartOrderTransformer(
             $orderEventDispatcher,
             $cartLineOrderLineTransformer,
             $orderFactory,
-            $cartLineObjectManager
+            $cartLineObjectManager,
+            $addressFormatter
         );
 
         $this->orderFactory = $orderFactory;
