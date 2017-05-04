@@ -526,6 +526,19 @@ class Order implements OrderInterface
         );
     }
 
+    public function getPaymentLastStateLine()
+    {
+        if ($this->paymentLastStateLine === null) {
+            return new \Elcodi\Component\StateTransitionMachine\Entity\StateLine();
+        }
+        return $this->paymentLastStateLine;
+    }
+
+    public function getShippingLastStateLine()
+    {
+        return $this->shippingLastStateLine;
+    }
+
     /**
      * Sets ShippingStateLineStack.
      *
