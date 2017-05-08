@@ -10,6 +10,7 @@ services:
             - %elcodi.order_payment_states_machine_identifier%
             - %elcodi.order_payment_states_machine_states%
             - %elcodi.order_payment_states_machine_point_of_entry%
+            - '@logger'
 
     elcodi.order.payment_states_machine:
         class: Elcodi\Component\StateTransitionMachine\Machine\Machine
@@ -23,6 +24,7 @@ services:
             - '@elcodi.order.payment_states_machine'
             - '@elcodi.event_dispatcher.machine'
             - '@elcodi.factory.state_transition_machine_state_line'
+            - '@logger'
 
 
     #
@@ -35,6 +37,7 @@ services:
             - %elcodi.order_shipping_states_machine_identifier%
             - %elcodi.order_shipping_states_machine_states%
             - %elcodi.order_shipping_states_machine_point_of_entry%
+            - '@logger'
 
     elcodi.order.shipping_states_machine:
         class: Elcodi\Component\StateTransitionMachine\Machine\Machine

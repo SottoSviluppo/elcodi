@@ -38,12 +38,14 @@ class MachineFactory
     public function generate(
         $machineId,
         TransitionChain $transitionChain,
-        $pointOfEntry
+        $pointOfEntry,
+        $logger
     ) {
         $machine = new Machine(
             $machineId,
             $transitionChain,
-            $pointOfEntry
+            $pointOfEntry,
+            $logger
         );
 
         return $machine;

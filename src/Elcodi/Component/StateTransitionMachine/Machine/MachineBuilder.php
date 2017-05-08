@@ -67,6 +67,8 @@ class MachineBuilder
      */
     private $pointOfEntry;
 
+    private $logger;
+
     /**
      * @var bool
      *
@@ -86,13 +88,15 @@ class MachineBuilder
         MachineFactory $machineFactory,
         $machineId,
         array $configuration,
-        $pointOfEntry
+        $pointOfEntry,
+        $logger
     ) {
         $this->machineFactory = $machineFactory;
         $this->machineId = $machineId;
         $this->configuration = $configuration;
         $this->transitionChain = TransitionChain::create();
         $this->pointOfEntry = $pointOfEntry;
+        $this->logger = $logger;
     }
 
     /**
@@ -155,7 +159,8 @@ class MachineBuilder
             ->generate(
                 $this->machineId,
                 $this->transitionChain,
-                $this->pointOfEntry
+                $this->pointOfEntry,
+                $this->logger
             );
 
         return $machine;
@@ -270,7 +275,7 @@ class MachineBuilder
                 $startStateName,
                 $transitionName,
                 $finalStateName
-                ) = $transitionConfiguration;
+            ) = $transitionConfiguration;
 
             $startState = new State($startStateName);
             $finalState = new State($finalStateName);

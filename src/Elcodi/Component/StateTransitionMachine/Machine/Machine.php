@@ -50,6 +50,8 @@ class Machine implements MachineInterface
      */
     private $pointOfEntry;
 
+    private $logger;
+
     /**
      * @param int             $machineId       Machine id
      * @param TransitionChain $transitionChain Transition Chain
@@ -58,11 +60,13 @@ class Machine implements MachineInterface
     public function __construct(
         $machineId,
         TransitionChain $transitionChain,
-        $pointOfEntry
+        $pointOfEntry,
+        $logger
     ) {
         $this->machineId = $machineId;
         $this->transitionChain = $transitionChain;
         $this->pointOfEntry = $pointOfEntry;
+        $this->logger = $logger;
     }
 
     /**
@@ -112,6 +116,10 @@ class Machine implements MachineInterface
             );
 
         if (!($transition instanceof Transition)) {
+            $this->logger->log(
+                'error',
+                'Illegal transition from ' . $startStateName . ' to ' . $transitionName
+            );
             throw new TransitionNotAccessibleException();
         }
 
@@ -159,7 +167,7 @@ class Machine implements MachineInterface
             $this->transitionChain->getTransitions(),
             function (Transition $transition) use ($startStateName) {
                 return
-                    $transition->getStart()->getName() === $startStateName;
+                $transition->getStart()->getName() === $startStateName;
             }
         );
     }
