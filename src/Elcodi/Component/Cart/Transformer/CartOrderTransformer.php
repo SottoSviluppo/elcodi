@@ -140,13 +140,13 @@ class CartOrderTransformer
         $deliveryAddress = $order->getDeliveryAddress();
         if ($deliveryAddress != null) {
             $array = $this->addressFormatter->toArray($deliveryAddress);
-            $order->setDeliveryAddressText($array['fullAddress']);
+            $order->setDeliveryAddressText($array['realFullAddress']);
         }
 
         $billingAddress = $order->getBillingAddress();
         if ($billingAddress != null) {
             $array = $this->addressFormatter->toArray($billingAddress);
-            $order->setBillingAddressText($array['fullAddress']);
+            $order->setBillingAddressText($array['realFullAddress']);
         }
 
         $couponAmount = $cart->getCouponAmount();

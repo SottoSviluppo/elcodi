@@ -87,6 +87,10 @@ class AddressFormatter
         $this->buildFullAddressString(
             $address
         );
+        $addressArray['realFullAddress'] =
+        $this->buildRealFullAddressString(
+            $address
+        );
 
         return $addressArray;
     }
@@ -112,6 +116,35 @@ class AddressFormatter
             $address->getPostalcode(),
             $this->getCountryName($address)
         );
+    }
+
+    private function buildRealFullAddressString(
+        AddressInterface $address
+    ) {
+        $string = sprintf(
+            "%s %s\r\n%s %s, %s %s\r\n%s\r\n",
+            $address->getRecipientName(),
+            $address->getRecipientSurname(),
+            $address->getAddress(),
+            $address->getAddressMore(),
+            $address->getCity(),
+            $address->getPostalcode(),
+            $this->getCountryName($address)
+        );
+
+        // if ($address->getPhone() != '') {
+        //     $string .= "\r\nTel. " . $address->getPhone();
+        // }
+
+        // if ($address->getMobile() != '') {
+        //     $string .= "\r\nCell. " . $address->getMobile();
+        // }
+
+        // if ($address->getComments() != '') {
+        //     $string .= "\r\nNote. " . $address->getComments();
+        // }
+
+        return $string;
     }
 
     private function getCountryName($address)
