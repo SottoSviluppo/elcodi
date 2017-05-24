@@ -210,7 +210,7 @@ class MoneyPrinter
         return $this->getDecimalPriceFromPrice($this->getSinglePrice($purchasable));
     }
 
-    private function getDecimalPriceFromPrice($price)
+    public function getDecimalPriceFromPrice($price)
     {
         $divideBy = $price->getCurrency()->getDivideBy();
         $decimalPrice = $price->getAmount() / $divideBy;

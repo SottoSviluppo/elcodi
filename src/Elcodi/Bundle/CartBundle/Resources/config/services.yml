@@ -64,3 +64,9 @@ services:
         class: Elcodi\Component\Cart\Services\CartShippingAmountValidator
         arguments:
             - '@elcodi.wrapper.empty_money'
+
+    elcodi.excel_manager.order:
+        class: Elcodi\Component\Cart\Services\OrderExcelManager
+        arguments:
+            - '@translator'
+            - '@elcodi.money_printer'

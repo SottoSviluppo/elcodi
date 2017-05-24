@@ -31,3 +31,6 @@ services:
         arguments:
             - '@session'
             - '@request_stack'
+
+    elcodi.download_utility:
+        class: Elcodi\Component\Core\Services\DownloadUtility
