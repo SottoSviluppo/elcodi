@@ -70,3 +70,4 @@ services:
         arguments:
             - '@translator'
             - '@elcodi.money_printer'
+            - '@elcodi.download_utility'
