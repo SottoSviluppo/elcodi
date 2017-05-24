@@ -82,6 +82,10 @@ class OrderExcelManager
 
     public function createExcelFromArray($array, $filename)
     {
+        if (!file_exists('media/')) {
+            mkdir('media/', 0777, true);
+        }
+
         $path = 'media/' . $filename;
 
         $objPHPExcel = new PHPExcel();
