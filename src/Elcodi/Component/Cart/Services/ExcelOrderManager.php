@@ -10,7 +10,7 @@ use PHPExcel;
 use PHPExcel_Writer_Excel2007;
 use Symfony\Component\HttpFoundation\Response;
 
-class OrderExcelManager
+class ExcelOrderManager
 {
     public $translator;
     public $moneyPrinter;
@@ -43,12 +43,12 @@ class OrderExcelManager
         $rowHeader[] = 'ID Ordine';
         $rowHeader[] = 'Data ordine';
         $rowHeader[] = 'Cliente';
-        $rowHeader[] = 'Metodo di pagamento';
-        $rowHeader[] = 'Stato ordine';
+        // $rowHeader[] = 'Metodo di pagamento';
+        // $rowHeader[] = 'Stato ordine';
         $rowHeader[] = 'Totale';
         $rowHeader[] = 'Valuta totale';
-        $rowHeader[] = 'Totale coupon';
-        $rowHeader[] = 'Valuta coupon';
+        // $rowHeader[] = 'Totale coupon';
+        // $rowHeader[] = 'Valuta coupon';
         $array[] = $rowHeader;
 
         foreach ($orders as $order) {
@@ -61,18 +61,18 @@ class OrderExcelManager
                 $row[] = $order->getCustomer()->__toString();
             }
 
-            if ($order->getPaymentMethod() == null) {
-                $row[] = '';
-            } else {
-                $row[] = $this->translator->trans($order->getPaymentMethod()->getName());
-            }
-            $row[] = $this->translator->trans('common.order.states.' . $order->getShippingStateLineStack()->getLastStateLine()->getName());
+            // if ($order->getPaymentMethod() == null) {
+            //     $row[] = '';
+            // } else {
+            //     $row[] = $this->translator->trans($order->getPaymentMethod()->getName());
+            // }
+            // $row[] = $this->translator->trans('common.order.states.' . $order->getShippingStateLineStack()->getLastStateLine()->getName());
 
             $row[] = $this->moneyPrinter->getDecimalPriceFromPrice($order->getPurchasableAmount());
             $row[] = $order->getPurchasableAmount()->getCurrency()->getIso();
 
-            $row[] = $this->moneyPrinter->getDecimalPriceFromPrice($order->getCouponAmount());
-            $row[] = $order->getCouponAmount()->getCurrency()->getIso();
+            // $row[] = $this->moneyPrinter->getDecimalPriceFromPrice($order->getCouponAmount());
+            // $row[] = $order->getCouponAmount()->getCurrency()->getIso();
 
             $row++;
             $array[] = $row;
