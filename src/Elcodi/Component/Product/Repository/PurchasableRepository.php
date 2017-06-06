@@ -34,7 +34,7 @@ class PurchasableRepository extends EntityRepository
      *
      * @return array All Purchasables by a set of category ids
      */
-    public function getAllFromCategories(array $categories)
+    public function getAllFromCategories(array $categories, $orderByField = 'id', $orderByDirection = 'DESC')
     {
         $queryBuilder = $this->createQueryBuilder('p');
         $this->addPerformanceJoinsToQueryBuilder($queryBuilder);
@@ -43,6 +43,7 @@ class PurchasableRepository extends EntityRepository
             ->innerJoin('p.categories', 'c')
             ->where('c.id IN (:categories)')
             ->andWhere('p.enabled = true')
+            ->addOrderBy('p.' . $orderByField, $orderByDirection)
             ->setParameters([
                 'categories' => $categories,
             ])
