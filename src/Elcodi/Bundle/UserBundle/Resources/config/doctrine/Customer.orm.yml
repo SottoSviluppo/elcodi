@@ -55,6 +55,11 @@ Elcodi\Component\User\Entity\Customer:
             column: roles
             type: array
             nullable: true 
+        facebookId:
+            column: facebook_id
+            type: string
+            length: 255
+            nullable: false
 
     oneToMany:
         carts:

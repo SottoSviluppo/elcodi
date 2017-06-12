@@ -155,6 +155,12 @@ class Customer extends AbstractUser implements CustomerInterface
     protected $roles;
 
     /**
+     * @var string
+     *
+     */
+    protected $facebookId;
+
+    /**
      * User roles.
      *
      * @return string[] Roles
@@ -637,5 +643,29 @@ class Customer extends AbstractUser implements CustomerInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * Sets FacebookId.
+     *
+     * @param string $facebookId
+     *
+     * @return $this Self object
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get FacebookId.
+     *
+     * @return string FacebookId
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
     }
 }

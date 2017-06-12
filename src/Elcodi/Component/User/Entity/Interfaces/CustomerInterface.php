@@ -276,4 +276,20 @@ interface CustomerInterface extends AbstractUserInterface, TaxableInterface
      * @return string Salt
      */
     public function getSalt();
+
+    /**
+     * Sets FacebookId.
+     *
+     * @param string $facebookId
+     *
+     * @return $this Self object
+     */
+    public function setFacebookId($facebookId);
+
+    /**
+     * Get FacebookId.
+     *
+     * @return string FacebookId
+     */
+    public function getFacebookId();
 }
