@@ -59,7 +59,7 @@ Elcodi\Component\User\Entity\Customer:
             column: facebook_id
             type: string
             length: 255
-            nullable: false
+            nullable: true
 
     oneToMany:
         carts:
