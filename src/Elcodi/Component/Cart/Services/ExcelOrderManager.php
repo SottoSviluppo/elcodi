@@ -43,6 +43,7 @@ class ExcelOrderManager
         $rowHeader[] = 'ID Ordine';
         $rowHeader[] = 'Data ordine';
         $rowHeader[] = 'Cliente';
+        $rowHeader[] = 'Email cliente';
         // $rowHeader[] = 'Metodo di pagamento';
         // $rowHeader[] = 'Stato ordine';
         $rowHeader[] = 'Totale';
@@ -57,8 +58,10 @@ class ExcelOrderManager
             $row[] = $order->getCreatedAt()->format('d/m/Y');
             if ($order->getCustomer() == null) {
                 $row[] = '';
+                $row[] = '';
             } else {
                 $row[] = $order->getCustomer()->__toString();
+                $row[] = $order->getCustomer()->getEmail();
             }
 
             // if ($order->getPaymentMethod() == null) {
