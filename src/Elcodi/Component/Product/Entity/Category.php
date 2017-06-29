@@ -99,6 +99,13 @@ class Category implements CategoryInterface
     protected $cssClass;
 
     /**
+     * @var bool
+     *
+     * Product must show in home
+     */
+    protected $showInHome;
+
+    /**
      * Set name.
      *
      * @param string $name Name
@@ -297,6 +304,30 @@ class Category implements CategoryInterface
     public function getCssClass()
     {
         return $this->cssClass;
+    }
+
+    /**
+     * Get ShowInHome.
+     *
+     * @return bool ShowInHome
+     */
+    public function getShowInHome()
+    {
+        return $this->showInHome;
+    }
+
+    /**
+     * Sets ShowInHome.
+     *
+     * @param bool $showInHome ShowInHome
+     *
+     * @return $this Self object
+     */
+    public function setShowInHome($showInHome)
+    {
+        $this->showInHome = $showInHome;
+
+        return $this;
     }
 
     /**
