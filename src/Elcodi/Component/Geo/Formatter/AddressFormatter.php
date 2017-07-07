@@ -103,7 +103,7 @@ class AddressFormatter
      *
      * @return string
      */
-    private function buildFullAddressString(
+    protected function buildFullAddressString(
         AddressInterface $address
     ) {
         // $cityString = implode(', ', $cityHierarchy);
@@ -118,7 +118,7 @@ class AddressFormatter
         );
     }
 
-    private function buildRealFullAddressString(
+    protected function buildRealFullAddressString(
         AddressInterface $address
     ) {
         $string = sprintf(
@@ -147,7 +147,7 @@ class AddressFormatter
         return $string;
     }
 
-    private function getCountryName($address)
+    protected function getCountryName($address)
     {
         $country = $address->getCountry();
         $countryName = "";

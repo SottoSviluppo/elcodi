@@ -140,12 +140,21 @@ class CartOrderTransformer
         $deliveryAddress = $order->getDeliveryAddress();
         if ($deliveryAddress != null) {
             $array = $this->addressFormatter->toArray($deliveryAddress);
+            $order->setDeliveryAddressJson($array);
             $order->setDeliveryAddressText($array['realFullAddress']);
         }
 
         $billingAddress = $order->getBillingAddress();
         if ($billingAddress != null) {
             $array = $this->addressFormatter->toArray($billingAddress);
+
+            $customer = $order->getCustomer();
+            if ($customer !== null) {
+                $array['vat'] = $customer->getVat();
+                $array['fiscalCode'] = $customer->getFiscalCode();
+            }
+
+            $order->setBillingAddressJson($array);
             $order->setBillingAddressText($array['realFullAddress']);
         }
 

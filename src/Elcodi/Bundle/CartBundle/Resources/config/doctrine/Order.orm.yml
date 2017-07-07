@@ -66,6 +66,14 @@ Elcodi\Component\Cart\Entity\Order:
             column: billing_address_text
             type: text
             nullable: true
+        deliveryAddressJson:
+            column: delivery_address_json
+            type: json_array
+            nullable: true
+        billingAddressJson:
+            column: billing_address_json
+            type: json_array
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

@@ -184,6 +184,20 @@ class Order implements OrderInterface
     protected $billingAddressText;
 
     /**
+     * @var json
+     *
+     * delivery address Json
+     */
+    protected $deliveryAddressJson;
+
+    /**
+     * @var json
+     *
+     * billing address Json
+     */
+    protected $billingAddressJson;
+
+    /**
      * Sets Customer.
      *
      * @param CustomerInterface $customer Customer
@@ -625,4 +639,79 @@ class Order implements OrderInterface
 
         return $this;
     }
+
+    /**
+     * Get billingAddressJson.
+     *
+     * @return json billingAddressJson
+     */
+    public function getBillingAddressJson()
+    {
+        return $this->billingAddressJson;
+    }
+
+    /**
+     * Sets billingAddressJson.
+     *
+     * @param json $billingAddressJson billingAddressJson
+     *
+     * @return $this Self object
+     */
+    public function setBillingAddressJson($billingAddressJson)
+    {
+        $this->billingAddressJson = $billingAddressJson;
+
+        return $this;
+    }
+
+    public function getBillingAddressJsonValue($key)
+    {
+        if (!array_key_exists($key, $this->billingAddressJson)) {
+            return "";
+        }
+        return $this->billingAddressJson[$key];
+    }
+
+    public function setBillingAddressJsonValue($key, $value)
+    {
+        $this->billingAddressJson[$key] = $value;
+    }
+
+    /**
+     * Get deliveryAddressJson.
+     *
+     * @return json deliveryAddressJson
+     */
+    public function getDeliveryAddressJson()
+    {
+        return $this->deliveryAddressJson;
+    }
+
+    /**
+     * Sets deliveryAddressJson.
+     *
+     * @param json $deliveryAddressJson deliveryAddressJson
+     *
+     * @return $this Self object
+     */
+    public function setDeliveryAddressJson($deliveryAddressJson)
+    {
+        $this->deliveryAddressJson = $deliveryAddressJson;
+
+        return $this;
+    }
+
+    public function getDeliveryAddressJsonValue($key)
+    {
+        if (!array_key_exists($key, $this->deliveryAddressJson)) {
+            return "";
+        }
+        return $this->deliveryAddressJson[$key];
+    }
+
+    public function setDeliveryAddressJsonValue($key, $value)
+    {
+        $this->deliveryAddressJson[$key] = $value;
+    }
+
 }

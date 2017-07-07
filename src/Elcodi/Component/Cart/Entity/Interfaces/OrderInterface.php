@@ -348,4 +348,20 @@ IdentifiableInterface
      * @return $this Self object
      */
     public function setBillingAddressText($billingAddressText = '');
+
+    public function getBillingAddressJson();
+
+    public function setBillingAddressJson($billingAddressJson);
+
+    public function getBillingAddressJsonValue($key);
+
+    public function setBillingAddressJsonValue($key, $value);
+
+    public function getDeliveryAddressJson();
+
+    public function setDeliveryAddressJson($deliveryAddressJson);
+
+    public function getDeliveryAddressJsonValue($key);
+
+    public function setDeliveryAddressJsonValue($key, $value);
 }
