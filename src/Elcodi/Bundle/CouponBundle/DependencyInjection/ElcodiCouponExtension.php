@@ -80,6 +80,10 @@ class ElcodiCouponExtension extends AbstractExtension implements EntitiesOverrid
             'elcodi.entity.coupon.mapping_file' => $config['mapping']['coupon']['mapping_file'],
             'elcodi.entity.coupon.manager' => $config['mapping']['coupon']['manager'],
             'elcodi.entity.coupon.enabled' => $config['mapping']['coupon']['enabled'],
+            'elcodi.entity.customer_coupon.class' => $config['mapping']['customer_coupon']['class'],
+            'elcodi.entity.customer_coupon.mapping_file' => $config['mapping']['customer_coupon']['mapping_file'],
+            'elcodi.entity.customer_coupon.manager' => $config['mapping']['customer_coupon']['manager'],
+            'elcodi.entity.customer_coupon.enabled' => $config['mapping']['customer_coupon']['enabled'],
         ];
     }
 

@@ -9,3 +9,8 @@ services:
             - '@elcodi.factory.coupon'
             - '@elcodi.generator.random_string'
             - '@elcodi.factory.datetime'
+
+    elcodi.manager.customer_coupon:
+        class: Elcodi\Component\Coupon\Services\CustomerCouponManager
+        arguments:
+            - '@elcodi.repository.customer_coupon'

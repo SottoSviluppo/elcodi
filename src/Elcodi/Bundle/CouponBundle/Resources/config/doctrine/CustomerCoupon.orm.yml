@@ -1,0 +1,37 @@
+Elcodi\Component\Coupon\Entity\CustomerCoupon:
+    type: entity
+    repositoryClass: Elcodi\Component\Coupon\Repository\CustomerCouponRepository
+    table: customer_coupon
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: true
+        updatedAt:
+            column: updated_at
+            type: datetime
+            nullable: true
+
+    manyToOne:
+        customer:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerInterface
+            joinColumn:
+                name: customer_id
+                referencedColumnName: id
+                nullable: false
+        coupon:
+            targetEntity: Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface
+            joinColumn:
+                 name: coupon_id
+                 referencedColumnName: id
+                 nullable: false
+
+
+    lifecycleCallbacks:
+        preUpdate: [loadUpdateAt]
+        prePersist: [loadUpdateAt]

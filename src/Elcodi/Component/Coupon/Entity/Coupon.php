@@ -171,6 +171,11 @@ class Coupon implements CouponInterface
     protected $freeShipping;
 
     /**
+     * @var int number of coupon available for Customer
+     */
+    protected $countCustomer = 0;
+
+    /**
      * Set code.
      *
      * @param string $code Code
@@ -567,6 +572,30 @@ class Coupon implements CouponInterface
     }
 
     /**
+     * Set countCustomer.
+     *
+     * @param int $countCustomer
+     *
+     * @return $this Self object
+     */
+    public function setCountCustomer($countCustomer)
+    {
+        $this->countCustomer = $countCustomer;
+
+        return $this;
+    }
+
+    /**
+     * Get countCustomer.
+     *
+     * @return int
+     */
+    public function getCountCustomer()
+    {
+        return $this->countCustomer;
+    }
+
+    /**
      * String representation of Coupon.
      *
      * @return string
@@ -592,4 +621,5 @@ class Coupon implements CouponInterface
 
         return $this;
     }
+
 }

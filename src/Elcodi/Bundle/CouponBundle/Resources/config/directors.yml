@@ -10,3 +10,11 @@ services:
             - '@elcodi.object_manager.coupon'
             - '@elcodi.repository.coupon'
             - '@elcodi.factory.coupon'
+
+    elcodi.director.customer_coupon:
+        class: Elcodi\Component\Core\Services\ObjectDirector
+        lazy: true
+        arguments:
+            - '@elcodi.object_manager.customer_coupon'
+            - '@elcodi.repository.customer_coupon'
+            - '@elcodi.factory.customer_coupon'

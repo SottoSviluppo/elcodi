@@ -17,9 +17,8 @@
 
 namespace Elcodi\Bundle\CouponBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-
 use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractConfiguration;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * Class Configuration.
@@ -33,18 +32,25 @@ class Configuration extends AbstractConfiguration
     {
         $rootNode
             ->children()
-                ->arrayNode('mapping')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->append($this->addMappingNode(
-                            'coupon',
-                            'Elcodi\Component\Coupon\Entity\Coupon',
-                            '@ElcodiCouponBundle/Resources/config/doctrine/Coupon.orm.yml',
-                            'default',
-                            true
-                        ))
-                    ->end()
-                ->end()
+            ->arrayNode('mapping')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->append($this->addMappingNode(
+                'coupon',
+                'Elcodi\Component\Coupon\Entity\Coupon',
+                '@ElcodiCouponBundle/Resources/config/doctrine/Coupon.orm.yml',
+                'default',
+                true
+            ))
+            ->append($this->addMappingNode(
+                'customer_coupon',
+                'Elcodi\Component\Coupon\Entity\CustomerCoupon',
+                '@ElcodiCouponBundle/Resources/config/doctrine/CustomerCoupon.orm.yml',
+                'default',
+                true
+            ))
+            ->end()
+            ->end()
             ->end();
     }
 }

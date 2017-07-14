@@ -280,6 +280,22 @@ ValidIntervalInterface
     public function getColor();
 
     /**
+     * Set countCustomer.
+     *
+     * @param int $countCustomer
+     *
+     * @return $this Self object
+     */
+    public function setCountCustomer($countCustomer);
+
+    /**
+     * Get countCustomer.
+     *
+     * @return int
+     */
+    public function getCountCustomer();
+
+    /**
      * Increment used variable by one, and disables it if there are no more
      * available units.
      *

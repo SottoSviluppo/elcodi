@@ -66,6 +66,14 @@ services:
         tags:
             - { name: kernel.event_listener, event: cart_coupon.oncheck, method: validateCoupon, priority: 32 }
 
+    elcodi.event_listener.validate_customer_coupon:
+        class: Elcodi\Component\CartCoupon\EventListener\ValidateCustomerCouponEventListener
+        arguments:
+            - '@elcodi.validator.customer_coupon'
+        tags:
+            - { name: kernel.event_listener, event: cart_coupon.oncheck, method: validateCustomerCoupon, priority: 32 }
+
+
     elcodi.event_listener.validate_coupon_minimum_price:
         class: Elcodi\Component\CartCoupon\EventListener\ValidateCouponMinimumPriceEventListener
         arguments:

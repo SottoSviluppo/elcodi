@@ -56,6 +56,13 @@ services:
             - '@elcodi.manager.coupon'
             - '@elcodi.event_dispatcher.cart_coupon'
 
+    elcodi.validator.customer_coupon:
+        class: Elcodi\Component\CartCoupon\Services\CustomerCouponValidator
+        arguments:
+            - '@elcodi.manager.customer_coupon'
+            # - '@elcodi.manager.coupon'
+            # - '@elcodi.event_dispatcher.customer_coupon'
+
     elcodi.validator.duplicated_coupon:
         class: Elcodi\Component\CartCoupon\Services\DuplicatedCouponValidator
         arguments:

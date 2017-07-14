@@ -42,6 +42,10 @@ Elcodi\Component\Coupon\Entity\Coupon:
             column: count
             type: integer
             nullable: false
+        countCustomer:
+            column: count_customer
+            type: integer
+            nullable: false
         used:
             column: used
             type: integer

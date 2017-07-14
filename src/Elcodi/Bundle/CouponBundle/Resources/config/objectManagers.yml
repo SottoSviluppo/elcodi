@@ -7,3 +7,8 @@ services:
         parent: elcodi.abstract_manager
         arguments:
             - %elcodi.entity.coupon.class%
+
+    elcodi.object_manager.customer_coupon:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.customer_coupon.class%
