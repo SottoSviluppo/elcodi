@@ -52,6 +52,7 @@ class CouponFactory extends AbstractPurchasableFactory
             ->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_MANUAL)
             ->setUsed(0)
             ->setCount(0)
+            ->setCountCustomer(0)
             ->setPriority(0)
             ->setStackable(false)
             ->setEnabled(false)
