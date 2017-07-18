@@ -18,6 +18,7 @@
 namespace Elcodi\Component\Cart\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
+use Elcodi\Component\CartCoupon\Entity\Interfaces\OrderCouponInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
@@ -100,6 +101,40 @@ IdentifiableInterface
      * @return $this Self object
      */
     public function removeOrderLine(OrderLineInterface $orderLine);
+
+    /**
+     * Set order Lines.
+     *
+     * @param Collection $orderCoupons Order lines
+     *
+     * @return $this Self object
+     */
+    public function setOrderCoupons(Collection $orderCoupons);
+
+    /**
+     * Get order lines.
+     *
+     * @return Collection Order lines
+     */
+    public function getOrderCoupons();
+
+    /**
+     * Add order line.
+     *
+     * @param OrderCouponInterface $orderCoupon Order line
+     *
+     * @return $this Self object
+     */
+    public function addOrderCoupon(OrderCouponInterface $orderCoupon);
+
+    /**
+     * Remove order line.
+     *
+     * @param OrderCouponInterface $orderCoupon Order line
+     *
+     * @return $this Self object
+     */
+    public function removeOrderCoupon(OrderCouponInterface $orderCoupon);
 
     /**
      * Set quantity.

@@ -18,6 +18,7 @@
 namespace Elcodi\Component\Cart\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Elcodi\Component\CartCoupon\Entity\Interfaces\OrderCouponInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface;
@@ -63,6 +64,13 @@ class Order implements OrderInterface
      * Order Lines
      */
     protected $orderLines;
+
+    /**
+     * @var Collection
+     *
+     * cart coupons
+     */
+    protected $orderCoupons;
 
     /**
      * @var int
@@ -295,6 +303,60 @@ class Order implements OrderInterface
     public function removeOrderLine(OrderLineInterface $orderLine)
     {
         $this->orderLines->removeElement($orderLine);
+
+        return $this;
+    }
+
+    /**
+     * Set order Lines.
+     *
+     * @param Collection $orderCoupons Order lines
+     *
+     * @return $this Self object
+     */
+    public function setOrderCoupons(Collection $orderCoupons)
+    {
+        $this->orderCoupons = $orderCoupons;
+
+        return $this;
+    }
+
+    /**
+     * Get order lines.
+     *
+     * @return Collection Order lines
+     */
+    public function getOrderCoupons()
+    {
+        return $this->orderCoupons;
+    }
+
+    /**
+     * Add order line.
+     *
+     * @param OrderCouponInterface $orderCoupon Order line
+     *
+     * @return $this Self object
+     */
+    public function addOrderCoupon(OrderCouponInterface $orderCoupon)
+    {
+        if (!$this->orderCoupons->contains($orderCoupon)) {
+            $this->orderCoupons->add($orderCoupon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove order line.
+     *
+     * @param OrderCouponInterface $orderCoupon Order line
+     *
+     * @return $this Self object
+     */
+    public function removeOrderCoupon(OrderCouponInterface $orderCoupon)
+    {
+        $this->orderCoupons->removeElement($orderCoupon);
 
         return $this;
     }
