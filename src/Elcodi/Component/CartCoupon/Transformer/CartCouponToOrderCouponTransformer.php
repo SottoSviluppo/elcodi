@@ -17,11 +17,12 @@
 
 namespace Elcodi\Component\CartCoupon\Transformer;
 
-use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
-use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\CartCoupon\EventDispatcher\OrderCouponEventDispatcher;
 use Elcodi\Component\CartCoupon\Services\CartCouponManager;
 use Elcodi\Component\CartCoupon\Services\OrderCouponTruncator;
+use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
+use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 
@@ -57,6 +58,8 @@ class CartCouponToOrderCouponTransformer
      */
     private $orderCouponEventDispatcher;
 
+    private $orderCouponRepository;
+
     /**
      * Construct.
      *
@@ -67,11 +70,13 @@ class CartCouponToOrderCouponTransformer
     public function __construct(
         CartCouponManager $cartCouponManager,
         OrderCouponTruncator $orderCouponTruncator,
-        OrderCouponEventDispatcher $orderCouponEventDispatcher
+        OrderCouponEventDispatcher $orderCouponEventDispatcher,
+        $orderCouponRepository
     ) {
         $this->cartCouponManager = $cartCouponManager;
         $this->orderCouponTruncator = $orderCouponTruncator;
         $this->orderCouponEventDispatcher = $orderCouponEventDispatcher;
+        $this->orderCouponRepository = $orderCouponRepository;
     }
 
     /**
@@ -121,6 +126,12 @@ class CartCouponToOrderCouponTransformer
                     $order,
                     $coupon
                 );
+        }
+
+        $orderCoupons = $this->orderCouponRepository->findOrderCouponsByOrder($order);
+        $order->setOrderCoupons(new ArrayCollection());
+        foreach ($orderCoupons as $orderCoupon) {
+            $order->addOrderCoupon($orderCoupon);
         }
     }
 }
