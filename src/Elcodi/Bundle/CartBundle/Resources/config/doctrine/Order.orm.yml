@@ -170,6 +170,12 @@ Elcodi\Component\Cart\Entity\Order:
             mappedBy: order
             cascade: [ "all" ]
             orphanRemoval: true
+        
+        orderCoupons:
+            targetEntity: Elcodi\Component\CartCoupon\Entity\Interfaces\OrderCouponInterface
+            mappedBy: order
+            cascade: [ "all" ]
+            orphanRemoval: true
 
     manyToMany:
         shippingStateLines:

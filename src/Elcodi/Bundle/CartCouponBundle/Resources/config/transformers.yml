@@ -16,3 +16,4 @@ services:
             - '@elcodi.manager.cart_coupon'
             - '@elcodi.truncator.order_coupon'
             - '@elcodi.event_dispatcher.order_coupon'
+            - '@elcodi.repository.order_coupon'
