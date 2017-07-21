@@ -6,6 +6,7 @@ use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Coupon\Exception\CouponIncompatibleException;
 use Elcodi\Component\Coupon\Services\CustomerCouponManager;
+use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 
 /**
  * Class CustomerCouponValidator.
@@ -54,6 +55,9 @@ class CustomerCouponValidator
         }
 
         $customer = $cart->getCustomer();
+        if (!$customer instanceof CustomerInterface) {
+            return;
+        }
         $this
             ->customerCouponManager
             ->checkCustomerCoupon($coupon, $customer);
