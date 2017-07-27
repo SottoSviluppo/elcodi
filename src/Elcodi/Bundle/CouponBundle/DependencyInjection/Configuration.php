@@ -43,6 +43,13 @@ class Configuration extends AbstractConfiguration
                 true
             ))
             ->append($this->addMappingNode(
+                'coupon_campaign',
+                'Elcodi\Component\Coupon\Entity\CouponCampaign',
+                '@ElcodiCouponBundle/Resources/config/doctrine/CouponCampaign.orm.yml',
+                'default',
+                true
+            ))
+            ->append($this->addMappingNode(
                 'customer_coupon',
                 'Elcodi\Component\Coupon\Entity\CustomerCoupon',
                 '@ElcodiCouponBundle/Resources/config/doctrine/CustomerCoupon.orm.yml',

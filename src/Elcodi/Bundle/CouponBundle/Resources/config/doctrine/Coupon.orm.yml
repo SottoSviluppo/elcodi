@@ -98,7 +98,7 @@ Elcodi\Component\Coupon\Entity\Coupon:
             column: extra_data
             type: json_array
             nullable: true 
-
+                
     manyToOne:
         priceCurrency:
             targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
@@ -112,6 +112,12 @@ Elcodi\Component\Coupon\Entity\Coupon:
                  name: minimum_purchase_currency_iso
                  referencedColumnName: iso
                  nullable: true
+        couponCampaign:
+            targetEntity: Elcodi\Component\Coupon\Entity\Interfaces\CouponCampaignInterface
+            joinColumn:
+                name: coupon_campaign_id
+                referencedColumnName: id
+                nullable: true
         rule:
             targetEntity: Elcodi\Component\Rule\Entity\Interfaces\RuleInterface
             fetch: EAGER

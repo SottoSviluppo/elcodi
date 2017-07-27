@@ -39,6 +39,7 @@ class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
                 $container,
                 [
                     'coupon',
+                    'coupon_campaign',
                     'customer_coupon',
                 ]
             );

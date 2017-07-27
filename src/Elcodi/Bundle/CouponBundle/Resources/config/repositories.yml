@@ -15,3 +15,7 @@ services:
         parent: elcodi.abstract_repository
         arguments:
             - %elcodi.entity.customer_coupon.class%
+    elcodi.repository.coupon_campaign:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.coupon_campaign.class%

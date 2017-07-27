@@ -80,6 +80,10 @@ class ElcodiCouponExtension extends AbstractExtension implements EntitiesOverrid
             'elcodi.entity.coupon.mapping_file' => $config['mapping']['coupon']['mapping_file'],
             'elcodi.entity.coupon.manager' => $config['mapping']['coupon']['manager'],
             'elcodi.entity.coupon.enabled' => $config['mapping']['coupon']['enabled'],
+            'elcodi.entity.coupon_campaign.class' => $config['mapping']['coupon_campaign']['class'],
+            'elcodi.entity.coupon_campaign.mapping_file' => $config['mapping']['coupon_campaign']['mapping_file'],
+            'elcodi.entity.coupon_campaign.manager' => $config['mapping']['coupon_campaign']['manager'],
+            'elcodi.entity.coupon_campaign.enabled' => $config['mapping']['coupon_campaign']['enabled'],
             'elcodi.entity.customer_coupon.class' => $config['mapping']['customer_coupon']['class'],
             'elcodi.entity.customer_coupon.mapping_file' => $config['mapping']['customer_coupon']['mapping_file'],
             'elcodi.entity.customer_coupon.manager' => $config['mapping']['customer_coupon']['manager'],
@@ -120,6 +124,7 @@ class ElcodiCouponExtension extends AbstractExtension implements EntitiesOverrid
     public function getEntitiesOverrides()
     {
         return [
+            'Elcodi\Component\Coupon\Entity\Interfaces\CouponCampaignInterface' => 'elcodi.entity.coupon_campaign.class',
             'Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface' => 'elcodi.entity.coupon.class',
         ];
     }
