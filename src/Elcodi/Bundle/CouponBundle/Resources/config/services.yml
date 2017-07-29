@@ -14,3 +14,21 @@ services:
         class: Elcodi\Component\Coupon\Services\CustomerCouponManager
         arguments:
             - '@elcodi.repository.customer_coupon'
+
+    elcodi.manager.coupon_campaign:
+        class: Elcodi\Component\Coupon\Services\CouponCampaignManager
+        arguments:
+            - '@elcodi.factory.coupon_campaign'
+            - '@elcodi.repository.coupon_campaign'
+            - '@elcodi.director.coupon_campaign'
+
+
+    elcodi.generator_manager.coupon:
+        class: Elcodi\Component\Coupon\Services\CouponGeneratorManager
+        arguments:
+            - '@elcodi.factory.coupon'
+            - '@elcodi.generator.random_string'
+            - '@elcodi.factory.datetime'
+            - '@elcodi.repository.coupon'
+            - '@elcodi.director.coupon'
+            - '@elcodi.manager.coupon_campaign'

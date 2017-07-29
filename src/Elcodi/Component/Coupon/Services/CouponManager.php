@@ -71,38 +71,6 @@ class CouponManager
         $this->dateTimeFactory = $dateTimeFactory;
     }
 
-    public function generateBaseCoupon($name, $length)
-    {
-        $dateFrom = $this
-            ->dateTimeFactory
-            ->create();
-
-        $dateTo = null;
-
-        $couponGenerated = $this->couponFactory->create();
-        $couponCode = $this
-            ->couponCodeGenerator
-            ->randomUpperString($length);
-
-        $couponGenerated
-            ->setCode($couponCode)
-            ->setName($name . '_' . $couponCode)
-            // ->setType($coupon->getType())
-            // ->setPrice($coupon->getPrice())
-            // ->setDiscount($coupon->getDiscount())
-            ->setCount(1)
-            // ->setPriority($coupon->getPriority())
-            // ->setMinimumPurchase($coupon->getMinimumPurchase())
-            ->setValidFrom($dateFrom)
-            ->setValidTo($dateTo)
-            // ->setValue($coupon->getValue())
-            // ->setRule($coupon->getRule())
-            // ->setEnforcement($coupon->getEnforcement())
-            ->setEnabled(true);
-
-        return $couponGenerated;
-    }
-
     /**
      * Creates a new coupon instance, given an existing Coupon as reference.
      *

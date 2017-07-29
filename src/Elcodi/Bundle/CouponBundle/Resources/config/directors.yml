@@ -18,3 +18,12 @@ services:
             - '@elcodi.object_manager.customer_coupon'
             - '@elcodi.repository.customer_coupon'
             - '@elcodi.factory.customer_coupon'
+
+    elcodi.director.coupon_campaign:
+        class: Elcodi\Component\Core\Services\ObjectDirector
+        lazy: true
+        arguments:
+            - '@elcodi.object_manager.coupon_campaign'
+            - '@elcodi.repository.coupon_campaign'
+            - '@elcodi.factory.coupon_campaign'
+
