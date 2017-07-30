@@ -63,11 +63,12 @@ class CouponGeneratorManager
     }
 
     private $count;
-    private $campaignName;
+    private $couponCampaign;
     private $amount;
     private $chars;
     private $baseName;
     private $freeShipping;
+    private $stackable;
     private $start;
     private $end;
     private $color;
@@ -78,9 +79,9 @@ class CouponGeneratorManager
         $this->count = $count;
     }
 
-    public function setCampaignName($campaignName)
+    public function setCouponCampaign($couponCampaign)
     {
-        $this->campaignName = $campaignName;
+        $this->couponCampaign = $couponCampaign;
     }
 
     public function setAmount($amount)
@@ -101,6 +102,11 @@ class CouponGeneratorManager
     public function setFreeShipping($freeShipping)
     {
         $this->freeShipping = $freeShipping;
+    }
+
+    public function setStackable($stackable)
+    {
+        $this->stackable = $stackable;
     }
 
     public function setStart($start)
@@ -127,7 +133,7 @@ class CouponGeneratorManager
     {
         $coupons = array();
         for ($i = 0; $i < $count; $i++) {
-            $coupon = $this->get('elcodi.generator_manager.coupon')->generateUniqueCoupon($money);
+            $coupon = $this->generateUniqueCoupon($money);
             $coupons[] = $coupon;
         }
         return $coupons;
@@ -137,16 +143,20 @@ class CouponGeneratorManager
     {
         $coupon = $this->getUniqueCoupon();
 
-        $coupon->setCouponCampaign($this->couponCampaignManager->getCouponCampaign($this->campaignName));
+        $coupon->setCouponCampaign($this->couponCampaign);
 
         $coupon->setType(ElcodiCouponTypes::TYPE_AMOUNT);
         $coupon->setPrice($money);
 
         $coupon->setFreeShipping($this->freeShipping);
+        $coupon->setStackable($this->stackable);
         $coupon->setColor($this->color);
-        $coupon->setValidFrom(\DateTime::createFromFormat('Ymd', $this->start));
-        $coupon->setValidTo(\DateTime::createFromFormat('Ymd', $this->end));
-
+        if ($this->start != null) {
+            $coupon->setValidFrom(\DateTime::createFromFormat('Ymd', $this->start));
+        }
+        if ($this->end != null) {
+            $coupon->setValidTo(\DateTime::createFromFormat('Ymd', $this->end));
+        }
         $this->couponDirector->save($coupon);
 
         return $coupon;

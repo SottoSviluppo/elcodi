@@ -120,7 +120,9 @@ class CouponsCreateCommand extends AbstractElcodiCommand
         $currency = $this->container->get('elcodi.repository.currency')->findOneByIso('EUR');
 
         // $this->container->get('elcodi.generator_manager.coupon')->setCount($count);
-        $this->container->get('elcodi.generator_manager.coupon')->setCampaignName($campaignName);
+        $couponCampaign = $this->container->get('elcodi.manager.coupon_campaign')->getCouponCampaign($campaignName);
+
+        $this->container->get('elcodi.generator_manager.coupon')->setCouponCampaign($couponCampaign);
         $this->container->get('elcodi.generator_manager.coupon')->setAmount($amount);
         $this->container->get('elcodi.generator_manager.coupon')->setChars($chars);
         $this->container->get('elcodi.generator_manager.coupon')->setBaseName($baseName);
