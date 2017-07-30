@@ -67,4 +67,12 @@ class DownloadUtility
         readfile('media/' . $zipName);
     }
 
+    public function downloadStringFile($content, $fileName)
+    {
+        header("Content-Disposition: attachment; filename=\"" . $fileName . "\"");
+        header("Content-Type: application/force-download");
+        header("Content-Length: " . strlen($fileName));
+        header("Connection: close");
+        echo $content;
+    }
 }

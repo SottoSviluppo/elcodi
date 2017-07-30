@@ -12,3 +12,8 @@ services:
         parent: elcodi.abstract_manager
         arguments:
             - %elcodi.entity.customer_coupon.class%
+
+    elcodi.object_manager.coupon_campaign:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.coupon_campaign.class%

@@ -3,7 +3,6 @@
 namespace Elcodi\Component\Coupon\Command;
 
 use Elcodi\Component\Core\Command\Abstracts\AbstractElcodiCommand;
-use Elcodi\Component\Coupon\ElcodiCouponTypes;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -25,6 +24,7 @@ class CouponsCreateCommand extends AbstractElcodiCommand
         $this
             ->setName('elcodi:coupons:create')
             ->setDescription('Crea n coupons')
+            ->addArgument('campaignName', InputArgument::REQUIRED, 'Campaign name')
             ->addArgument('count', InputArgument::REQUIRED, 'Number of codes')
             ->addArgument('chars', InputArgument::REQUIRED, 'Number of characters')
             ->addArgument('amount', InputArgument::REQUIRED, 'Amount in cents')
@@ -46,6 +46,11 @@ class CouponsCreateCommand extends AbstractElcodiCommand
         $defaultStart = date('Ymd');
         $defaultEnd = '20991231';
         $defaultColor = '';
+        $defaultcampaignName = 'Default';
+
+        $campaignName = $this->getHelper('dialog')->askAndValidate($output, "<question>campaignName:</question> [<comment>$defaultcampaignName</comment>]", function ($typeInput) {
+            return $typeInput;
+        }, 3, $defaultcampaignName);
 
         $count = $this->getHelper('dialog')->askAndValidate($output, "<question>count:</question> [<comment>$defaultCount</comment>]", function ($typeInput) {
             return $typeInput;
@@ -77,6 +82,7 @@ class CouponsCreateCommand extends AbstractElcodiCommand
         }, 3, $defaultColor);
 
         $input->setArgument('count', $count);
+        $input->setArgument('campaignName', $campaignName);
         $input->setArgument('chars', $chars);
         $input->setArgument('amount', $amount);
         $input->setArgument('base_name', $baseName);
@@ -102,6 +108,7 @@ class CouponsCreateCommand extends AbstractElcodiCommand
     protected function createCoupons(InputInterface $input, OutputInterface $output)
     {
         $count = $this->input->getArgument('count');
+        $campaignName = $this->input->getArgument('campaignName');
         $amount = $this->input->getArgument('amount');
         $chars = $this->input->getArgument('chars');
         $baseName = $this->input->getArgument('base_name');
@@ -112,24 +119,26 @@ class CouponsCreateCommand extends AbstractElcodiCommand
 
         $currency = $this->container->get('elcodi.repository.currency')->findOneByIso('EUR');
 
+        // $this->container->get('elcodi.generator_manager.coupon')->setCount($count);
+        $couponCampaign = $this->container->get('elcodi.manager.coupon_campaign')->getCouponCampaign($campaignName);
+
+        $this->container->get('elcodi.generator_manager.coupon')->setCouponCampaign($couponCampaign);
+        $this->container->get('elcodi.generator_manager.coupon')->setAmount($amount);
+        $this->container->get('elcodi.generator_manager.coupon')->setChars($chars);
+        $this->container->get('elcodi.generator_manager.coupon')->setBaseName($baseName);
+        $this->container->get('elcodi.generator_manager.coupon')->setFreeShipping($freeShipping);
+        $this->container->get('elcodi.generator_manager.coupon')->setStart($start);
+        $this->container->get('elcodi.generator_manager.coupon')->setEnd($end);
+        $this->container->get('elcodi.generator_manager.coupon')->setColor($color);
+
+        $money = \Elcodi\Component\Currency\Entity\Money::create(
+            $amount,
+            $currency
+        );
         $createdCoupons = "";
 
         for ($i = 0; $i < $count; $i++) {
-            $coupon = $this->generateUniqueCoupon($baseName, $chars);
-            $coupon->setType(ElcodiCouponTypes::TYPE_AMOUNT);
-
-            $money = \Elcodi\Component\Currency\Entity\Money::create(
-                $amount,
-                $currency
-            );
-
-            $coupon->setPrice($money);
-            $coupon->setFreeShipping($freeShipping);
-            $coupon->setColor($color);
-            $coupon->setValidFrom(\DateTime::createFromFormat('Ymd', $start));
-            $coupon->setValidTo(\DateTime::createFromFormat('Ymd', $end));
-
-            $this->container->get('elcodi.director.coupon')->save($coupon);
+            $coupon = $this->container->get('elcodi.generator_manager.coupon')->generateUniqueCoupon($money);
             $this->output->writeln('Created coupon ' . $coupon->getCode());
 
             $createdCoupons .= $coupon->getCode() . "\r\n";
@@ -142,17 +151,4 @@ class CouponsCreateCommand extends AbstractElcodiCommand
         return $this;
     }
 
-    private function generateUniqueCoupon($baseName, $chars)
-    {
-        $coupon = null;
-        while (true) {
-            $coupon = $this->container->get('elcodi.manager.coupon')->generateBaseCoupon($baseName, $chars);
-            $couponsWithCode = $this->container->get('elcodi.repository.coupon')->findByCode($coupon->getCode());
-            if (count($couponsWithCode) == 0) {
-                break;
-            }
-            echo "doppio";
-        }
-        return $coupon;
-    }
 }

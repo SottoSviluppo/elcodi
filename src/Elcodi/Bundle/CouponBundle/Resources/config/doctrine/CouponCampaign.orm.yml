@@ -1,0 +1,29 @@
+Elcodi\Component\Coupon\Entity\CouponCampaign:
+    type: entity
+    repositoryClass: Elcodi\Component\Coupon\Repository\CouponCampaignRepository
+    table: coupon_campaign
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        campaignName:
+            column: campaign_name
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+        updatedAt:
+            column: updated_at
+            type: datetime
+
+
+
+
+
+    lifecycleCallbacks:
+        preUpdate: [loadUpdateAt]
+        prePersist: [loadUpdateAt]

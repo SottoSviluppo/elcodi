@@ -176,6 +176,11 @@ class Coupon implements CouponInterface
     protected $countCustomer = 0;
 
     /**
+     * @var entity
+     */
+    protected $couponCampaign;
+
+    /**
      * Set code.
      *
      * @param string $code Code
@@ -593,6 +598,30 @@ class Coupon implements CouponInterface
     public function getCountCustomer()
     {
         return $this->countCustomer;
+    }
+
+    /**
+     * Sets CouponCampaign.
+     *
+     * @param entity $couponCampaign
+     *
+     * @return $this Self object
+     */
+    public function setCouponCampaign($couponCampaign)
+    {
+        $this->couponCampaign = $couponCampaign;
+
+        return $this;
+    }
+
+    /**
+     * Get CouponCampaign.
+     *
+     * @return entity CouponCampaign
+     */
+    public function getCouponCampaign()
+    {
+        return $this->couponCampaign;
     }
 
     /**

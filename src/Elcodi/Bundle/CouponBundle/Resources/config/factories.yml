@@ -20,3 +20,9 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.customer_coupon.class%"]]
             - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
+            
+    elcodi.factory.coupon_campaign:
+        class: Elcodi\Component\Coupon\Factory\CouponCampaignFactory
+        calls:
+            - [setEntityNamespace, [ %elcodi.entity.coupon_campaign.class% ] ]
+            - [setDateTimeFactory, ["@elcodi.factory.datetime"] ]
