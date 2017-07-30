@@ -67,8 +67,8 @@ class CouponGeneratorManager
     private $amount;
     private $chars;
     private $baseName;
-    private $freeShipping;
-    private $stackable;
+    private $freeShipping = false;
+    private $stackable = false;
     private $start;
     private $end;
     private $color;
