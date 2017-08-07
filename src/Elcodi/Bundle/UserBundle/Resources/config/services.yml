@@ -20,3 +20,10 @@ services:
         class: Elcodi\Component\User\Services\AdminUserManager
         arguments:
             - '@elcodi.event_dispatcher.user'
+
+    elcodi.excel_manager.customer:
+        class: Elcodi\Component\User\Services\ExcelCustomerManager
+        arguments:
+            - '@translator'
+            - '@elcodi.money_printer'
+            - '@elcodi.download_utility'
