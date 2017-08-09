@@ -41,6 +41,7 @@ services:
         class: Elcodi\Component\Cart\Services\CartRestorer
         arguments:            
             - '@elcodi.repository.order'
+            - '@elcodi.object_manager.order'
             - '@elcodi.object_manager.cart'
             - '@elcodi.wrapper.customer'
 

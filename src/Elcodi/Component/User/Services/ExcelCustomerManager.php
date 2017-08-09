@@ -14,15 +14,18 @@ class ExcelCustomerManager
     public $translator;
     public $moneyPrinter;
     public $downloadUtility;
+    public $orderRepository;
 
     public function __construct(
         $translator,
         $moneyPrinter,
-        $downloadUtility
+        $downloadUtility,
+        $orderRepository
     ) {
         $this->translator = $translator;
         $this->moneyPrinter = $moneyPrinter;
         $this->downloadUtility = $downloadUtility;
+        $this->orderRepository = $orderRepository;
     }
 
     public function getExcelFromCustomers($customers)
@@ -39,6 +42,7 @@ class ExcelCustomerManager
         $array = array();
         $rowHeader = array();
 
+        $rowHeader[] = 'ID cliente';
         $rowHeader[] = 'Guest';
         $rowHeader[] = 'Nome';
         $rowHeader[] = 'Cognome';
@@ -55,6 +59,7 @@ class ExcelCustomerManager
         foreach ($customers as $customer) {
             $row = array();
             $row[] = $customer->getId();
+            $row[] = $customer->isGuest();
             $row[] = $customer->getFirstname();
             $row[] = $customer->getLastname();
             $row[] = $customer->getCountry();

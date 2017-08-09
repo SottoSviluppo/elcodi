@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Cart\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 
 /**
@@ -36,6 +35,23 @@ class OrderRepository extends EntityRepository
         $res = $this->createQueryBuilder('o')
             ->innerJoin('o.shippingLastStateLine', 'sl')
             ->where('sl.name = \'preparing\'')
+            ->orderBy('o.updatedAt', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $res;
+    }
+
+    public function getPaidOrders($customer)
+    {
+        // Estrae gli ordini di uno specifico $customer che hanno il paymentLastStateLine = 'paid'
+        $res = $this->createQueryBuilder('o')
+            ->select(['o'])
+            ->leftJoin('o.paymentLastStateLine', 'sl')
+            ->where('o.customer = :customer')
+            ->andWhere("sl.name = 'paid'")
+            ->andWhere("o.amount > 0")
+            ->setParameter('customer', $customer)
             ->orderBy('o.updatedAt', 'ASC')
             ->getQuery()
             ->getResult();

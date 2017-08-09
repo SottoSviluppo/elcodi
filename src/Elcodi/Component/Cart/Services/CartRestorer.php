@@ -8,15 +8,18 @@ use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 class CartRestorer
 {
     public $orderRepository;
+    public $orderObjectManager;
     public $cartObjectManager;
     public $customerWrapper;
 
     public function __construct(
         $orderRepository,
+        $orderObjectManager,
         $cartObjectManager,
         $customerWrapper
     ) {
         $this->orderRepository = $orderRepository;
+        $this->orderObjectManager = $orderObjectManager;
         $this->cartObjectManager = $cartObjectManager;
         $this->customerWrapper = $customerWrapper;
     }
@@ -54,5 +57,8 @@ class CartRestorer
         $this
             ->cartObjectManager
             ->flush($cart);
+
+        $order->setPaymentMethodExtra(array());
+        $this->orderObjectManager->flush($order);
     }
 }
