@@ -217,7 +217,7 @@ class MoneyPrinter
         return $decimalPrice;
     }
 
-    protected function getSinglePrice(Purchasable $purchasable, $cartLine)
+    public function getSinglePrice(Purchasable $purchasable, $cartLine = null)
     {
         if ($purchasable->getKeepCartPrice()) {
             return $cartLine->getPurchasableAmount();
