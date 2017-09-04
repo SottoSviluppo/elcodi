@@ -131,7 +131,6 @@ class CartWrapper implements WrapperInterface
                 $cartFromCustomer,
                 $cartFromSession
             );
-
         $this
             ->cartEventDispatcher
             ->dispatchCartLoadEvents($this->cart);

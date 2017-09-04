@@ -20,6 +20,10 @@ Elcodi\Component\Cart\Entity\Cart:
             column: shipping_method
             type: string
             nullable: true
+        taxAmount:
+            column: tax_amount
+            type: integer
+            nullable: true
         createdAt:
             column: created_at
             type: datetime
@@ -55,6 +59,12 @@ Elcodi\Component\Cart\Entity\Cart:
                 name: billing_address_id
                 referencedColumnName: id
                 nullable: true
+        taxCurrency:
+            targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
+            joinColumn:
+                 name: tax_currency_iso
+                 referencedColumnName: iso
+                 nullable: true
 
     oneToMany:
         cartLines:
