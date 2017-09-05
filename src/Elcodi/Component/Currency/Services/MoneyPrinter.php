@@ -226,4 +226,15 @@ class MoneyPrinter
         return $purchasable->getResolvedPrice();
     }
 
+    /**
+     * Return sum of two Money entity
+     */
+    public function addMoney(
+        Money $firstAdd,
+        Money $toAdd
+    ) {
+        $sum = $firstAdd->add($toAdd);
+
+        return $sum;
+    }
 }

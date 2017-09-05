@@ -17,10 +17,9 @@
 
 namespace Elcodi\Component\Currency\Twig;
 
+use Elcodi\Component\Currency\Services\MoneyPrinter;
 use Twig_Extension;
 use Twig_SimpleFilter;
-
-use Elcodi\Component\Currency\Services\MoneyPrinter;
 
 /**
  * Class MoneyPrinterExtension.
@@ -76,16 +75,20 @@ class MoneyPrinterExtension extends Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('printConvertMoneyPurchasableCartLine', array(
-                $this->moneyPrinter, 
+                $this->moneyPrinter,
                 'printConvertMoneyPurchasableCartLine')
             ),
             new \Twig_SimpleFunction('printConvertMoneyPurchasableCartLineSingle', array(
-                $this->moneyPrinter, 
+                $this->moneyPrinter,
                 'printConvertMoneyPurchasableCartLineSingle')
+            ),
+            new \Twig_SimpleFunction('addMoney', array(
+                $this->moneyPrinter,
+                'addMoney')
             ),
         ];
     }
-    
+
     /**
      * return extension name.
      *
