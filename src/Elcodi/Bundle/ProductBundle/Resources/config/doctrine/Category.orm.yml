@@ -67,6 +67,8 @@ Elcodi\Component\Product\Entity\Category:
         showInHome:
             column: show_in_home
             type: boolean
+            options:
+                default: false
 
     oneToMany:
         subCategories:
