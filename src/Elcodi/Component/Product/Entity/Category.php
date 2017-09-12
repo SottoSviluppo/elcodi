@@ -330,6 +330,13 @@ class Category implements CategoryInterface
         return $this;
     }
 
+    public function getEnabledSubCategories()
+    {
+        return $this->subCategories->filter(function ($k) {
+            return $k->isEnabled();
+        });
+    }
+
     /**
      * To string method.
      *
