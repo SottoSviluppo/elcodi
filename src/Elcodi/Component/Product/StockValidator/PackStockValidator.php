@@ -81,7 +81,7 @@ class PackStockValidator implements PurchasableStockValidatorInterface
         $isPackValid = $this->isValidUsingSimplePurchasableValidation(
             $purchasable,
             $stockRequired,
-            !$isInheritStock
+            $useStock
         );
 
         /**
