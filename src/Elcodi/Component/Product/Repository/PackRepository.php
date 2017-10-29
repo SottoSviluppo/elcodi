@@ -24,4 +24,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PackRepository extends EntityRepository
 {
+
+    public function getPacksWithPurchasableId($purchasableId)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->innerJoin('c.purchasables', 'purchasables')
+            ->andWhere('purchasables.id = :id')
+            ->setParameter('id', $purchasableId)
+        // ->groupBy('c.id')
+        ;
+        return $query->getQuery()->getResult();
+    }
 }

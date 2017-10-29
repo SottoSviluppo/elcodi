@@ -668,4 +668,19 @@ class Customer extends AbstractUser implements CustomerInterface
     {
         return $this->facebookId;
     }
+
+    public function getString()
+    {
+        if ($this->isCompany()) {
+            if ($this->getCompanyName() != '') {
+                return $this->getCompanyName();
+            }
+        } else {
+            if ($this->getFirstname() != '' || $this->getLastname() != '') {
+                return $this->getFirstname() . ' ' . $this->getLastname();
+            }
+        }
+
+        return $this->getEmail();
+    }
 }
