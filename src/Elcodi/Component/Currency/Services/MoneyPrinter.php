@@ -188,6 +188,20 @@ class MoneyPrinter
         return $this->printMoney($money);
     }
 
+    public function printConvertMoneyPurchasable(
+        Purchasable $purchasable
+    ) {
+        $price = $this->getSinglePrice($purchasable, null);
+        return $this->printMoney($price);
+    }
+
+    public function printConvertMoneyPurchasableRegular(
+        Purchasable $purchasable
+    ) {
+        $price = $this->getSinglePrice($purchasable, null);
+        return $this->printMoney($price);
+    }
+
     public function printConvertMoneyPurchasableCartLineSingle(
         Purchasable $purchasable,
         $cartLine

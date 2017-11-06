@@ -57,6 +57,14 @@ class MoneyPrinterExtension extends Twig_Extension
                 $this->moneyPrinter,
                 'printConvertMoney',
             ]),
+            new Twig_SimpleFilter('print_convert_money_purchasable', [
+                $this->moneyPrinter,
+                'printConvertMoneyPurchasable',
+            ]),
+            new Twig_SimpleFilter('print_convert_money_purchasable_regular', [
+                $this->moneyPrinter,
+                'printConvertMoneyPurchasableRegular',
+            ]),
             new Twig_SimpleFilter('print_money', [
                 $this->moneyPrinter,
                 'printMoney',

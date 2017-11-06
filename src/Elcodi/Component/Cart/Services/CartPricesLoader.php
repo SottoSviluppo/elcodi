@@ -185,4 +185,25 @@ class CartPricesLoader
 
         return $cartLine;
     }
+
+    public function getTaxAmount(CartInterface $cart)
+    {
+        $taxAmount = 0;
+        foreach ($cart->getCartLines() as $cartLine) {
+            if ($cartLine->getTax() === null) {
+                continue;
+            }
+
+            $tax = $cartLine->getTax()->getValue();
+            $purchasablePrice = $cartLine->getPurchasable()->getPrice()->getAmount();
+            $cartLineTaxAmount = $purchasablePrice * $tax / 100;
+            $taxAmount += $cartLineTaxAmount;
+        }
+        $taxAmountMoney = \Elcodi\Component\Currency\Entity\Money::create(
+            $taxAmount,
+            $cart->getAmount()->getCurrency()
+        );
+
+        return $taxAmountMoney;
+    }
 }
