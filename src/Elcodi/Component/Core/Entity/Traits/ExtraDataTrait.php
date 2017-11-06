@@ -40,6 +40,10 @@ trait ExtraDataTrait
 
     public function getExtraDataValue($key)
     {
+        if ($this->extraData === null) {
+            return "";
+        }
+
         if (!array_key_exists($key, $this->extraData)) {
             return "";
         }
