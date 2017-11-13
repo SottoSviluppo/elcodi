@@ -75,4 +75,14 @@ class LanguageManager
                 return $language->getIso();
             });
     }
+
+    public function getLanguagesArray()
+    {
+        $languages = $this->getLanguages();
+        $array = [];
+        foreach ($languages as $lang) {
+            $array[$lang->getIso()] = $lang->getName();
+        }
+        return $array;
+    }
 }

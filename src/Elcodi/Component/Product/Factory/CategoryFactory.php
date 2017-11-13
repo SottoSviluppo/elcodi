@@ -43,6 +43,7 @@ class CategoryFactory extends AbstractFactory
             ->setRoot(true)
             ->setPosition(0)
             ->setEnabled(true)
+            ->setShowInHome(false)
             ->setImages(new ArrayCollection())
             ->setImagesSort('')
             ->setCreatedAt($this->now());
