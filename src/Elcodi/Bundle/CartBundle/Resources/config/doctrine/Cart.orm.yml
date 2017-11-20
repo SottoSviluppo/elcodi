@@ -30,7 +30,11 @@ Elcodi\Component\Cart\Entity\Cart:
         updatedAt:
             column: updated_at
             type: datetime
-
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
+            
     oneToOne:
         order:
             targetEntity: Elcodi\Component\Cart\Entity\Interfaces\OrderInterface

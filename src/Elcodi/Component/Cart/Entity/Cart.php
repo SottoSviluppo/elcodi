@@ -22,6 +22,7 @@ use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
@@ -33,7 +34,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
  */
 class Cart implements CartInterface
 {
-    use IdentifiableTrait, DateTimeTrait, TaxAmountTrait;
+    use IdentifiableTrait, DateTimeTrait, TaxAmountTrait, ExtraDataTrait;
 
     /**
      * @var bool

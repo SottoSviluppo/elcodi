@@ -135,7 +135,9 @@ class CartOrderTransformer
             ->setWeight($cart->getWeight())
             ->setBillingAddress($cart->getBillingAddress())
             ->setDeliveryAddress($cart->getDeliveryAddress())
-            ->setOrderLines($orderLines);
+            ->setOrderLines($orderLines)
+            ->setExtraData($cart->getExtraData())
+        ;
 
         $deliveryAddress = $order->getDeliveryAddress();
         if ($deliveryAddress != null) {
