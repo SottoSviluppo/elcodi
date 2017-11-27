@@ -71,8 +71,18 @@ class DownloadUtility
     {
         header("Content-Disposition: attachment; filename=\"" . $fileName . "\"");
         header("Content-Type: application/force-download");
-        header("Content-Length: " . strlen($fileName));
+        header("Content-Length: " . strlen($content));
         header("Connection: close");
         echo $content;
     }
+
+    public function downloadPdfFile($content, $fileName)
+    {
+        header("Content-Disposition: attachment; filename=\"" . $fileName . "\"");
+        header('Content-Type: application/pdf');
+        header("Content-Length: " . strlen($content));
+        header("Connection: close");
+        echo $content;
+    }
+
 }
