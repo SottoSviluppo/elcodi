@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Product\ElcodiProductStock;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface;
@@ -36,6 +35,13 @@ class Pack extends Purchasable implements PackInterface
      * Pack type
      */
     protected $type;
+
+    /**
+     * @var int
+     *
+     * Discount
+     */
+    protected $discount = 0;
 
     /**
      * @var int
@@ -97,9 +103,9 @@ class Pack extends Purchasable implements PackInterface
         foreach ($this->getPurchasables() as $purchasable) {
             $purchasableStock = $purchasable->getStock();
             if (is_int($purchasableStock) && (
-                    !is_int($stock) ||
-                    $purchasableStock < $stock
-                )) {
+                !is_int($stock) ||
+                $purchasableStock < $stock
+            )) {
                 $stock = $purchasableStock;
             }
         }
@@ -129,6 +135,30 @@ class Pack extends Purchasable implements PackInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set discount.
+     *
+     * @param int $discount Discount
+     *
+     * @return $this Self object
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Get discount.
+     *
+     * @return int discount
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 
     /**

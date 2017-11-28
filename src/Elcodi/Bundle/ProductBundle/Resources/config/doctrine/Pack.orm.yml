@@ -8,6 +8,14 @@ Elcodi\Component\Product\Entity\Pack:
             column: stock_type
             type: integer
             nullable: false
+        type:
+            column: type
+            type: integer
+            nullable: true
+        discount:
+            column: discount
+            type: integer
+
 
     manyToMany:
         purchasables:
