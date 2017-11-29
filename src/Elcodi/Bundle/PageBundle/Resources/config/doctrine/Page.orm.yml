@@ -18,11 +18,11 @@ Elcodi\Component\Page\Entity\Page:
             column: title
             type: string
             length: 255
-            nullable: false
+            nullable: true
         content:
             column: content
             type: text
-            nullable: false
+            nullable: true
         type:
             column: type
             type: integer
