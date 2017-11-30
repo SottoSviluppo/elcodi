@@ -125,4 +125,19 @@ class CategoryRepository extends EntityRepository {
 			->groupBy('c.id');
 		return $query->getQuery()->getArrayResult();
 	}
+
+	public function getChildrenCategoriesOrderByPosition(CategoryInterface $parentCategory, $orderDirection = 'ASC')
+	{
+		$categories = $this
+			->createQueryBuilder('c')
+			->where('c.parent = :parent_category')
+			->addOrderBy('c.position', $orderDirection)
+			->setParameters([
+				'parent_category' => $parentCategory,
+			])
+			->getQuery()
+			->getResult();
+
+		return $categories;
+	}
 }
