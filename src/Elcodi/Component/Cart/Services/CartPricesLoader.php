@@ -195,8 +195,9 @@ class CartPricesLoader
             }
 
             $tax = $cartLine->getTax()->getValue();
-            $purchasablePrice = $cartLine->getPurchasable()->getPrice()->getAmount();
-            $cartLineTaxAmount = $purchasablePrice * $tax / 100;
+            $cartLineAmount = $cartLine->getAmount()->getAmount();
+
+            $cartLineTaxAmount = $cartLineAmount * $tax / 100;
             $taxAmount += $cartLineTaxAmount;
         }
         $taxAmountMoney = \Elcodi\Component\Currency\Entity\Money::create(
