@@ -119,6 +119,8 @@ class CartOrderTransformer
                 $cart->getCartLines()
             );
 
+        $amount = $cart->getAmount();
+        $amount = $amount->add($cart->getTaxAmount());
         /**
          * @var OrderInterface $order
          */
@@ -128,7 +130,7 @@ class CartOrderTransformer
             ->setQuantity($cart->getTotalItemNumber())
             ->setPurchasableAmount($cart->getPurchasableAmount())
             ->setShippingAmount($cart->getShippingAmount())
-            ->setAmount($cart->getAmount())
+            ->setAmount($amount)
             ->setHeight($cart->getHeight())
             ->setWidth($cart->getWidth())
             ->setDepth($cart->getDepth())

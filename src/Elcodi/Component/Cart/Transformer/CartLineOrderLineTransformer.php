@@ -120,13 +120,22 @@ class CartLineOrderLineTransformer
         /**
          * @var OrderLineInterface $orderLine
          */
+
+        $amount = $cartLine->getAmount();
+        $amount = $amount->add($cartLine->getTaxAmount());
+        // \Doctrine\Common\Util\Debug::dump($cartLine);
+        // \Doctrine\Common\Util\Debug::dump($cartLine->getAmount());
+        // \Doctrine\Common\Util\Debug::dump($cartLine->getTaxAmount());
+        // \Doctrine\Common\Util\Debug::dump($amount);
+        //  die();
+
         $orderLine
             ->setOrder($order)
             ->setPurchasable($cartLine->getPurchasable())
             ->setQuantity($cartLine->getQuantity())
             ->setPurchasableAmount($cartLine->getPurchasableAmount())
             ->setTax($cartLine->getTax())
-            ->setAmount($cartLine->getAmount())
+            ->setAmount($amount)
             ->setHeight($cartLine->getHeight())
             ->setWidth($cartLine->getWidth())
             ->setDepth($cartLine->getDepth())

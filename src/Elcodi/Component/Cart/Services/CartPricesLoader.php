@@ -183,28 +183,43 @@ class CartPricesLoader
         $cartLine->setPurchasableAmount($purchasablePrice);
         $cartLine->setAmount($purchasablePrice->multiply($cartLine->getQuantity()));
 
+        $purchasableAmountTax = $this->getCartLineTaxAmount($cartLine);
+        $purchasableMoneyTax = \Elcodi\Component\Currency\Entity\Money::create(
+            $purchasableAmountTax,
+            $cartLine->getAmount()->getCurrency()
+        );
+
+        $cartLine->setTaxAmount($purchasableMoneyTax);
+        
         return $cartLine;
     }
+
+
 
     public function getTaxAmount(CartInterface $cart)
     {
         $taxAmount = 0;
         foreach ($cart->getCartLines() as $cartLine) {
-            if ($cartLine->getTax() === null) {
-                continue;
-            }
-
-            $tax = $cartLine->getTax()->getValue();
-            $cartLineAmount = $cartLine->getAmount()->getAmount();
-
-            $cartLineTaxAmount = $cartLineAmount * $tax / 100;
-            $taxAmount += $cartLineTaxAmount;
+            $taxAmount += $this->getCartLineTaxAmount($cartLine);
         }
+
         $taxAmountMoney = \Elcodi\Component\Currency\Entity\Money::create(
             $taxAmount,
             $cart->getAmount()->getCurrency()
         );
 
         return $taxAmountMoney;
+    }
+
+    private function getCartLineTaxAmount($cartLine)
+    {
+        if ($cartLine->getTax() === null) {
+            return 0;
+        }
+
+        $tax = $cartLine->getTax()->getValue();
+        $cartLineAmount = $cartLine->getAmount()->getAmount();
+
+        return $cartLineAmount * $tax / 100;
     }
 }
