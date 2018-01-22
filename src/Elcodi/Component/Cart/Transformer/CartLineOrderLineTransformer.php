@@ -122,12 +122,9 @@ class CartLineOrderLineTransformer
          */
 
         $amount = $cartLine->getAmount();
+        if ($cartLine->getTaxAmount() !== null) {
         $amount = $amount->add($cartLine->getTaxAmount());
-        // \Doctrine\Common\Util\Debug::dump($cartLine);
-        // \Doctrine\Common\Util\Debug::dump($cartLine->getAmount());
-        // \Doctrine\Common\Util\Debug::dump($cartLine->getTaxAmount());
-        // \Doctrine\Common\Util\Debug::dump($amount);
-        //  die();
+        }
 
         $orderLine
             ->setOrder($order)

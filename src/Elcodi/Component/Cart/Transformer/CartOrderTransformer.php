@@ -120,7 +120,10 @@ class CartOrderTransformer
             );
 
         $amount = $cart->getAmount();
+        if ($cart->getTaxAmount() !== null) {
         $amount = $amount->add($cart->getTaxAmount());
+        }
+
         /**
          * @var OrderInterface $order
          */

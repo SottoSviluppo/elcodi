@@ -44,6 +44,10 @@ trait TaxAmountTrait
      */
     public function getTaxAmount()
     {
+        if ($this->taxCurrency == null) {
+            return null;
+        }
+
         return Money::create(
             $this->taxAmount,
             $this->taxCurrency
