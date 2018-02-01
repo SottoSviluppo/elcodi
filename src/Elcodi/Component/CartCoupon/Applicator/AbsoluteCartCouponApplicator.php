@@ -34,14 +34,14 @@ class AbsoluteCartCouponApplicator implements CartCouponApplicatorInterface
      *
      * Currency Wrapper
      */
-    private $currencyWrapper;
+    protected $currencyWrapper;
 
     /**
      * @var CurrencyConverter
      *
      * Currency converter
      */
-    private $currencyConverter;
+    protected $currencyConverter;
 
     /**
      * Construct method.
