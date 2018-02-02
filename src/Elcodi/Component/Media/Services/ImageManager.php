@@ -58,6 +58,7 @@ class ImageManager
      * ResizerAdapter
      */
     private $resizeAdapter;
+    private $kernelRoot;
 
     /**
      * Construct method.
@@ -69,11 +70,13 @@ class ImageManager
     public function __construct(
         ImageFactory $imageFactory,
         FileManager $fileManager,
-        ResizeAdapterInterface $resizeAdapter
+        ResizeAdapterInterface $resizeAdapter,
+        $kernelRoot
     ) {
         $this->imageFactory = $imageFactory;
         $this->fileManager = $fileManager;
         $this->resizeAdapter = $resizeAdapter;
+        $this->kernelRoot = $kernelRoot;
     }
 
     /**
@@ -117,12 +120,12 @@ class ImageManager
         }
         $name = $file->getFilename();
         $image
-            ->setWidth($imageSizeData[0])
-            ->setHeight($imageSizeData[1])
-            ->setContentType($fileMime)
-            ->setSize($file->getSize())
-            ->setExtension($extension)
-            ->setName($name);
+        ->setWidth($imageSizeData[0])
+        ->setHeight($imageSizeData[1])
+        ->setContentType($fileMime)
+        ->setSize($file->getSize())
+        ->setExtension($extension)
+        ->setName($name);
 
         return $image;
     }
@@ -143,11 +146,26 @@ class ImageManager
         $width,
         $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
     ) {
-        $imageData = $this
-            ->fileManager
-            ->downloadFile($image)
-            ->getContent();
 
+        $imagename = $image->getId().'_'.$height.'_'.$width.'_'.$type.'.'.$image->getExtension();
+
+        if(!file_exists($this->kernelRoot.'/../web/local/cache/')){
+            mkdir($this->kernelRoot.'/../web/local/cache/');
+        }
+
+        $imagePath = $this->kernelRoot.'/../web/local/cache/'.$image->getId();
+
+
+        if (file_exists($imagePath.'/'.$imagename)) {
+
+            $imageFile = file_get_contents($imagePath.'/'.$imagename);
+            return $image->setContent($imageFile);
+        }
+
+        $imageData = $this
+        ->fileManager
+        ->downloadFile($image)
+        ->getContent();
         if (ElcodiMediaImageResizeTypes::NO_RESIZE === $type) {
             $image->setContent($imageData);
 
@@ -155,8 +173,8 @@ class ImageManager
         }
 
         $resizedImageData = $this
-            ->resizeAdapter
-            ->resize($imageData, $height, $width, $type);
+        ->resizeAdapter
+        ->resize($imageData, $height, $width, $type);
 
         /**
          * We need to physically store the new resized
@@ -166,11 +184,13 @@ class ImageManager
          */
         $resizedFile = new File(tempnam(sys_get_temp_dir(), '_generated'));
         file_put_contents($resizedFile, $resizedImageData);
-
+        
         $image = $this->createImage($resizedFile);
         $image->setContent($resizedImageData);
 
-        unlink($resizedFile);
+        $resizedFile->move($imagePath, $imagename);
+
+        // unlink($resizedFile);
 
         return $image;
     }

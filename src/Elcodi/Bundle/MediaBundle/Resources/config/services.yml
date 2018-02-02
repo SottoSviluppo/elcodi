@@ -9,6 +9,7 @@ services:
             - '@elcodi.factory.image'
             - '@elcodi.manager.media_file'
             - '@elcodi.media_resize_adapter'
+            - '%kernel.root_dir%'
 
     elcodi.manager.media_file:
         class: Elcodi\Component\Media\Services\FileManager
