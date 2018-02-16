@@ -174,7 +174,7 @@ class ImageManager
 
         $resizedImageData = $this
         ->resizeAdapter
-        ->resize($imageData, $height, $width, $type);
+        ->resize($imageData, $height, $width, $type, $image->getExtension());
 
         /**
          * We need to physically store the new resized
