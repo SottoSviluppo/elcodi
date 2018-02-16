@@ -175,6 +175,7 @@ class CartOrderTransformer
         $this->orderObjectManager->persist($order);
         $this->orderObjectManager->flush();
 
+      
         $this
             ->orderEventDispatcher
             ->dispatchOrderOnCreatedEvent(

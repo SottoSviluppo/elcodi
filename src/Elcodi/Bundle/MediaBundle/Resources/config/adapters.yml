@@ -11,3 +11,5 @@ services:
 
     elcodi.media_resize_adapter.gd:
         class: Elcodi\Component\Media\Adapter\Resizer\GDResizeAdapter
+        arguments:
+            - "@logger"

@@ -28,6 +28,12 @@ use Elcodi\Component\Media\ElcodiMediaImageResizeTypes;
  */
 class GDResizeAdapter implements ResizeAdapterInterface
 {
+	private $logger;
+
+	public function __construct($logger) {
+		$this->logger = $logger;
+	}
+
     /**
      * Interface for resize implementations.
      *
@@ -42,7 +48,8 @@ class GDResizeAdapter implements ResizeAdapterInterface
         $imageData,
         $height,
         $width,
-        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
+        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES,
+	$extension = null
     ) {
         $originalResource = imagecreatefromstring($imageData);
         $originalWidth = imagesx($originalResource);
@@ -60,8 +67,16 @@ class GDResizeAdapter implements ResizeAdapterInterface
             $dimensions->getDstFrameY()
         );
 
-        $backgroundColor = imagecolorallocate($newResource, 255, 255, 255);
-        imagefill($newResource, 0, 0, $backgroundColor);
+        	imagealphablending($newResource, true);
+		imagesavealpha($newResource, true);
+
+		if ($extension == 'png') {
+			// $backgroundColor = imagecolorallocatealpha($newResource, 255, 255, 255, 0);
+			imagefill($newResource, 0, 0, 0x7fff0000);
+		} else {
+			$backgroundColor = imagecolorallocate($newResource, 255, 255, 255);
+			imagefill($newResource, 0, 0, $backgroundColor);
+		}
 
         imagecopyresampled(
             $newResource,
@@ -77,7 +92,11 @@ class GDResizeAdapter implements ResizeAdapterInterface
         );
 
         ob_start();
-        imagejpeg($newResource);
+        if ($extension == 'png') {
+			imagepng($newResource);
+		} else {
+			imagejpeg($newResource);
+		}
         $content = ob_get_contents();
         ob_end_clean();
 
