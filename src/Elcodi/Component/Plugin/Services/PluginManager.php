@@ -99,6 +99,7 @@ class PluginManager
         /**
          * @var Bundle $plugin
          */
+        $position = 0;
         foreach ($pluginBundles as $plugin) {
             $pluginConfiguration = $this
                 ->pluginLoader
@@ -116,10 +117,12 @@ class PluginManager
                 $pluginInstance = $existingPlugin->merge($pluginInstance);
                 unset($oldPlugins[$pluginNamespace]);
             }
+            $pluginInstance->setPosition($position);
 
             $this->savePlugin($pluginInstance);
 
             $pluginsLoaded[] = $pluginInstance;
+            $position++;
         }
 
         /**

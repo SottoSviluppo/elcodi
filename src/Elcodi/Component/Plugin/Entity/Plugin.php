@@ -64,6 +64,13 @@ class Plugin
     protected $configuration;
 
     /**
+     * @var integer
+     *
+     *
+     */
+    protected $position;
+
+    /**
      * Construct new plugin instance.
      *
      * @param string              $namespace     Namespace
@@ -151,6 +158,16 @@ class Plugin
     public function getCategory()
     {
         return $this->category;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**

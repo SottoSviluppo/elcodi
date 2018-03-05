@@ -58,4 +58,15 @@ class PluginRepository extends EntityRepository
             'enabled' => true,
         ]);
     }
+
+    public function findAllOrderedByPosition()
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+        $query = $queryBuilder
+            ->orderBy('p.position', 'ASC');
+
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
 }

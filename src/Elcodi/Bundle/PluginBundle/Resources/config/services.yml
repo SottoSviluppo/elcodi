@@ -40,7 +40,7 @@ services:
         class: StdClass
         factory:
             - '@elcodi.repository.plugin'
-            - findAll
+            - findAllOrderedByPosition
 
     elcodi.abstract_plugin:
         abstract: true

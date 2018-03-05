@@ -28,6 +28,11 @@ Elcodi\Component\Plugin\Entity\Plugin:
             length: 255
             nullable: true
             unique: false
+        position:
+            column: position
+            type: integer
+            nullable: true
+            unique: false
         enabled:
             column: enabled
             type: boolean
