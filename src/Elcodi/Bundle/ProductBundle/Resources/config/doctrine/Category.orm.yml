@@ -74,6 +74,8 @@ Elcodi\Component\Product\Entity\Category:
         subCategories:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface
             mappedBy: parent
+            orderBy:
+                position: ASC
 
     manyToOne:
         parent:

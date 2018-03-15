@@ -47,6 +47,10 @@ trait IconsContainerTrait
      */
     public function addIcon(\Elcodi\Component\Media\Entity\Interfaces\ImageInterface $icon)
     {
+        if ($this->icons == null) {
+            $this->icons = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
         $this->icons->add($icon);
 
         return $this;
