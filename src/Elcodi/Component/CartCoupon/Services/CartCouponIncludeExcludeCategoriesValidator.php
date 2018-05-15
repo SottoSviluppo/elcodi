@@ -87,13 +87,17 @@ class CartCouponIncludeExcludeCategoriesValidator {
 		}
 
 		//se il tipo del coupon prevede l'inclusione di alcune categorie, verifico che nelle cartLines sia presente almeno un prodotto appartenente alle categorie selezionate nel coupon
-		//verifico inoltre che l'importo dei prodotti delle categorie del coupon sia maggiore dell'ammontare del coupon stesso
 		//altrimenti da l'eccezione che indica che il coupon non è applicabile
-		if ($couponRuleCategories == ElcodiCouponTypes::INCLUDE_CATEGORY) {
+		if ($couponRuleCategories == ElcodiCouponTypes::INCLUDE_CATEGORY && $coupon->getType() == ElcodiCouponTypes::TYPE_PERCENT) {
+			if (empty($cartLineToAppliedCoupon)) {
+				throw new CouponIncludeCategoriesException();
+			}
+
+		} elseif ($couponRuleCategories == ElcodiCouponTypes::INCLUDE_CATEGORY && $coupon->getType() == ElcodiCouponTypes::TYPE_AMOUNT) {
+			//altrimenti nel caso in cui il coupon sia del tipo TYPE_AMOUNT verifico che l'importo dei prodotti delle categorie del coupon sia maggiore dell'ammontare del coupon stesso
 			$amount = $coupon->getPrice();
 			$purchasableAmount = $this->purchasableAmountCouponService->getPurchasableAmount($cart, $coupon);
-
-			if (empty($cartLineToAppliedCoupon) or $purchasableAmount->isLessThan($amount)) {
+			if ($purchasableAmount->isLessThan($amount)) {
 				throw new CouponIncludeCategoriesException();
 			}
 		}
