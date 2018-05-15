@@ -20,37 +20,51 @@ namespace Elcodi\Component\Coupon;
 /**
  * Class ElcodiCouponTypes.
  */
-final class ElcodiCouponTypes
-{
-    /**
-     * @var int
-     *
-     * Coupon type absolute amount
-     */
-    const TYPE_AMOUNT = 1;
+final class ElcodiCouponTypes {
+	/**
+	 * @var int
+	 *
+	 * Coupon type absolute amount
+	 */
+	const TYPE_AMOUNT = 1;
 
-    /**
-     * @var int
-     *
-     * Coupon type percent
-     */
-    const TYPE_PERCENT = 2;
+	/**
+	 * @var int
+	 *
+	 * Coupon type percent
+	 */
+	const TYPE_PERCENT = 2;
 
-    /**
-     * Appliance type.
-     */
+	/**
+	 * Appliance type.
+	 */
 
-    /**
-     * @var int
-     *
-     * Automatic enforcement
-     */
-    const ENFORCEMENT_AUTOMATIC = 1;
+	/**
+	 * @var int
+	 *
+	 * Automatic enforcement
+	 */
+	const ENFORCEMENT_AUTOMATIC = 1;
 
-    /**
-     * @var int
-     *
-     * Manual enforcement
-     */
-    const ENFORCEMENT_MANUAL = 2;
+	/**
+	 * @var int
+	 *
+	 * Manual enforcement
+	 */
+	const ENFORCEMENT_MANUAL = 2;
+
+	/**
+	 * @var int
+	 *
+	 *  Include only selected categories for coupon
+	 */
+	const INCLUDE_CATEGORY = 0;
+
+	/**
+	 * @var int
+	 *
+	 *  Exclude selected categories for coupon
+	 */
+	const EXCLUDE_CATEGORY = 1;
+
 }

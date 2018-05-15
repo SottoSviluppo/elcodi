@@ -31,275 +31,297 @@ interface CouponInterface extends
 IdentifiableInterface,
 DateTimeInterface,
 EnabledInterface,
-ValidIntervalInterface
-{
-    /**
-     * Set code.
-     *
-     * @param string $code Code
-     *
-     * @return $this Self object
-     */
-    public function setCode($code);
+ValidIntervalInterface {
+	/**
+	 * Set code.
+	 *
+	 * @param string $code Code
+	 *
+	 * @return $this Self object
+	 */
+	public function setCode($code);
 
-    /**
-     * Get code.
-     *
-     * @return string Code
-     */
-    public function getCode();
+	/**
+	 * Get code.
+	 *
+	 * @return string Code
+	 */
+	public function getCode();
 
-    /**
-     * Set name coupon name.
-     *
-     * @param string $name
-     *
-     * @return $this Self object
-     */
-    public function setName($name);
+	/**
+	 * Set name coupon name.
+	 *
+	 * @param string $name
+	 *
+	 * @return $this Self object
+	 */
+	public function setName($name);
 
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName();
+	/**
+	 * Get name.
+	 *
+	 * @return string
+	 */
+	public function getName();
 
-    /**
-     * Set type.
-     *
-     * @see ElcodiCouponTypes::TYPE_AMOUNT
-     * @see ElcodiCouponTypes::TYPE_PERCENT
-     *
-     * @param int $type Type
-     *
-     * @return $this Self object
-     */
-    public function setType($type);
+	/**
+	 * Set type.
+	 *
+	 * @see ElcodiCouponTypes::TYPE_AMOUNT
+	 * @see ElcodiCouponTypes::TYPE_PERCENT
+	 *
+	 * @param int $type Type
+	 *
+	 * @return $this Self object
+	 */
+	public function setType($type);
 
-    /**
-     * Get type.
-     *
-     * @return int Type
-     */
-    public function getType();
+	/**
+	 * Get type.
+	 *
+	 * @return int Type
+	 */
+	public function getType();
 
-    /**
-     * Sets Enforcement.
-     *
-     * @see ElcodiCouponTypes::ENFORCEMENT_AUTOMATIC
-     * @see ElcodiCouponTypes::ENFORCEMENT_MANUAL
-     *
-     * @param int $enforcement Enforcement
-     *
-     * @return $this Self object
-     */
-    public function setEnforcement($enforcement);
+	/**
+	 * Sets Enforcement.
+	 *
+	 * @see ElcodiCouponTypes::ENFORCEMENT_AUTOMATIC
+	 * @see ElcodiCouponTypes::ENFORCEMENT_MANUAL
+	 *
+	 * @param int $enforcement Enforcement
+	 *
+	 * @return $this Self object
+	 */
+	public function setEnforcement($enforcement);
 
-    /**
-     * Get Enforcement.
-     *
-     * @return int Enforcement
-     */
-    public function getEnforcement();
+	/**
+	 * Get Enforcement.
+	 *
+	 * @return int Enforcement
+	 */
+	public function getEnforcement();
 
-    /**
-     * Set price.
-     *
-     * @param MoneyInterface $amount Price
-     *
-     * @return $this Self object
-     */
-    public function setPrice(MoneyInterface $amount);
+	/**
+	 * Set price.
+	 *
+	 * @param MoneyInterface $amount Price
+	 *
+	 * @return $this Self object
+	 */
+	public function setPrice(MoneyInterface $amount);
 
-    /**
-     * Get price.
-     *
-     * @return MoneyInterface Price
-     */
-    public function getPrice();
+	/**
+	 * Get price.
+	 *
+	 * @return MoneyInterface Price
+	 */
+	public function getPrice();
 
-    /**
-     * Set discount.
-     *
-     * @param int $discount Discount
-     *
-     * @return $this Self object
-     */
-    public function setDiscount($discount);
+	/**
+	 * Set discount.
+	 *
+	 * @param int $discount Discount
+	 *
+	 * @return $this Self object
+	 */
+	public function setDiscount($discount);
 
-    /**
-     * Get discount.
-     *
-     * @return int discount
-     */
-    public function getDiscount();
+	/**
+	 * Get discount.
+	 *
+	 * @return int discount
+	 */
+	public function getDiscount();
 
-    /**
-     * Set absolute price.
-     *
-     * @param MoneyInterface $amount Absolute Price
-     *
-     * @return $this Self object
-     */
-    public function setAbsolutePrice(MoneyInterface $amount);
+	/**
+	 * Set absolute price.
+	 *
+	 * @param MoneyInterface $amount Absolute Price
+	 *
+	 * @return $this Self object
+	 */
+	public function setAbsolutePrice(MoneyInterface $amount);
 
-    /**
-     * Get absolute price.
-     *
-     * @return MoneyInterface Absolute Price
-     */
-    public function getAbsolutePrice();
+	/**
+	 * Get absolute price.
+	 *
+	 * @return MoneyInterface Absolute Price
+	 */
+	public function getAbsolutePrice();
 
-    /**
-     * Get Value.
-     *
-     * @return string Value
-     */
-    public function getValue();
+	/**
+	 * Get Value.
+	 *
+	 * @return string Value
+	 */
+	public function getValue();
 
-    /**
-     * Sets Value.
-     *
-     * @param string $value Value
-     *
-     * @return $this Self object
-     */
-    public function setValue($value);
+	/**
+	 * Sets Value.
+	 *
+	 * @param string $value Value
+	 *
+	 * @return $this Self object
+	 */
+	public function setValue($value);
 
-    /**
-     * Set count.
-     *
-     * @param int $count
-     *
-     * @return $this Self object
-     */
-    public function setCount($count);
+	/**
+	 * Set count.
+	 *
+	 * @param int $count
+	 *
+	 * @return $this Self object
+	 */
+	public function setCount($count);
 
-    /**
-     * Get count.
-     *
-     * @return int
-     */
-    public function getCount();
+	/**
+	 * Get count.
+	 *
+	 * @return int
+	 */
+	public function getCount();
 
-    /**
-     * Set used.
-     *
-     * @param int $used
-     *
-     * @return $this Self object
-     */
-    public function setUsed($used);
+	/**
+	 * Set used.
+	 *
+	 * @param int $used
+	 *
+	 * @return $this Self object
+	 */
+	public function setUsed($used);
 
-    /**
-     * Get used.
-     *
-     * @return int Number this coupon has been used
-     */
-    public function getUsed();
+	/**
+	 * Get used.
+	 *
+	 * @return int Number this coupon has been used
+	 */
+	public function getUsed();
 
-    /**
-     * Set priority.
-     *
-     * @param int $priority
-     *
-     * @return $this Self object
-     */
-    public function setPriority($priority);
+	/**
+	 * Set priority.
+	 *
+	 * @param int $priority
+	 *
+	 * @return $this Self object
+	 */
+	public function setPriority($priority);
 
-    /**
-     * Get priority.
-     *
-     * @return int Number this coupon has been priority
-     */
-    public function getPriority();
+	/**
+	 * Get priority.
+	 *
+	 * @return int Number this coupon has been priority
+	 */
+	public function getPriority();
 
-    /**
-     * Set minimum purchase.
-     *
-     * @param MoneyInterface $amount Absolute Price
-     *
-     * @return $this Self object
-     */
-    public function setMinimumPurchase(MoneyInterface $amount);
+	/**
+	 * Set minimum purchase.
+	 *
+	 * @param MoneyInterface $amount Absolute Price
+	 *
+	 * @return $this Self object
+	 */
+	public function setMinimumPurchase(MoneyInterface $amount);
 
-    /**
-     * Get minimum purchase.
-     *
-     * @return MoneyInterface Absolute Price
-     */
-    public function getMinimumPurchase();
+	/**
+	 * Get minimum purchase.
+	 *
+	 * @return MoneyInterface Absolute Price
+	 */
+	public function getMinimumPurchase();
 
-    /**
-     * Get if this coupon can be used together with another coupon.
-     *
-     * @return int
-     */
-    public function getStackable();
+	/**
+	 * Get if this coupon can be used together with another coupon.
+	 *
+	 * @return int
+	 */
+	public function getStackable();
 
-    /**
-     * Set if this coupon can be used together with another coupon.
-     *
-     * @param int $stackable
-     *
-     * @return $this Self object
-     */
-    public function setStackable($stackable);
+	/**
+	 * Set if this coupon can be used together with another coupon.
+	 *
+	 * @param int $stackable
+	 *
+	 * @return $this Self object
+	 */
+	public function setStackable($stackable);
 
-    /**
-     * Set rule Rule to check for applicability.
-     *
-     * @param RuleInterface $rule New rule
-     *
-     * @return $this Self object
-     */
-    public function setRule(RuleInterface $rule);
+	/**
+	 * Set rule Rule to check for applicability.
+	 *
+	 * @param RuleInterface $rule New rule
+	 *
+	 * @return $this Self object
+	 */
+	public function setRule(RuleInterface $rule);
 
-    /**
-     * Get rule to check for applicability.
-     *
-     * @return RuleInterface Current rule
-     */
-    public function getRule();
+	/**
+	 * Get rule to check for applicability.
+	 *
+	 * @return RuleInterface Current rule
+	 */
+	public function getRule();
 
-    /**
-     * Set color.
-     *
-     * @param string $color Color
-     *
-     * @return $this Self object
-     */
-    public function setColor($color);
+	/**
+	 * Set color.
+	 *
+	 * @param string $color Color
+	 *
+	 * @return $this Self object
+	 */
+	public function setColor($color);
 
-    /**
-     * Get color.
-     *
-     * @return string Color
-     */
-    public function getColor();
+	/**
+	 * Get color.
+	 *
+	 * @return string Color
+	 */
+	public function getColor();
 
-    /**
-     * Set countCustomer.
-     *
-     * @param int $countCustomer
-     *
-     * @return $this Self object
-     */
-    public function setCountCustomer($countCustomer);
+	/**
+	 * Set countCustomer.
+	 *
+	 * @param int $countCustomer
+	 *
+	 * @return $this Self object
+	 */
+	public function setCountCustomer($countCustomer);
 
-    /**
-     * Get countCustomer.
-     *
-     * @return int
-     */
-    public function getCountCustomer();
+	/**
+	 * Get countCustomer.
+	 *
+	 * @return int
+	 */
+	public function getCountCustomer();
 
-    /**
-     * Increment used variable by one, and disables it if there are no more
-     * available units.
-     *
-     * @return $this Self object
-     */
-    public function makeUse();
+	/**
+	 * Increment used variable by one, and disables it if there are no more
+	 * available units.
+	 *
+	 * @return $this Self object
+	 */
+	public function makeUse();
+
+	/**
+	 * Set includeCategories.
+	 *
+	 * @param int $includeCategories
+	 *
+	 * @return $this Self object
+	 */
+	public function setIncludeCategories($includeCategories);
+
+	/**
+	 * Get includeCategories.
+	 *
+	 * @return int
+	 */
+	public function getIncludeCategories();
+
+	/**
+	 * Get categories.
+	 *
+	 * @return Collection Categories
+	 */
+	public function getCategories();
 }

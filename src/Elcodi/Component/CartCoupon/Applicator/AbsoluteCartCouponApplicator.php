@@ -17,94 +17,96 @@
 
 namespace Elcodi\Component\CartCoupon\Applicator;
 
-use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\CartCoupon\Applicator\Interfaces\CartCouponApplicatorInterface;
+use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
+use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Currency\Services\CurrencyConverter;
 use Elcodi\Component\Currency\Wrapper\CurrencyWrapper;
 
 /**
  * Class AbsoluteCartCouponApplicator.
  */
-class AbsoluteCartCouponApplicator implements CartCouponApplicatorInterface
-{
-    /**
-     * @var CurrencyWrapper
-     *
-     * Currency Wrapper
-     */
-    protected $currencyWrapper;
+class AbsoluteCartCouponApplicator implements CartCouponApplicatorInterface {
+	/**
+	 * @var CurrencyWrapper
+	 *
+	 * Currency Wrapper
+	 */
+	protected $currencyWrapper;
 
-    /**
-     * @var CurrencyConverter
-     *
-     * Currency converter
-     */
-    protected $currencyConverter;
+	/**
+	 * @var CurrencyConverter
+	 *
+	 * Currency converter
+	 */
+	protected $currencyConverter;
 
-    /**
-     * Construct method.
-     *
-     * @param CurrencyWrapper   $currencyWrapper   Currency wrapper
-     * @param CurrencyConverter $currencyConverter Currency converter
-     */
-    public function __construct(
-        CurrencyWrapper $currencyWrapper,
-        CurrencyConverter $currencyConverter
-    ) {
-        $this->currencyWrapper = $currencyWrapper;
-        $this->currencyConverter = $currencyConverter;
-    }
+	/**
+	 * Construct method.
+	 *
+	 * @param CurrencyWrapper   $currencyWrapper   Currency wrapper
+	 * @param CurrencyConverter $currencyConverter Currency converter
+	 */
+	public function __construct(
+		CurrencyWrapper $currencyWrapper,
+		CurrencyConverter $currencyConverter
+	) {
+		$this->currencyWrapper = $currencyWrapper;
+		$this->currencyConverter = $currencyConverter;
+	}
 
-    /**
-     * Get the id of the Applicator.
-     *
-     * @return string Applicator id
-     */
-    public static function id()
-    {
-        return 1;
-    }
+	/**
+	 * Get the id of the Applicator.
+	 *
+	 * @return string Applicator id
+	 */
+	public static function id() {
+		return 1;
+	}
 
-    /**
-     * Can be applied.
-     *
-     * @param CartInterface   $cart   Cart
-     * @param CouponInterface $coupon Coupon
-     *
-     * @return bool Can be applied
-     */
-    public function canBeApplied(
-        CartInterface $cart,
-        CouponInterface $coupon
-    ) {
-        return $coupon->getType() === self::id();
-    }
+	/**
+	 * Can be applied.
+	 *
+	 * @param CartInterface   $cart   Cart
+	 * @param CouponInterface $coupon Coupon
+	 *
+	 * @return bool Can be applied
+	 */
+	public function canBeApplied(
+		CartInterface $cart,
+		CouponInterface $coupon
+	) {
 
-    /**
-     * Calculate coupon absolute value.
-     *
-     * @param CartInterface   $cart   Cart
-     * @param CouponInterface $coupon Coupon
-     *
-     * @return MoneyInterface|false Absolute value for this coupon in this cart
-     */
-    public function getCouponAbsoluteValue(
-        CartInterface $cart,
-        CouponInterface $coupon
-    ) {
-        $currency = $this
-            ->currencyWrapper
-            ->get();
+		return $coupon->getType() === self::id();
+	}
 
-        $amount = $coupon->getPrice();
+	/**
+	 * Calculate coupon absolute value.
+	 *
+	 * @param CartInterface   $cart   Cart
+	 * @param CouponInterface $coupon Coupon
+	 *
+	 * @return MoneyInterface|false Absolute value for this coupon in this cart
+	 */
+	public function getCouponAbsoluteValue(
+		CartInterface $cart,
+		CouponInterface $coupon
+	) {
 
-        return $this
-            ->currencyConverter
-            ->convertMoney(
-                $amount,
-                $currency
-            );
-    }
+		$currency = $this
+			->currencyWrapper
+			->get();
+
+		$amount = $coupon->getPrice();
+
+		return $this
+			->currencyConverter
+			->convertMoney(
+				$amount,
+				$currency
+			);
+	}
+
 }

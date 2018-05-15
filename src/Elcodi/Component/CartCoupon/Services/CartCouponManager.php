@@ -17,10 +17,10 @@
 
 namespace Elcodi\Component\CartCoupon\Services;
 
-use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\CartCoupon\Entity\Interfaces\CartCouponInterface;
 use Elcodi\Component\CartCoupon\EventDispatcher\CartCouponEventDispatcher;
 use Elcodi\Component\CartCoupon\Repository\CartCouponRepository;
+use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Core\Services\ObjectDirector;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Coupon\Exception\Abstracts\AbstractCouponException;
@@ -43,260 +43,257 @@ use Elcodi\Component\Coupon\Repository\CouponRepository;
  *
  * @api
  */
-class CartCouponManager
-{
-    /**
-     * @var CartCouponEventDispatcher
-     *
-     * CartCoupon Event dispatcher
-     */
-    private $cartCouponEventDispatcher;
+class CartCouponManager {
+	/**
+	 * @var CartCouponEventDispatcher
+	 *
+	 * CartCoupon Event dispatcher
+	 */
+	private $cartCouponEventDispatcher;
 
-    /**
-     * @var CouponRepository
-     *
-     * Coupon Repository
-     */
-    private $couponRepository;
+	/**
+	 * @var CouponRepository
+	 *
+	 * Coupon Repository
+	 */
+	private $couponRepository;
 
-    /**
-     * @var ObjectDirector
-     *
-     * CartCoupon director
-     */
-    private $cartCouponDirector;
+	/**
+	 * @var ObjectDirector
+	 *
+	 * CartCoupon director
+	 */
+	private $cartCouponDirector;
 
-    /**
-     * @var CartCouponRepository
-     *
-     * CartCoupon repository
-     */
-    private $cartCouponRepository;
+	/**
+	 * @var CartCouponRepository
+	 *
+	 * CartCoupon repository
+	 */
+	private $cartCouponRepository;
 
-    /**
-     * Construct method.
-     *
-     * @param CartCouponEventDispatcher $cartCouponEventDispatcher CartCoupon event dispatcher
-     * @param CouponRepository          $couponRepository          Coupon Repository
-     * @param ObjectDirector            $cartCouponDirector        CartCoupon director
-     * @param CartCouponRepository      $cartCouponRepository      CartCoupon repository
-     */
-    public function __construct(
-        CartCouponEventDispatcher $cartCouponEventDispatcher,
-        CouponRepository $couponRepository,
-        ObjectDirector $cartCouponDirector,
-        CartCouponRepository $cartCouponRepository
-    ) {
-        $this->cartCouponEventDispatcher = $cartCouponEventDispatcher;
-        $this->couponRepository = $couponRepository;
-        $this->cartCouponDirector = $cartCouponDirector;
-        $this->cartCouponRepository = $cartCouponRepository;
-    }
+	/**
+	 * Construct method.
+	 *
+	 * @param CartCouponEventDispatcher $cartCouponEventDispatcher CartCoupon event dispatcher
+	 * @param CouponRepository          $couponRepository          Coupon Repository
+	 * @param ObjectDirector            $cartCouponDirector        CartCoupon director
+	 * @param CartCouponRepository      $cartCouponRepository      CartCoupon repository
+	 */
+	public function __construct(
+		CartCouponEventDispatcher $cartCouponEventDispatcher,
+		CouponRepository $couponRepository,
+		ObjectDirector $cartCouponDirector,
+		CartCouponRepository $cartCouponRepository
+	) {
+		$this->cartCouponEventDispatcher = $cartCouponEventDispatcher;
+		$this->couponRepository = $couponRepository;
+		$this->cartCouponDirector = $cartCouponDirector;
+		$this->cartCouponRepository = $cartCouponRepository;
+	}
 
-    /**
-     * Create a cart coupon given a cart and a coupon.
-     *
-     * @param CartInterface   $cart   Cart
-     * @param CouponInterface $coupon Coupon
-     *
-     * @return CartCouponInterface Cart Coupon created
-     */
-    public function createAndSaveCartCoupon(
-        CartInterface $cart,
-        CouponInterface $coupon
-    ) {
-        /**
-         * We create a new instance of CartCoupon.
-         * We also persist and flush relation.
-         */
-        $cartCoupon = $this
-            ->cartCouponDirector
-            ->create();
+	/**
+	 * Create a cart coupon given a cart and a coupon.
+	 *
+	 * @param CartInterface   $cart   Cart
+	 * @param CouponInterface $coupon Coupon
+	 *
+	 * @return CartCouponInterface Cart Coupon created
+	 */
+	public function createAndSaveCartCoupon(
+		CartInterface $cart,
+		CouponInterface $coupon
+	) {
+		/**
+		 * We create a new instance of CartCoupon.
+		 * We also persist and flush relation.
+		 */
+		$cartCoupon = $this
+			->cartCouponDirector
+			->create();
 
-        $cartCoupon->setCart($cart);
-        $cartCoupon->setCoupon($coupon);
+		$cartCoupon->setCart($cart);
 
-        $this
-            ->cartCouponDirector
-            ->save($cartCoupon);
+		$cartCoupon->setCoupon($coupon);
 
-        return $cartCoupon;
-    }
+		$this
+			->cartCouponDirector
+			->save($cartCoupon);
 
-    /**
-     * Get CartCoupon instances assigned to current Cart.
-     *
-     * @param CartInterface $cart Cart
-     *
-     * @return CartCouponInterface[] CartCoupons
-     */
-    public function getCartCoupons(CartInterface $cart)
-    {
-        /**
-         * If Cart id is null means that this cart has been generated from
-         * scratch. This also means that it cannot have any Coupon associated.
-         * If is this case, we avoid this lookup.
-         */
-        if ($cart->getId() === null) {
-            return [];
-        }
+		return $cartCoupon;
+	}
 
-        return $this
-            ->cartCouponRepository
-            ->findCartCouponsByCart($cart);
-    }
+	/**
+	 * Get CartCoupon instances assigned to current Cart.
+	 *
+	 * @param CartInterface $cart Cart
+	 *
+	 * @return CartCouponInterface[] CartCoupons
+	 */
+	public function getCartCoupons(CartInterface $cart) {
+		/**
+		 * If Cart id is null means that this cart has been generated from
+		 * scratch. This also means that it cannot have any Coupon associated.
+		 * If is this case, we avoid this lookup.
+		 */
+		if ($cart->getId() === null) {
+			return [];
+		}
 
-    /**
-     * Get cart coupon objects.
-     *
-     * @param CartInterface $cart Cart
-     *
-     * @return CouponInterface[] Coupons
-     */
-    public function getCoupons(CartInterface $cart)
-    {
-        /**
-         * If Cart id is null means that this cart has been generated from
-         * scratch. This also means that it cannot have any Coupon associated.
-         * If is this case, we avoid this lookup.
-         */
-        if ($cart->getId() === null) {
-            return [];
-        }
+		return $this
+			->cartCouponRepository
+			->findCartCouponsByCart($cart);
+	}
 
-        return $this
-            ->cartCouponRepository
-            ->findCouponsByCart($cart);
-    }
+	/**
+	 * Get cart coupon objects.
+	 *
+	 * @param CartInterface $cart Cart
+	 *
+	 * @return CouponInterface[] Coupons
+	 */
+	public function getCoupons(CartInterface $cart) {
+		/**
+		 * If Cart id is null means that this cart has been generated from
+		 * scratch. This also means that it cannot have any Coupon associated.
+		 * If is this case, we avoid this lookup.
+		 */
+		if ($cart->getId() === null) {
+			return [];
+		}
 
-    /**
-     * Given a coupon code, applies it to cart.
-     *
-     * @param CartInterface $cart       Cart
-     * @param string        $couponCode Coupon code
-     *
-     * @throws AbstractCouponException
-     *
-     * @return bool Coupon has added to Cart
-     */
-    public function addCouponByCode(
-        CartInterface $cart,
-        $couponCode
-    ) {
-        $coupon = $this
-            ->couponRepository
-            ->findOneBy([
-                'code' => $couponCode,
-                'enabled' => true,
-            ]);
+		return $this
+			->cartCouponRepository
+			->findCouponsByCart($cart);
+	}
 
-        if (!($coupon instanceof CouponInterface)) {
-            throw new CouponNotAvailableException();
-        }
+	/**
+	 * Given a coupon code, applies it to cart.
+	 *
+	 * @param CartInterface $cart       Cart
+	 * @param string        $couponCode Coupon code
+	 *
+	 * @throws AbstractCouponException
+	 *
+	 * @return bool Coupon has added to Cart
+	 */
+	public function addCouponByCode(
+		CartInterface $cart,
+		$couponCode
+	) {
+		$coupon = $this
+			->couponRepository
+			->findOneBy([
+				'code' => $couponCode,
+				'enabled' => true,
+			]);
 
-        return $this
-            ->addCoupon(
-                $cart,
-                $coupon
-            );
-    }
+		if (!($coupon instanceof CouponInterface)) {
+			throw new CouponNotAvailableException();
+		}
 
-    /**
-     * Adds a Coupon to a Cart and recalculates the Cart Totals.
-     *
-     * @param CartInterface   $cart   Cart
-     * @param CouponInterface $coupon The coupon to add
-     *
-     * @throws AbstractCouponException
-     *
-     * @return $this Self object
-     */
-    public function addCoupon(
-        CartInterface $cart,
-        CouponInterface $coupon
-    ) {
-        $this
-            ->cartCouponEventDispatcher
-            ->dispatchCartCouponOnApplyEvent(
-                $cart,
-                $coupon
-            );
+		return $this
+			->addCoupon(
+				$cart,
+				$coupon
+			);
+	}
 
-        return $this;
-    }
+	/**
+	 * Adds a Coupon to a Cart and recalculates the Cart Totals.
+	 *
+	 * @param CartInterface   $cart   Cart
+	 * @param CouponInterface $coupon The coupon to add
+	 *
+	 * @throws AbstractCouponException
+	 *
+	 * @return $this Self object
+	 */
+	public function addCoupon(
+		CartInterface $cart,
+		CouponInterface $coupon
+	) {
+		$this
+			->cartCouponEventDispatcher
+			->dispatchCartCouponOnApplyEvent(
+				$cart,
+				$coupon
+			);
 
-    /**
-     * Given a coupon code, removes it from cart.
-     *
-     * @param CartInterface $cart       Cart
-     * @param string        $couponCode Coupon code
-     *
-     * @return bool Coupon has been removed from cart
-     */
-    public function removeCouponByCode(
-        CartInterface $cart,
-        $couponCode
-    ) {
-        $coupon = $this
-            ->couponRepository
-            ->findOneBy([
-                'code' => $couponCode,
-            ]);
+		return $this;
+	}
 
-        if (!($coupon instanceof CouponInterface)) {
-            return false;
-        }
+	/**
+	 * Given a coupon code, removes it from cart.
+	 *
+	 * @param CartInterface $cart       Cart
+	 * @param string        $couponCode Coupon code
+	 *
+	 * @return bool Coupon has been removed from cart
+	 */
+	public function removeCouponByCode(
+		CartInterface $cart,
+		$couponCode
+	) {
+		$coupon = $this
+			->couponRepository
+			->findOneBy([
+				'code' => $couponCode,
+			]);
 
-        return $this
-            ->removeCoupon(
-                $cart,
-                $coupon
-            );
-    }
+		if (!($coupon instanceof CouponInterface)) {
+			return false;
+		}
 
-    /**
-     * Removes a Coupon from a Cart, and recalculates Cart Totals.
-     *
-     * @param CartInterface   $cart   Cart
-     * @param CouponInterface $coupon The coupon to remove
-     *
-     * @return bool Coupon has been removed from cart
-     */
-    public function removeCoupon(
-        CartInterface $cart,
-        CouponInterface $coupon
-    ) {
-        $cartCoupons = $this
-            ->cartCouponDirector
-            ->findBy([
-                'cart' => $cart,
-                'coupon' => $coupon,
-            ]);
+		return $this
+			->removeCoupon(
+				$cart,
+				$coupon
+			);
+	}
 
-        if (empty($cartCoupons)) {
-            return false;
-        }
+	/**
+	 * Removes a Coupon from a Cart, and recalculates Cart Totals.
+	 *
+	 * @param CartInterface   $cart   Cart
+	 * @param CouponInterface $coupon The coupon to remove
+	 *
+	 * @return bool Coupon has been removed from cart
+	 */
+	public function removeCoupon(
+		CartInterface $cart,
+		CouponInterface $coupon
+	) {
+		$cartCoupons = $this
+			->cartCouponDirector
+			->findBy([
+				'cart' => $cart,
+				'coupon' => $coupon,
+			]);
 
-        foreach ($cartCoupons as $cartCoupon) {
-            $this
-                ->cartCouponEventDispatcher
-                ->dispatchCartCouponOnRemoveEvent(
-                    $cartCoupon
-                );
-        }
+		if (empty($cartCoupons)) {
+			return false;
+		}
 
-        return true;
-    }
+		foreach ($cartCoupons as $cartCoupon) {
+			$this
+				->cartCouponEventDispatcher
+				->dispatchCartCouponOnRemoveEvent(
+					$cartCoupon
+				);
+		}
 
-    /**
-     * Removed a CartCoupon.
-     *
-     * @param CartCouponInterface $cartCoupon Cart coupon
-     */
-    public function removeCartCoupon(CartCouponInterface $cartCoupon)
-    {
-        $this
-            ->cartCouponDirector
-            ->remove($cartCoupon);
-    }
+		return true;
+	}
+
+	/**
+	 * Removed a CartCoupon.
+	 *
+	 * @param CartCouponInterface $cartCoupon Cart coupon
+	 */
+	public function removeCartCoupon(CartCouponInterface $cartCoupon) {
+		$this
+			->cartCouponDirector
+			->remove($cartCoupon);
+	}
 }

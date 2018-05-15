@@ -33,9 +33,11 @@ services:
 
     elcodi.cart_coupon_applicator.percent:
         class: Elcodi\Component\CartCoupon\Applicator\PercentCartCouponApplicator
+        arguments:
+            - '@elcodi.wrapper.currency'
+            - '@elcodi.service.purchasable_amount_coupon'
         tags:
             - { name: elcodi.cart_coupon_applicator }
-
 
     elcodi.cart_coupon_applicator_collector:
         class: Elcodi\Component\CartCoupon\Applicator\CartCouponApplicatorCollector

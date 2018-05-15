@@ -17,6 +17,12 @@ services:
             - '@elcodi.repository.order_coupon'
             - '@elcodi.object_manager.order_coupon'
 
+    elcodi.service.purchasable_amount_coupon:
+        class: Elcodi\Component\CartCoupon\Services\PurchasableAmountCouponService
+        arguments:
+            - '@elcodi.wrapper.currency'
+            # - '@elcodi.object_manager.order_coupon'
+
     #
     # Applicators
     #
@@ -70,3 +76,11 @@ services:
         class: Elcodi\Component\CartCoupon\Services\StackableCouponValidator
         arguments:
             - '@elcodi.repository.cart_coupon'
+
+    elcodi.validator.cart_coupon_include_exclude_categories:
+        class: Elcodi\Component\CartCoupon\Services\CartCouponIncludeExcludeCategoriesValidator
+        arguments:
+            - '@elcodi.converter.currency'
+            - '@elcodi.service.purchasable_amount_coupon'
+
+

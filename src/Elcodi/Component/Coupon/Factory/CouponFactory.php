@@ -17,6 +17,7 @@
 
 namespace Elcodi\Component\Coupon\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Coupon\ElcodiCouponTypes;
 use Elcodi\Component\Coupon\Entity\Coupon;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
@@ -25,40 +26,39 @@ use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 /**
  * Class CouponFactory.
  */
-class CouponFactory extends AbstractPurchasableFactory
-{
-    /**
-     * Creates an instance of a simple coupon.
-     *
-     * This method must return always an empty instance for related entity
-     *
-     * @return Coupon Empty entity
-     */
-    public function create()
-    {
-        $now = $this->now();
-        $zeroPrice = $this->createZeroAmountMoney();
+class CouponFactory extends AbstractPurchasableFactory {
+	/**
+	 * Creates an instance of a simple coupon.
+	 *
+	 * This method must return always an empty instance for related entity
+	 *
+	 * @return Coupon Empty entity
+	 */
+	public function create() {
+		$now = $this->now();
+		$zeroPrice = $this->createZeroAmountMoney();
 
-        /**
-         * @var CouponInterface $coupon
-         */
-        $classNamespace = $this->getEntityNamespace();
-        $coupon = new $classNamespace();
-        $coupon
-            ->setType(ElcodiCouponTypes::TYPE_AMOUNT)
-            ->setPrice($zeroPrice)
-            ->setAbsolutePrice($zeroPrice)
-            ->setMinimumPurchase($zeroPrice)
-            ->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_MANUAL)
-            ->setUsed(0)
-            ->setCount(0)
-            ->setCountCustomer(0)
-            ->setPriority(0)
-            ->setStackable(false)
-            ->setEnabled(false)
-            ->setCreatedAt($now)
-            ->setValidFrom($now);
+		/**
+		 * @var CouponInterface $coupon
+		 */
+		$classNamespace = $this->getEntityNamespace();
+		$coupon = new $classNamespace();
+		$coupon
+			->setType(ElcodiCouponTypes::TYPE_AMOUNT)
+			->setPrice($zeroPrice)
+			->setAbsolutePrice($zeroPrice)
+			->setMinimumPurchase($zeroPrice)
+			->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_MANUAL)
+			->setUsed(0)
+			->setCount(0)
+			->setCountCustomer(0)
+			->setPriority(0)
+			->setStackable(false)
+			->setEnabled(false)
+			->setCreatedAt($now)
+			->setValidFrom($now)
+			->setCategories(new ArrayCollection());
 
-        return $coupon;
-    }
+		return $coupon;
+	}
 }

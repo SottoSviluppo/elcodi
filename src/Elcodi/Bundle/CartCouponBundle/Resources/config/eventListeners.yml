@@ -117,3 +117,10 @@ services:
             - '@elcodi.repository.order_coupon'
         tags:
             - { name: kernel.event_listener, event: payment.order.success, method: notifyCouponUsage }
+
+    elcodi.event_listener.validate_coupon_include_exclude_categories:
+        class: Elcodi\Component\CartCoupon\EventListener\ValidateCouponIncludeExcludeCategoriesEventListener
+        arguments:
+            - '@elcodi.validator.cart_coupon_include_exclude_categories'
+        tags:
+            - { name: kernel.event_listener, event: cart_coupon.oncheck, method: validateCartCouponIncludeExclude, priority: 0 }

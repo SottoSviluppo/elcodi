@@ -31,319 +31,314 @@ use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 /**
  * Class Category.
  */
-class Category implements CategoryInterface
-{
-    use IdentifiableTrait,
-    DateTimeTrait,
-    EnabledTrait,
-    ImagesContainerTrait,
-    IconsContainerTrait,
-    PrincipalImageTrait,
-    MetaDataTrait, ExtraDataTrait;
+class Category implements CategoryInterface {
+	use IdentifiableTrait,
+	DateTimeTrait,
+	EnabledTrait,
+	ImagesContainerTrait,
+	IconsContainerTrait,
+	PrincipalImageTrait,
+	MetaDataTrait, ExtraDataTrait;
 
-    /**
-     * @var string
-     *
-     * Category name
-     */
-    protected $name;
+	/**
+	 * @var string
+	 *
+	 * Category name
+	 */
+	protected $name;
 
-    /**
-     * @var string
-     *
-     * Category slug
-     */
-    protected $slug;
+	/**
+	 * @var string
+	 *
+	 * Category slug
+	 */
+	protected $slug;
 
-    /**
-     * @var Collection
-     *
-     * Subcategories
-     */
-    protected $subCategories;
+	/**
+	 * @var Collection
+	 *
+	 * Subcategories
+	 */
+	protected $subCategories;
 
-    /**
-     * @var CategoryInterface
-     *
-     * Parent
-     */
-    protected $parent;
+	/**
+	 * @var CategoryInterface
+	 *
+	 * Parent
+	 */
+	protected $parent;
 
-    /**
-     * @var Collection
-     *
-     * Many-to-Many association between categories
-     * and products. The resulting collection could be huge.
-     */
-    protected $purchasables;
+	/**
+	 * @var Collection
+	 *
+	 * Many-to-Many association between categories
+	 * and products. The resulting collection could be huge.
+	 */
+	protected $purchasables;
 
-    /**
-     * @var bool
-     *
-     * Category is a root category
-     */
-    protected $root;
+	/**
+	 * @var Collection
+	 *
+	 * Many-to-Many association between categories
+	 * and coupons. The resulting collection could be huge.
+	 */
+	protected $coupons;
 
-    /**
-     * @var int
-     *
-     * Position order to show in menu
-     */
-    protected $position;
+	/**
+	 * @var bool
+	 *
+	 * Category is a root category
+	 */
+	protected $root;
 
-    /**
-     * @var string
-     *
-     * class
-     */
-    protected $cssClass;
+	/**
+	 * @var int
+	 *
+	 * Position order to show in menu
+	 */
+	protected $position;
 
-    /**
-     * @var bool
-     *
-     * Product must show in home
-     */
-    protected $showInHome;
+	/**
+	 * @var string
+	 *
+	 * class
+	 */
+	protected $cssClass;
 
-    /**
-     * Set name.
-     *
-     * @param string $name Name
-     *
-     * @return $this Self object
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+	/**
+	 * @var bool
+	 *
+	 * Product must show in home
+	 */
+	protected $showInHome;
 
-        return $this;
-    }
+	/**
+	 * Set name.
+	 *
+	 * @param string $name Name
+	 *
+	 * @return $this Self object
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Return name.
-     *
-     * @return string name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+		return $this;
+	}
 
-    /**
-     * Set slug.
-     *
-     * @param string $slug Slug
-     *
-     * @return $this Self object
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
+	/**
+	 * Return name.
+	 *
+	 * @return string name
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set slug.
+	 *
+	 * @param string $slug Slug
+	 *
+	 * @return $this Self object
+	 */
+	public function setSlug($slug) {
+		$this->slug = $slug;
 
-    /**
-     * Get slug.
-     *
-     * @return string Slug
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
+		return $this;
+	}
 
-    /**
-     * Set subcategories.
-     *
-     * @param Collection $subCategories Sub categories
-     *
-     * @return $this Self object
-     */
-    public function setSubCategories(Collection $subCategories)
-    {
-        $this->subCategories = $subCategories;
+	/**
+	 * Get slug.
+	 *
+	 * @return string Slug
+	 */
+	public function getSlug() {
+		return $this->slug;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set subcategories.
+	 *
+	 * @param Collection $subCategories Sub categories
+	 *
+	 * @return $this Self object
+	 */
+	public function setSubCategories(Collection $subCategories) {
+		$this->subCategories = $subCategories;
 
-    /**
-     * Get subcategories.
-     *
-     * @return Collection Subcategories
-     */
-    public function getSubCategories()
-    {
-        return $this->subCategories;
-    }
+		return $this;
+	}
 
-    /**
-     * Add Subcategory.
-     *
-     * @param CategoryInterface $category Category to add as subcategory
-     *
-     * @return $this Self object
-     */
-    public function addSubCategory(CategoryInterface $category)
-    {
-        if (!$this
-            ->subCategories
-            ->contains($category)
-        ) {
-            $this
-                ->subCategories
-                ->add($category);
-        }
+	/**
+	 * Get subcategories.
+	 *
+	 * @return Collection Subcategories
+	 */
+	public function getSubCategories() {
+		return $this->subCategories;
+	}
 
-        return $this;
-    }
+	/**
+	 * Add Subcategory.
+	 *
+	 * @param CategoryInterface $category Category to add as subcategory
+	 *
+	 * @return $this Self object
+	 */
+	public function addSubCategory(CategoryInterface $category) {
+		if (!$this
+			->subCategories
+			->contains($category)
+		) {
+			$this
+				->subCategories
+				->add($category);
+		}
 
-    /**
-     * Remove subcategory.
-     *
-     * @param CategoryInterface $category
-     *
-     * @return $this Self object
-     */
-    public function removeSubCategory(CategoryInterface $category)
-    {
-        $this
-            ->subCategories
-            ->removeElement($category);
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Remove subcategory.
+	 *
+	 * @param CategoryInterface $category
+	 *
+	 * @return $this Self object
+	 */
+	public function removeSubCategory(CategoryInterface $category) {
+		$this
+			->subCategories
+			->removeElement($category);
 
-    /**
-     * Set category parent.
-     *
-     * @param CategoryInterface|null $parent Category parent
-     *
-     * @return $this Self object
-     */
-    public function setParent(CategoryInterface $parent = null)
-    {
-        $this->parent = $parent;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set category parent.
+	 *
+	 * @param CategoryInterface|null $parent Category parent
+	 *
+	 * @return $this Self object
+	 */
+	public function setParent(CategoryInterface $parent = null) {
+		$this->parent = $parent;
 
-    /**
-     * Get category parent.
-     *
-     * @return CategoryInterface Category parent
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
+		return $this;
+	}
 
-    /**
-     * @param bool $root
-     *
-     * @return $this Self object
-     */
-    public function setRoot($root)
-    {
-        $this->root = $root;
+	/**
+	 * Get category parent.
+	 *
+	 * @return CategoryInterface Category parent
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param bool $root
+	 *
+	 * @return $this Self object
+	 */
+	public function setRoot($root) {
+		$this->root = $root;
 
-    /**
-     * Get if is root.
-     *
-     * @return bool
-     */
-    public function isRoot()
-    {
-        return $this->root;
-    }
+		return $this;
+	}
 
-    /**
-     * Set position.
-     *
-     * @param int $position Category relative position
-     *
-     * @return $this Self object
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
+	/**
+	 * Get if is root.
+	 *
+	 * @return bool
+	 */
+	public function isRoot() {
+		return $this->root;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set position.
+	 *
+	 * @param int $position Category relative position
+	 *
+	 * @return $this Self object
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
 
-    /**
-     * Return Position.
-     *
-     * @return int Category relative position
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
+		return $this;
+	}
 
-    /**
-     * Get purchasables.
-     *
-     * @return Collection
-     */
-    public function getPurchasables()
-    {
-        return $this->purchasables;
-    }
+	/**
+	 * Return Position.
+	 *
+	 * @return int Category relative position
+	 */
+	public function getPosition() {
+		return $this->position;
+	}
 
-    public function setCssClass($cssClass)
-    {
-        $this->cssClass = $cssClass;
+	/**
+	 * Get purchasables.
+	 *
+	 * @return Collection
+	 */
+	public function getPurchasables() {
+		return $this->purchasables;
+	}
 
-        return $this;
-    }
+	/**
+	 * Get coupons.
+	 *
+	 * @return Collection
+	 */
+	public function getCoupons() {
+		return $this->coupons;
+	}
 
-    public function getCssClass()
-    {
-        return $this->cssClass;
-    }
+	public function setCssClass($cssClass) {
+		$this->cssClass = $cssClass;
 
-    /**
-     * Get ShowInHome.
-     *
-     * @return bool ShowInHome
-     */
-    public function getShowInHome()
-    {
-        return $this->showInHome;
-    }
+		return $this;
+	}
 
-    /**
-     * Sets ShowInHome.
-     *
-     * @param bool $showInHome ShowInHome
-     *
-     * @return $this Self object
-     */
-    public function setShowInHome($showInHome)
-    {
-        $this->showInHome = $showInHome;
+	public function getCssClass() {
+		return $this->cssClass;
+	}
 
-        return $this;
-    }
+	/**
+	 * Get ShowInHome.
+	 *
+	 * @return bool ShowInHome
+	 */
+	public function getShowInHome() {
+		return $this->showInHome;
+	}
 
-    public function getEnabledSubCategories()
-    {
-        return $this->subCategories->filter(function ($k) {
-            return $k->isEnabled();
-        });
-    }
+	/**
+	 * Sets ShowInHome.
+	 *
+	 * @param bool $showInHome ShowInHome
+	 *
+	 * @return $this Self object
+	 */
+	public function setShowInHome($showInHome) {
+		$this->showInHome = $showInHome;
 
-    /**
-     * To string method.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
+		return $this;
+	}
+
+	public function getEnabledSubCategories() {
+		return $this->subCategories->filter(function ($k) {
+			return $k->isEnabled();
+		});
+	}
+
+	/**
+	 * To string method.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return (string) $this->getName();
+	}
 }

@@ -94,6 +94,10 @@ Elcodi\Component\Coupon\Entity\Coupon:
         enabled:
             column: enabled
             type: boolean
+        includeCategories:
+            column: include_categories
+            type: integer
+            nullable: true
         extraData:
             column: extra_data
             type: json_array
@@ -125,6 +129,20 @@ Elcodi\Component\Coupon\Entity\Coupon:
                 name: rule
                 referencedColumnName: id
                 nullable: true
+    manyToMany:
+        categories:
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface
+            inversedBy: coupons
+            joinTable:
+                name: coupon_category
+                joinColumns:
+                    coupon_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
