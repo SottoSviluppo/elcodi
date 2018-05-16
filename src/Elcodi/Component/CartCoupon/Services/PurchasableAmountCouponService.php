@@ -40,6 +40,7 @@ class PurchasableAmountCouponService {
 		$purchasableAmount = $this->getInitialPurchasableAmount($coupon->getIncludeCategories(), $cart);
 
 		foreach ($cartLines as $line) {
+
 			$cartLineAmount = $this->calculatedPurchasableAmountForCouponCategories($line->getPurchasable(), $coupon->getCategories());
 			if ($coupon->getIncludeCategories() == ElcodiCouponTypes::INCLUDE_CATEGORY) {
 				$purchasableAmount = $purchasableAmount->add($cartLineAmount);
@@ -52,7 +53,7 @@ class PurchasableAmountCouponService {
 	}
 
 	private function getInitialPurchasableAmount($couponCategoriesType, $cart) {
-		if (ElcodiCouponTypes::INCLUDE_CATEGORY) {
+		if ($couponCategoriesType == ElcodiCouponTypes::INCLUDE_CATEGORY) {
 			return Money::create(0, $this->currencyWrapper->get());
 		}
 

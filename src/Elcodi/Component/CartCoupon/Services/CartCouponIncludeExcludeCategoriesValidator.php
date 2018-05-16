@@ -101,7 +101,6 @@ class CartCouponIncludeExcludeCategoriesValidator {
 				throw new CouponIncludeCategoriesException();
 			}
 		}
-
 		return;
 	}
 
