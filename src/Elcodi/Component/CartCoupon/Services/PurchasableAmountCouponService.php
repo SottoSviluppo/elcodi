@@ -22,22 +22,19 @@ class PurchasableAmountCouponService {
 		$this->currencyWrapper = $currencyWrapper;
 	}
 
-	// private function calculatedPurchasableAmountForCouponCategories($purchasable, $couponCategories) {
 	private function calculatedPurchasableAmountForCouponCategories($cartLine, $couponCategories) {
 		$purchasable = $cartLine->getPurchasable();
-		$cartLineAmount = Money::create(0, $this->currencyWrapper->get());
 		foreach ($couponCategories as $couponCategory) {
 			foreach ($purchasable->getCategories() as $purchasableCategory) {
 				if ($purchasableCategory->getId() == $couponCategory->getId()) {
 
-					// return $purchasable->getPrice();
 					$purchasablePrice = $purchasable->getPrice();
 					return $purchasablePrice->multiply($cartLine->getQuantity());
 				}
 			}
 		}
 
-		return $cartLineAmount;
+		return Money::create(0, $this->currencyWrapper->get());
 
 	}
 
@@ -47,7 +44,6 @@ class PurchasableAmountCouponService {
 
 		foreach ($cartLines as $line) {
 
-			// $cartLineAmount = $this->calculatedPurchasableAmountForCouponCategories($line->getPurchasable(), $coupon->getCategories());
 			$cartLineAmount = $this->calculatedPurchasableAmountForCouponCategories($line, $coupon->getCategories());
 			if ($coupon->getIncludeCategories() == ElcodiCouponTypes::INCLUDE_CATEGORY) {
 				$purchasableAmount = $purchasableAmount->add($cartLineAmount);
