@@ -50,7 +50,7 @@ class PercentCartCouponApplicator implements CartCouponApplicatorInterface {
 	 */
 	public function __construct(
 		CurrencyWrapper $currencyWrapper,
-		PurchasableAmountCouponService $purchasableAmountCouponService
+		$purchasableAmountCouponService
 	) {
 		$this->currencyWrapper = $currencyWrapper;
 		$this->purchasableAmountCouponService = $purchasableAmountCouponService;

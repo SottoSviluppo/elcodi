@@ -21,7 +21,6 @@ services:
         class: Elcodi\Component\CartCoupon\Services\PurchasableAmountCouponService
         arguments:
             - '@elcodi.wrapper.currency'
-            # - '@elcodi.object_manager.order_coupon'
 
     #
     # Applicators
