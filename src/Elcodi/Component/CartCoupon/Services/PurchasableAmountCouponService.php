@@ -32,7 +32,7 @@ class PurchasableAmountCouponService {
 
 					// return $purchasable->getPrice();
 					$purchasablePrice = $purchasable->getPrice();
-					return $purchasablePrice->multiply($purchasable->getQuantity());
+					return $purchasablePrice->multiply($cartLine->getQuantity());
 				}
 			}
 		}
