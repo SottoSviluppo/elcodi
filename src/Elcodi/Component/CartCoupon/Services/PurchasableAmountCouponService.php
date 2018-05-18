@@ -26,7 +26,8 @@ class PurchasableAmountCouponService {
 		$purchasable = $cartLine->getPurchasable();
 		foreach ($couponCategories as $couponCategory) {
 			foreach ($purchasable->getCategories() as $purchasableCategory) {
-				if ($purchasableCategory->getId() == $couponCategory->getId()) {
+				$purchasableParentCategoryId = $purchasableCategory->getParent()->getId();
+				if ($purchasableCategory->getId() == $couponCategory->getId() || $purchasableParentCategoryId == $couponCategory->getId()) {
 
 					$purchasablePrice = $purchasable->getPrice();
 					return $purchasablePrice->multiply($cartLine->getQuantity());
