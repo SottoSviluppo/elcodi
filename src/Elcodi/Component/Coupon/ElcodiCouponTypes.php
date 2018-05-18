@@ -58,13 +58,13 @@ final class ElcodiCouponTypes {
 	 *
 	 *  Include only selected categories for coupon
 	 */
-	const INCLUDE_CATEGORY = 0;
+	const INCLUDE_CATEGORY = 1;
 
 	/**
 	 * @var int
 	 *
 	 *  Exclude selected categories for coupon
 	 */
-	const EXCLUDE_CATEGORY = 1;
+	const EXCLUDE_CATEGORY = 2;
 
 }

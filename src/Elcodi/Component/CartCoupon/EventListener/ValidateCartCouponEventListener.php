@@ -17,43 +17,40 @@
 
 namespace Elcodi\Component\CartCoupon\EventListener;
 
-use Elcodi\Component\CartCoupon\Event\CartCouponOnApplyEvent;
 use Elcodi\Component\CartCoupon\EventDispatcher\CartCouponEventDispatcher;
+use Elcodi\Component\CartCoupon\Event\CartCouponOnApplyEvent;
 
 /**
  * Class ValidateCartCouponEventListener.
  */
-final class ValidateCartCouponEventListener
-{
-    /**
-     * @var CartCouponEventDispatcher
-     *
-     * Event dispatcher for CartCoupon
-     */
-    private $cartCouponDispatcher;
+final class ValidateCartCouponEventListener {
+	/**
+	 * @var CartCouponEventDispatcher
+	 *
+	 * Event dispatcher for CartCoupon
+	 */
+	private $cartCouponDispatcher;
 
-    /**
-     * Construct method.
-     *
-     * @param CartCouponEventDispatcher $cartCouponDispatcher Event dispatcher for CartCoupon
-     */
-    public function __construct(CartCouponEventDispatcher $cartCouponDispatcher)
-    {
-        $this->cartCouponDispatcher = $cartCouponDispatcher;
-    }
+	/**
+	 * Construct method.
+	 *
+	 * @param CartCouponEventDispatcher $cartCouponDispatcher Event dispatcher for CartCoupon
+	 */
+	public function __construct(CartCouponEventDispatcher $cartCouponDispatcher) {
+		$this->cartCouponDispatcher = $cartCouponDispatcher;
+	}
 
-    /**
-     * Checks if a Coupon is applicable to a Cart.
-     *
-     * @param CartCouponOnApplyEvent $event Event
-     */
-    public function validateCoupon(CartCouponOnApplyEvent $event)
-    {
-        $this
-            ->cartCouponDispatcher
-            ->dispatchCartCouponOnCheckEvent(
-                $event->getCart(),
-                $event->getCoupon()
-            );
-    }
+	/**
+	 * Checks if a Coupon is applicable to a Cart.
+	 *
+	 * @param CartCouponOnApplyEvent $event Event
+	 */
+	public function validateCoupon(CartCouponOnApplyEvent $event) {
+		$this
+			->cartCouponDispatcher
+			->dispatchCartCouponOnCheckEvent(
+				$event->getCart(),
+				$event->getCoupon()
+			);
+	}
 }

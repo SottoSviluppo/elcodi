@@ -219,7 +219,6 @@ class CartCouponManager {
 				$cart,
 				$coupon
 			);
-
 		return $this;
 	}
 

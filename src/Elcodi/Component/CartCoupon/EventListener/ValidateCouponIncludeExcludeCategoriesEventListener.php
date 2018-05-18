@@ -17,7 +17,7 @@
 
 namespace Elcodi\Component\CartCoupon\EventListener;
 
-use Elcodi\Component\CartCoupon\Event\CartCouponOnCheckEvent;
+use Elcodi\Component\CartCoupon\Event\CartCouponOnApplyEvent;
 use Elcodi\Component\CartCoupon\Services\CartCouponIncludeExcludeCategoriesValidator;
 
 /**
@@ -43,9 +43,9 @@ final class ValidateCouponIncludeExcludeCategoriesEventListener {
 	/**
 	 * Check if cart meets minimum price requirements for a coupon.
 	 *
-	 * @param CartCouponOnCheckEvent $event Event
+	 * @param CartCouponOnApplyEvent $event Event
 	 */
-	public function validateCartCouponIncludeExclude(CartCouponOnCheckEvent $event) {
+	public function validateCartCouponIncludeExclude(CartCouponOnApplyEvent $event) {
 		$this
 			->cartCouponIncludeExcludeCategoriesValidator
 			->validateCartCouponIncludeExclude(

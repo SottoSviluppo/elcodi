@@ -94,11 +94,10 @@ class PercentCartCouponApplicator implements CartCouponApplicatorInterface {
 	) {
 		$couponCategoriesType = $coupon->getIncludeCategories();
 		$couponPercent = $coupon->getDiscount();
-
 		// Se il $couponCategoriesType è del tipo INCLUDE_CATEGORY oppure EXCLUDE_CATEGORY calcolo l'ammontare del carrello sul quale applicare lo sconto percentuale
 		if ($couponCategoriesType == ElcodiCouponTypes::INCLUDE_CATEGORY || $couponCategoriesType == ElcodiCouponTypes::EXCLUDE_CATEGORY) {
 			$purchasableAmount = $this->purchasableAmountCouponService->getPurchasableAmount($cart, $coupon);
-		} else {
+		} elseif ($couponCategoriesType == null) {
 			//il coupon non ha nessuna regola sulle categorie pertanto ammontare del carrello sul quale applicare il coupon è l'importo totale del carrello
 			$purchasableAmount = $cart->getPurchasableAmount();
 		}
