@@ -126,6 +126,19 @@ Elcodi\Component\User\Entity\Customer:
                 inverseJoinColumns:
                     address_id:
                         referencedColumnName: id
+        customerCategories:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerCategoryInterface
+            inversedBy: customers
+            joinTable:
+                name: customers_categories
+                joinColumns:
+                    customer_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
             preUpdate: [loadUpdateAt]

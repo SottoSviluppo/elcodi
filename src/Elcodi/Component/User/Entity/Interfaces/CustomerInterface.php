@@ -31,265 +31,271 @@ use Elcodi\Component\Tax\Entity\Interfaces\TaxableInterface;
  * Entities depending on CustomerInterfaces must implement shopping
  * capabilities and associations, such as addresses, orders, carts
  */
-interface CustomerInterface extends AbstractUserInterface, TaxableInterface
-{
-    /**
-     * Set phone.
-     *
-     * @param string $phone Phone
-     *
-     * @return $this
-     */
-    public function setPhone($phone);
+interface CustomerInterface extends AbstractUserInterface, TaxableInterface {
+	/**
+	 * Set phone.
+	 *
+	 * @param string $phone Phone
+	 *
+	 * @return $this
+	 */
+	public function setPhone($phone);
 
-    /**
-     * Get phone.
-     *
-     * @return string
-     */
-    public function getPhone();
+	/**
+	 * Get phone.
+	 *
+	 * @return string
+	 */
+	public function getPhone();
 
-    /**
-     * Set identity document.
-     *
-     * @param string $identityDocument
-     *
-     * @return $this
-     */
-    public function setIdentityDocument($identityDocument);
+	/**
+	 * Set identity document.
+	 *
+	 * @param string $identityDocument
+	 *
+	 * @return $this
+	 */
+	public function setIdentityDocument($identityDocument);
 
-    /**
-     * Get identity document.
-     *
-     * @return string Identity document
-     */
-    public function getIdentityDocument();
+	/**
+	 * Get identity document.
+	 *
+	 * @return string Identity document
+	 */
+	public function getIdentityDocument();
 
-    /**
-     * Sets Guest.
-     *
-     * @param bool $guest Guest
-     *
-     * @return $this Self object
-     */
-    public function setGuest($guest);
+	/**
+	 * Sets Guest.
+	 *
+	 * @param bool $guest Guest
+	 *
+	 * @return $this Self object
+	 */
+	public function setGuest($guest);
 
-    /**
-     * Get Guest.
-     *
-     * @return bool Guest
-     */
-    public function isGuest();
+	/**
+	 * Get Guest.
+	 *
+	 * @return bool Guest
+	 */
+	public function isGuest();
 
-    /**
-     * Sets Newsletter.
-     *
-     * @param bool $newsletter Newsletter
-     *
-     * @return $this Self object
-     */
-    public function setNewsletter($newsletter);
+	/**
+	 * Sets Newsletter.
+	 *
+	 * @param bool $newsletter Newsletter
+	 *
+	 * @return $this Self object
+	 */
+	public function setNewsletter($newsletter);
 
-    /**
-     * Get Newsletter.
-     *
-     * @return bool Newsletter
-     */
-    public function getNewsletter();
+	/**
+	 * Get Newsletter.
+	 *
+	 * @return bool Newsletter
+	 */
+	public function getNewsletter();
 
-    /**
-     * Add Order.
-     *
-     * @param OrderInterface $order Order
-     *
-     * @return $this Self object
-     */
-    public function addOrder(OrderInterface $order);
+	/**
+	 * Add Order.
+	 *
+	 * @param OrderInterface $order Order
+	 *
+	 * @return $this Self object
+	 */
+	public function addOrder(OrderInterface $order);
 
-    /**
-     * Remove Order.
-     *
-     * @param OrderInterface $order
-     *
-     * @return $this Self object
-     */
-    public function removeOrder(OrderInterface $order);
+	/**
+	 * Remove Order.
+	 *
+	 * @param OrderInterface $order
+	 *
+	 * @return $this Self object
+	 */
+	public function removeOrder(OrderInterface $order);
 
-    /**
-     * Set orders.
-     *
-     * @param Collection $orders Orders
-     *
-     * @return $this Self object
-     */
-    public function setOrders(Collection $orders);
+	/**
+	 * Set orders.
+	 *
+	 * @param Collection $orders Orders
+	 *
+	 * @return $this Self object
+	 */
+	public function setOrders(Collection $orders);
 
-    /**
-     * Get user orders.
-     *
-     * @return Collection Customerinterface orders
-     */
-    public function getOrders();
+	/**
+	 * Get user orders.
+	 *
+	 * @return Collection Customerinterface orders
+	 */
+	public function getOrders();
 
-    /**
-     * Add Cart.
-     *
-     * @param CartInterface $cart
-     *
-     * @return $this Self object
-     */
-    public function addCart(CartInterface $cart);
+	/**
+	 * Add Cart.
+	 *
+	 * @param CartInterface $cart
+	 *
+	 * @return $this Self object
+	 */
+	public function addCart(CartInterface $cart);
 
-    /**
-     * Remove Cart.
-     *
-     * @param CartInterface $cart
-     *
-     * @return $this Self object
-     */
-    public function removeCart(CartInterface $cart);
+	/**
+	 * Remove Cart.
+	 *
+	 * @param CartInterface $cart
+	 *
+	 * @return $this Self object
+	 */
+	public function removeCart(CartInterface $cart);
 
-    /**
-     * @param Collection $carts
-     *
-     * @return $this Self object
-     */
-    public function setCarts(Collection $carts);
+	/**
+	 * @param Collection $carts
+	 *
+	 * @return $this Self object
+	 */
+	public function setCarts(Collection $carts);
 
-    /**
-     * Get Cart collection.
-     *
-     * @return Collection
-     */
-    public function getCarts();
+	/**
+	 * Get Cart collection.
+	 *
+	 * @return Collection
+	 */
+	public function getCarts();
 
-    /**
-     * Add address.
-     *
-     * @param AddressInterface $address
-     *
-     * @return $this Self object
-     */
-    public function addAddress(AddressInterface $address);
+	/**
+	 * Add address.
+	 *
+	 * @param AddressInterface $address
+	 *
+	 * @return $this Self object
+	 */
+	public function addAddress(AddressInterface $address);
 
-    /**
-     * Remove address.
-     *
-     * @param AddressInterface $address
-     *
-     * @return $this Self object
-     */
-    public function removeAddress(AddressInterface $address);
+	/**
+	 * Remove address.
+	 *
+	 * @param AddressInterface $address
+	 *
+	 * @return $this Self object
+	 */
+	public function removeAddress(AddressInterface $address);
 
-    /**
-     * Set addresses.
-     *
-     * @param Collection $addresses Addresses
-     *
-     * @return $this Self object
-     */
-    public function setAddresses(Collection $addresses);
+	/**
+	 * Set addresses.
+	 *
+	 * @param Collection $addresses Addresses
+	 *
+	 * @return $this Self object
+	 */
+	public function setAddresses(Collection $addresses);
 
-    /**
-     * Get addresses.
-     *
-     * @return Collection Addresses
-     */
-    public function getAddresses();
+	/**
+	 * Get addresses.
+	 *
+	 * @return Collection Addresses
+	 */
+	public function getAddresses();
 
-    /**
-     * Set Delivery Address.
-     *
-     * @param AddressInterface $deliveryAddress
-     *
-     * @return $this Self object
-     */
-    public function setDeliveryAddress(AddressInterface $deliveryAddress = null);
+	/**
+	 * Set Delivery Address.
+	 *
+	 * @param AddressInterface $deliveryAddress
+	 *
+	 * @return $this Self object
+	 */
+	public function setDeliveryAddress(AddressInterface $deliveryAddress = null);
 
-    /**
-     * Get Delivery address.
-     *
-     * @return AddressInterface
-     */
-    public function getDeliveryAddress();
+	/**
+	 * Get Delivery address.
+	 *
+	 * @return AddressInterface
+	 */
+	public function getDeliveryAddress();
 
-    /**
-     * Set Invoice Address.
-     *
-     * @param AddressInterface $invoiceAddress
-     *
-     * @return $this Self object
-     */
-    public function setInvoiceAddress(AddressInterface $invoiceAddress = null);
+	/**
+	 * Set Invoice Address.
+	 *
+	 * @param AddressInterface $invoiceAddress
+	 *
+	 * @return $this Self object
+	 */
+	public function setInvoiceAddress(AddressInterface $invoiceAddress = null);
 
-    /**
-     * Get Invoice address.
-     *
-     * @return AddressInterface
-     */
-    public function getInvoiceAddress();
+	/**
+	 * Get Invoice address.
+	 *
+	 * @return AddressInterface
+	 */
+	public function getInvoiceAddress();
 
-    /**
-     * Set language.
-     *
-     * @param LanguageInterface $language The language
-     *
-     * @return $this Self object
-     */
-    public function setLanguage(LanguageInterface $language);
+	/**
+	 * Set language.
+	 *
+	 * @param LanguageInterface $language The language
+	 *
+	 * @return $this Self object
+	 */
+	public function setLanguage(LanguageInterface $language);
 
-    /**
-     * Get language.
-     *
-     * @return LanguageInterface
-     */
-    public function getLanguage();
+	/**
+	 * Get language.
+	 *
+	 * @return LanguageInterface
+	 */
+	public function getLanguage();
 
-    /**
-     * Set country.
-     *
-     * @param CountryInterface $country The country
-     *
-     * @return $this Self object
-     */
-    public function setCountry(CountryInterface $country);
+	/**
+	 * Set country.
+	 *
+	 * @param CountryInterface $country The country
+	 *
+	 * @return $this Self object
+	 */
+	public function setCountry(CountryInterface $country);
 
-    /**
-     * Get country.
-     *
-     * @return CountryInterface
-     */
-    public function getCountry();
+	/**
+	 * Get country.
+	 *
+	 * @return CountryInterface
+	 */
+	public function getCountry();
 
-    /**
-     * Sets Salt.
-     *
-     * @param string $salt
-     *
-     * @return $this Self object
-     */
-    public function setSalt($salt);
+	/**
+	 * Sets Salt.
+	 *
+	 * @param string $salt
+	 *
+	 * @return $this Self object
+	 */
+	public function setSalt($salt);
 
-    /**
-     * Get Salt.
-     *
-     * @return string Salt
-     */
-    public function getSalt();
+	/**
+	 * Get Salt.
+	 *
+	 * @return string Salt
+	 */
+	public function getSalt();
 
-    /**
-     * Sets FacebookId.
-     *
-     * @param string $facebookId
-     *
-     * @return $this Self object
-     */
-    public function setFacebookId($facebookId);
+	/**
+	 * Sets FacebookId.
+	 *
+	 * @param string $facebookId
+	 *
+	 * @return $this Self object
+	 */
+	public function setFacebookId($facebookId);
 
-    /**
-     * Get FacebookId.
-     *
-     * @return string FacebookId
-     */
-    public function getFacebookId();
+	/**
+	 * Get FacebookId.
+	 *
+	 * @return string FacebookId
+	 */
+	public function getFacebookId();
+
+	/**
+	 * Get customerCategories.
+	 *
+	 * @return Collection customerCategories
+	 */
+	public function getCustomerCategories();
 }
