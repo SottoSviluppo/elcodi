@@ -130,4 +130,4 @@ services:
         arguments:
             - '@elcodi.validator.cart_coupon_customer_categories'
         tags:
-            - { name: kernel.event_listener, event: cart_coupon.onapply, method: validateCartCouponCustomer, priority: 32 }
+            - { name: kernel.event_listener, event: cart_coupon.onapply, method: validateCartCouponCustomer, priority: 33 }
