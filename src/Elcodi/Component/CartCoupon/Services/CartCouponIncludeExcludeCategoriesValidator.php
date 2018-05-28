@@ -101,6 +101,7 @@ class CartCouponIncludeExcludeCategoriesValidator {
 				throw new CouponIncludeCategoriesException();
 			}
 		}
+
 		return;
 	}
 
@@ -114,7 +115,8 @@ class CartCouponIncludeExcludeCategoriesValidator {
 
 		foreach ($couponCategories as $couponCategory) {
 			foreach ($purchasableCategories as $purchasableCategory) {
-				if ($purchasableCategory->getId() == $couponCategory->getId()) {
+				$purchasableParentCategoryId = $purchasableCategory->getParent()->getId();
+				if ($purchasableCategory->getId() == $couponCategory->getId() || $purchasableParentCategoryId == $couponCategory->getId()) {
 					return true;
 				}
 			}
