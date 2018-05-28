@@ -48,6 +48,14 @@ class CustomerCategory implements CustomerCategoryInterface {
 	protected $customers;
 
 	/**
+	 * @var Collection
+	 *
+	 * Many-to-Many association between categories
+	 * and products. The resulting collection could be huge.
+	 */
+	protected $coupons;
+
+	/**
 	 * Set name.
 	 *
 	 * @param string $name Name
@@ -76,6 +84,15 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 */
 	public function getCustomers() {
 		return $this->customers;
+	}
+
+	/**
+	 * Get coupons.
+	 *
+	 * @return Collection
+	 */
+	public function getCoupons() {
+		return $this->coupons;
 	}
 
 	/**

@@ -22,6 +22,11 @@ services:
         arguments:
             - '@elcodi.wrapper.currency'
 
+    elcodi.service.customer_category:
+        class: Elcodi\Component\CartCoupon\Services\CustomerCategoryService
+        # arguments:
+        #     - '@elcodi.wrapper.currency'
+
     #
     # Applicators
     #
@@ -81,5 +86,11 @@ services:
         arguments:
             - '@elcodi.converter.currency'
             - '@elcodi.service.purchasable_amount_coupon'
+
+    elcodi.validator.cart_coupon_customer_categories:
+        class: Elcodi\Component\CartCoupon\Services\CartCouponCustomerCategoriesValidator
+        arguments:
+            - '@security.token_storage'
+            - '@elcodi.service.customer_category'
 
 

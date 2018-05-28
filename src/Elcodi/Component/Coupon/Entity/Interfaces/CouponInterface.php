@@ -324,4 +324,11 @@ ValidIntervalInterface {
 	 * @return Collection Categories
 	 */
 	public function getCategories();
+
+	/**
+	 * Get customerCategories.
+	 *
+	 * @return Collection customerCategories
+	 */
+	public function getCustomerCategories();
 }

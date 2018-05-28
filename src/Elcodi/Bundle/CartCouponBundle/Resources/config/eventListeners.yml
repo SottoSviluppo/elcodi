@@ -124,3 +124,10 @@ services:
             - '@elcodi.validator.cart_coupon_include_exclude_categories'
         tags:
             - { name: kernel.event_listener, event: cart_coupon.onapply, method: validateCartCouponIncludeExclude, priority: 0 }
+
+    elcodi.event_listener.validate_coupon_customer_categories:
+        class: Elcodi\Component\CartCoupon\EventListener\ValidateCouponCustomerCategoriesEventListener
+        arguments:
+            - '@elcodi.validator.cart_coupon_customer_categories'
+        tags:
+            - { name: kernel.event_listener, event: cart_coupon.onapply, method: validateCartCouponCustomer, priority: 32 }

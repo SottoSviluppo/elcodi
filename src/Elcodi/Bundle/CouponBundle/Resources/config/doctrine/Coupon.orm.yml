@@ -143,6 +143,19 @@ Elcodi\Component\Coupon\Entity\Coupon:
                     category_id:
                         referencedColumnName: id
                         onDelete: "CASCADE"
+        customerCategories:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerCategoryInterface
+            inversedBy: customers
+            joinTable:
+                name: customers_coupons
+                joinColumns:
+                    coupon_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    customer_category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

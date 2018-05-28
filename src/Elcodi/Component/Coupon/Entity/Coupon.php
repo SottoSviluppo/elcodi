@@ -193,6 +193,13 @@ class Coupon implements CouponInterface {
 	protected $categories;
 
 	/**
+	 * @var Collection
+	 *
+	 * Many-to-Many association between customer and categories.
+	 */
+	protected $customerCategories;
+
+	/**
 	 * Set code.
 	 *
 	 * @param string $code Code
@@ -674,6 +681,15 @@ class Coupon implements CouponInterface {
 			->removeElement($category);
 
 		return $this;
+	}
+
+	/**
+	 * Get customerCategories.
+	 *
+	 * @return Collection CustomerCategories
+	 */
+	public function getCustomerCategories() {
+		return $this->customerCategories;
 	}
 
 	/**

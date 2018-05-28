@@ -60,4 +60,17 @@ EnabledInterface {
 	 */
 	public function getName();
 
+	/**
+	 * Get customers.
+	 *
+	 * @return Collection
+	 */
+	public function getCustomers();
+
+	/**
+	 * Get coupons.
+	 *
+	 * @return Collection
+	 */
+	public function getCoupons();
 }
