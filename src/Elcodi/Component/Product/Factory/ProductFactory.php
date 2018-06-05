@@ -91,7 +91,7 @@ class ProductFactory extends AbstractPurchasableFactory
         $product
             ->setStock($stock)
             ->setType(ElcodiProductTypes::TYPE_PRODUCT_PHYSICAL)
-            ->setShowInHome(true)
+            ->setShowInHome(false)
             ->setPrice($zeroPrice)
             ->setReducedPrice($zeroPrice)
             ->setAttributes(new ArrayCollection())
