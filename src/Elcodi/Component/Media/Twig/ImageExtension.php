@@ -17,12 +17,12 @@
 
 namespace Elcodi\Component\Media\Twig;
 
+use Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 use Twig_Extension;
 use Twig_SimpleFilter;
-
-use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 
 /**
  * Class ImageExtension.
@@ -116,6 +116,7 @@ class ImageExtension extends Twig_Extension
         return [
             new Twig_SimpleFilter('resize', [$this, 'resize']),
             new Twig_SimpleFilter('viewImage', [$this, 'viewImage']),
+            new Twig_SimpleFilter('attachmentSource', [$this, 'attachmentSource']),
         ];
     }
 
@@ -171,6 +172,30 @@ class ImageExtension extends Twig_Extension
                 'id' => (int) $imageMedia->getId(),
                 '_format' => $imageMedia->getExtension(),
             ], $routeReferenceType);
+
+        $this->fixRouterContext();
+
+        return $generatedRoute;
+    }
+
+    /**
+     * Return route of attachment.
+     *
+     * @param AttachmentInterface $attachmentMedia  Attachmentmedia element
+     * @param bool           $absoluteUrl If the url generated shoud be absolute
+     *
+     * @return string attachment route
+     */
+    public function attachmentSource($attachmentMedia, $absoluteUrl = false)
+    {
+        $this->prepareRouterContext();
+        // $routeReferenceType = $this->getReferenceType($absoluteUrl);
+
+        $generatedRoute = $this
+            ->router
+            ->generate('elcodi.route.attachment_download', [
+                'id' => (int) $attachmentMedia->getId(),
+            ]);
 
         $this->fixRouterContext();
 

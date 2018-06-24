@@ -126,6 +126,18 @@ Elcodi\Component\Product\Entity\Category:
         coupons:
             targetEntity: Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface
             mappedBy: categories
+        attachments:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface
+            joinTable:
+                name: category_attachment
+                joinColumns:
+                    category_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    attachment_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

@@ -7,3 +7,8 @@ services:
         parent: elcodi.abstract_manager
         arguments:
             - %elcodi.entity.image.class%
+
+    elcodi.object_manager.attachment:
+        parent: elcodi.abstract_manager
+        arguments:
+            - %elcodi.entity.attachment.class%

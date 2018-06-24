@@ -20,6 +20,7 @@ namespace Elcodi\Component\Media\EventDispatcher;
 use Elcodi\Component\Core\EventDispatcher\Abstracts\AbstractEventDispatcher;
 use Elcodi\Component\Media\ElcodiMediaEvents;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\Media\Event\AttachmentUploadedEvent;
 use Elcodi\Component\Media\Event\ImageUploadedEvent;
 
 /**
@@ -60,6 +61,44 @@ class MediaEventDispatcher extends AbstractEventDispatcher
         $this->eventDispatcher->dispatch(
             ElcodiMediaEvents::IMAGE_ONUPLOAD,
             $imageUploadedEvent
+        );
+
+        return $this;
+    }
+
+    /**
+     * Create attachment pre uploaded event.
+     *
+     * @param AttachmentInterface $attachment Attachment
+     *
+     * @return $this self Object
+     */
+    public function dispatchAttachmentPreUploadEvent($attachment)
+    {
+        $attachmentUploadedEvent = new AttachmentUploadedEvent($attachment);
+
+        $this->eventDispatcher->dispatch(
+            ElcodiMediaEvents::ATTACHMENT_PREUPLOAD,
+            $attachmentUploadedEvent
+        );
+
+        return $this;
+    }
+
+    /**
+     * Create attachment on uploaded event.
+     *
+     * @param $attachment Attachment
+     *
+     * @return $this self Object
+     */
+    public function dispatchAttachmentOnUploadEvent($attachment)
+    {
+        $attachmentUploadedEvent = new AttachmentUploadedEvent($attachment);
+
+        $this->eventDispatcher->dispatch(
+            ElcodiMediaEvents::ATTACHMENT_ONUPLOAD,
+            $attachmentUploadedEvent
         );
 
         return $this;

@@ -17,11 +17,10 @@
 
 namespace Elcodi\Bundle\MediaBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
 use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class ElcodiMediaExtension.
@@ -112,6 +111,11 @@ class ElcodiMediaExtension extends AbstractExtension implements EntitiesOverrida
             'elcodi.entity.image.manager' => $config['mapping']['image']['manager'],
             'elcodi.entity.image.enabled' => $config['mapping']['image']['enabled'],
 
+            'elcodi.entity.attachment.class' => $config['mapping']['attachment']['class'],
+            'elcodi.entity.attachment.mapping_file' => $config['mapping']['attachment']['mapping_file'],
+            'elcodi.entity.attachment.manager' => $config['mapping']['attachment']['manager'],
+            'elcodi.entity.attachment.enabled' => $config['mapping']['attachment']['enabled'],
+
             'elcodi.media_filesystem_service' => $config['filesystem'],
 
             'elcodi.image_generated_route_host' => $config['images']['generated_route_host'],
@@ -158,6 +162,7 @@ class ElcodiMediaExtension extends AbstractExtension implements EntitiesOverrida
     {
         return [
             'Elcodi\Component\Media\Entity\Interfaces\ImageInterface' => 'elcodi.entity.image.class',
+            'Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface' => 'elcodi.entity.attachment.class',
         ];
     }
 

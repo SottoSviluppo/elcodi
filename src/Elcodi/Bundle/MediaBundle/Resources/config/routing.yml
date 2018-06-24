@@ -22,3 +22,24 @@ elcodi.route.image_upload:
     methods: POST
     defaults:
         _controller: elcodi.controller.image_upload:uploadAction
+
+elcodi.route.attachment_view:
+    path: /attachments/{id}/render.{_format}
+    methods: GET
+    defaults:
+        _controller: elcodi.controller.attachment_upload:viewAction
+        height: 0
+        width: 0
+        type: 0
+
+elcodi.route.attachment_download:
+    path: /attachments/download/{id}
+    methods: GET
+    defaults:
+        _controller: elcodi.controller.attachment_upload:downloadAction
+
+elcodi.route.attachment_upload:
+    path: /attachments/upload
+    methods: POST
+    defaults:
+        _controller: elcodi.controller.attachment_upload:uploadAction

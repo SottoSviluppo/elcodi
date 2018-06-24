@@ -25,5 +25,13 @@ services:
             - '@elcodi.manager.media_image'
             - '@elcodi.event_dispatcher.media'
 
+    elcodi.uploader.attachment:
+        class: Elcodi\Component\Media\Services\AttachmentUploader
+        arguments:
+            - '@elcodi.object_manager.attachment'
+            - '@elcodi.manager.media_file'
+            - '@elcodi.event_dispatcher.media'
+            - '@elcodi.factory.attachment'
+
     elcodi.resolver.image:
         class: Elcodi\Component\Media\Services\ImageResolver

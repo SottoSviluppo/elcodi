@@ -37,4 +37,20 @@ final class ElcodiMediaEvents
      * event.class : ImageUploadEvent
      */
     const IMAGE_ONUPLOAD = 'image.onupload';
+
+    /**
+     * This event is fired each time an attachment is going to be uploaded.
+     *
+     * event.name : attachment.preupload
+     * event.class : AttachmentUploadEvent
+     */
+    const ATTACHMENT_PREUPLOAD = 'attachment.preupload';
+
+    /**
+     * This event is fired each time an attachment has been uploaded.
+     *
+     * event.name : attachment.onupload
+     * event.class : AttachmentUploadEvent
+     */
+    const ATTACHMENT_ONUPLOAD = 'attachment.onupload';
 }

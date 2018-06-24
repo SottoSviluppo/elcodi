@@ -22,3 +22,16 @@ services:
             - %elcodi.image_upload_field_name%
             - elcodi.route.image_view
             - elcodi.route.image_resize
+
+    elcodi.controller.attachment_upload:
+        class: Elcodi\Component\Media\Controller\AttachmentUploadController
+        arguments:
+            - '@request_stack'
+            - '@elcodi.uploader.attachment'
+            - '@router'
+            # - %elcodi.attachment_upload_field_name%
+            - elcodi.route.attachment_view
+            - elcodi.route.attachment_view
+            - "@elcodi.repository.attachment"
+            - "@elcodi.manager.media_file"
+ 

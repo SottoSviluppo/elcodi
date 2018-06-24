@@ -22,6 +22,7 @@ use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Media\Entity\Traits\AttachmentsContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\IconsContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
@@ -31,11 +32,13 @@ use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 /**
  * Class Category.
  */
-class Category implements CategoryInterface {
+class Category implements CategoryInterface
+{
 	use IdentifiableTrait,
 	DateTimeTrait,
 	EnabledTrait,
 	ImagesContainerTrait,
+    AttachmentsContainerTrait,
 	IconsContainerTrait,
 	PrincipalImageTrait,
 	MetaDataTrait, ExtraDataTrait;

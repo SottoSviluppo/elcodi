@@ -11,3 +11,8 @@ services:
         parent: elcodi.abstract_repository
         arguments:
             - %elcodi.entity.image.class%
+
+    elcodi.repository.attachment:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.attachment.class%

@@ -12,3 +12,9 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.image.class%"]]
             - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
+
+    elcodi.factory.attachment:
+        class: Elcodi\Component\Media\Factory\AttachmentFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.attachment.class%"]]
+            - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
