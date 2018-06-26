@@ -80,7 +80,8 @@ class AttachmentUploader
         $this->fileManager->uploadFile(
             $attachment,
             file_get_contents($file->getRealPath()),
-            true
+            true,
+            'attachment_'
         );
 
         $this

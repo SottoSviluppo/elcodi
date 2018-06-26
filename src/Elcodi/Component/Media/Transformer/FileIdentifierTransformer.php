@@ -32,9 +32,9 @@ class FileIdentifierTransformer implements FileIdentifierTransformerInterface
      *
      * @return string Entity transformed
      */
-    public function transform(FileInterface $file)
+    public function transform(FileInterface $file, string $prefix = '')
     {
-        return $file->getId() . '.' .
+        return $prefix.$file->getId() . '.' .
         $file->getExtension();
     }
 }

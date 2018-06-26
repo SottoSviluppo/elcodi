@@ -28,8 +28,9 @@ interface FileIdentifierTransformerInterface
      * Transforms an entity to be stored.
      *
      * @param FileInterface $file File to transform
+     * @param string $prefix prefix file name
      *
      * @return string Entity transformed
      */
-    public function transform(FileInterface $file);
+    public function transform(FileInterface $file, string $prefix = '');
 }

@@ -73,14 +73,14 @@ class FileManager
      *
      * @return $this Self object
      */
-    public function uploadFile(FileInterface $file, $data, $overwrite = true)
+    public function uploadFile(FileInterface $file, $data, $overwrite = true, $prefix='')
     {
         $this
             ->filesystem
             ->write(
                 $this
                     ->fileIdentifierTransformer
-                    ->transform($file),
+                    ->transform($file, $prefix),
                 $data,
                 $overwrite
             );
@@ -96,7 +96,7 @@ class FileManager
      *
      * @return FileInterface File downloaded
      */
-    public function downloadFile(FileInterface $file)
+    public function downloadFile(FileInterface $file, $prefix='')
     {
         /**
          * @var string $content
@@ -105,7 +105,7 @@ class FileManager
             ->filesystem
             ->read($this
                 ->fileIdentifierTransformer
-                ->transform($file)
+                ->transform($file, $prefix)
             );
 
         $file->setContent($content);
