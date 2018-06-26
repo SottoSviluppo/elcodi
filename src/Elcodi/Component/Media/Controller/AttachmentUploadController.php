@@ -224,7 +224,7 @@ class AttachmentUploadController
 
         $this
             ->fileManager
-            ->downloadFile($attachment)
+            ->downloadFile($attachment, 'attachment_')
             ->getContent();
 
         $attachmentData = $attachment->getContent();
