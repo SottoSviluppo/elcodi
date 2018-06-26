@@ -19,10 +19,11 @@ namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
-use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ETaggableTrait;
+use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Media\Entity\Traits\AttachmentsContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -47,7 +48,9 @@ abstract class Purchasable implements PurchasableInterface
     EnabledTrait,
     DimensionsTrait,
     TaxableTrait,
-    PurchasablePriceTrait, ExtraDataTrait;
+    PurchasablePriceTrait, 
+    ExtraDataTrait,
+    AttachmentsContainerTrait;
 
     /**
      * @var string

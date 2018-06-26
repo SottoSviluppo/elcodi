@@ -196,6 +196,18 @@ Elcodi\Component\Product\Entity\Purchasable:
                     category_id:
                         referencedColumnName: id
                         onDelete: "CASCADE"
+        attachments:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface
+            joinTable:
+                name: purchasable_attachment
+                joinColumns:
+                    purchasable_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    attachment_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
