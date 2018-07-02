@@ -222,4 +222,9 @@ class Variant extends Purchasable implements VariantInterface
     {
         return 'product_variant';
     }
+
+    public function getVariants()
+    {
+        return array();
+    }
 }
