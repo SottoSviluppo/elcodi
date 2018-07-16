@@ -30,6 +30,7 @@ use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Product\Entity\Category;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
+use Elcodi\Component\User\Entity\CustomerCategory;
 
 /**
  * Class Coupon.
@@ -690,6 +691,51 @@ class Coupon implements CouponInterface {
 	 */
 	public function getCustomerCategories() {
 		return $this->customerCategories;
+	}
+
+	/**
+	 * Set customerCategories.
+	 *
+	 * @param Collection $customerCategories CustomerCategories
+	 *
+	 * @return $this Self object
+	 */
+	public function setCustomerCategories(Collection $customerCategories) {
+		$this->customerCategories = $customerCategories;
+
+		return $this;
+	}
+
+	/**
+	 * Add customerCategory.
+	 *
+	 * @param CustomerCategory $customerCategory Category
+	 *
+	 * @return $this Self object
+	 */
+	public function addCustomerCategory(CustomerCategory $customerCategory) {
+		if (!$this->customerCategories->contains($customerCategory)) {
+			$this
+				->customerCategories
+				->add($customerCategory);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Remove customerCategory.
+	 *
+	 * @param CustomerCategory $customerCategory Category
+	 *
+	 * @return $this Self object
+	 */
+	public function removeCustomerCategory(CustomerCategory $customerCategory) {
+		$this
+			->customerCategories
+			->removeElement($customerCategory);
+
+		return $this;
 	}
 
 	/**
