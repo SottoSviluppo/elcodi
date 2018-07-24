@@ -49,6 +49,10 @@ Elcodi\Component\Media\Entity\Attachment:
         enabled:
             column: enabled
             type: boolean
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

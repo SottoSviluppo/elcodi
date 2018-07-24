@@ -19,17 +19,18 @@ namespace Elcodi\Component\Media\Entity\Abstracts;
 
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Media\Entity\Interfaces\MediaInterface;
 
 /**
  * Class Media.
  */
-abstract class Media implements MediaInterface
-{
-    use IdentifiableTrait,
-        EnabledTrait,
-        DateTimeTrait;
+abstract class Media implements MediaInterface {
+	use IdentifiableTrait,
+	EnabledTrait,
+	DateTimeTrait,
+		ExtraDataTrait;
 
     /**
      * @var string
