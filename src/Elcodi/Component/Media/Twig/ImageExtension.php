@@ -27,242 +27,259 @@ use Twig_SimpleFilter;
 /**
  * Class ImageExtension.
  */
-class ImageExtension extends Twig_Extension
-{
-    /**
-     * @var UrlGeneratorInterface
-     *
-     * Router
-     */
-    private $router;
+class ImageExtension extends Twig_Extension {
+	/**
+	 * @var UrlGeneratorInterface
+	 *
+	 * Router
+	 */
+	private $router;
 
-    /**
-     * @var string
-     *
-     * Resize route name
-     */
-    private $imageResizeControllerRouteName;
+	/**
+	 * @var string
+	 *
+	 * Resize route name
+	 */
+	private $imageResizeControllerRouteName;
 
-    /**
-     * @var string
-     *
-     * View route name
-     */
-    private $imageViewControllerRouteName;
+	/**
+	 * @var string
+	 *
+	 * View route name
+	 */
+	private $imageViewControllerRouteName;
 
-    /**
-     * @var string
-     *
-     * Host part of the generated URL.
-     * Useful when working with CDNs, where
-     * you might want to map, for instance,
-     * http://www.elcodi.com/image/1 to
-     * http://cdn.elcodi.com/image/1
-     */
-    private $generatedRouteHost;
+	/**
+	 * @var string
+	 *
+	 * Host part of the generated URL.
+	 * Useful when working with CDNs, where
+	 * you might want to map, for instance,
+	 * http://www.elcodi.com/image/1 to
+	 * http://cdn.elcodi.com/image/1
+	 */
+	private $generatedRouteHost;
 
-    /**
-     * @var RequestContext
-     *
-     * Original router context
-     */
-    private $originalContext;
+	/**
+	 * @var RequestContext
+	 *
+	 * Original router context
+	 */
+	private $originalContext;
 
-    /**
-     * @var RequestContext
-     *
-     * Modified router context
-     */
-    private $modifiedContext;
+	/**
+	 * @var RequestContext
+	 *
+	 * Modified router context
+	 */
+	private $modifiedContext;
 
-    /**
-     * Construct method.
-     *
-     * @param UrlGeneratorInterface $router                         Router
-     * @param string                $imageResizeControllerRouteName Image resize controller route name
-     * @param string                $imageViewControllerRouteName   Image view controller route name
-     * @param string                $generatedRouteHost             Host part of the URL to be overridden, if present
-     */
-    public function __construct(
-        UrlGeneratorInterface $router,
-        $imageResizeControllerRouteName,
-        $imageViewControllerRouteName,
-        $generatedRouteHost = ''
+	/**
+	 * Construct method.
+	 *
+	 * @param UrlGeneratorInterface $router                         Router
+	 * @param string                $imageResizeControllerRouteName Image resize controller route name
+	 * @param string                $imageViewControllerRouteName   Image view controller route name
+	 * @param string                $generatedRouteHost             Host part of the URL to be overridden, if present
+	 */
+	public function __construct(
+		UrlGeneratorInterface $router,
+		$imageResizeControllerRouteName,
+		$imageViewControllerRouteName,
+		$generatedRouteHost = ''
 
-    ) {
-        $this->router = $router;
-        $this->imageResizeControllerRouteName = $imageResizeControllerRouteName;
-        $this->imageViewControllerRouteName = $imageViewControllerRouteName;
-        $this->generatedRouteHost = $generatedRouteHost;
+	) {
+		$this->router = $router;
+		$this->imageResizeControllerRouteName = $imageResizeControllerRouteName;
+		$this->imageViewControllerRouteName = $imageViewControllerRouteName;
+		$this->generatedRouteHost = $generatedRouteHost;
 
-        /**
-         * Routing context will change when a hostname is
-         * forced into the route generation.
-         */
-        $this->originalContext = $this
-            ->router
-            ->getContext();
+		/**
+		 * Routing context will change when a hostname is
+		 * forced into the route generation.
+		 */
+		$this->originalContext = $this
+			->router
+			->getContext();
 
-        $this->modifiedContext = clone $this->originalContext;
-    }
+		$this->modifiedContext = clone $this->originalContext;
+	}
 
-    /**
-     * Return all filters.
-     *
-     * @return Twig_SimpleFilter[] Filters created
-     */
-    public function getFilters()
-    {
-        return [
-            new Twig_SimpleFilter('resize', [$this, 'resize']),
-            new Twig_SimpleFilter('viewImage', [$this, 'viewImage']),
-            new Twig_SimpleFilter('attachmentSource', [$this, 'attachmentSource']),
-        ];
-    }
+	/**
+	 * Return all filters.
+	 *
+	 * @return Twig_SimpleFilter[] Filters created
+	 */
+	public function getFilters() {
+		return [
+			new Twig_SimpleFilter('resize', [$this, 'resize']),
+			new Twig_SimpleFilter('viewImage', [$this, 'viewImage']),
+			new Twig_SimpleFilter('attachmentSource', [$this, 'attachmentSource']),
+			new Twig_SimpleFilter('viewAttachment', [$this, 'viewAttachment']),
+		];
+	}
 
-    /**
-     * Return route of image with desired resize.
-     *
-     * @param ImageInterface $imageMedia Imagemedia element
-     * @param array          $options    Options
-     *
-     * @return string image route
-     */
-    public function resize(ImageInterface $imageMedia, array $options)
-    {
-        $this->prepareRouterContext();
+	/**
+	 * Return route of image with desired resize.
+	 *
+	 * @param ImageInterface $imageMedia Imagemedia element
+	 * @param array          $options    Options
+	 *
+	 * @return string image route
+	 */
+	public function resize(ImageInterface $imageMedia, array $options) {
+		$this->prepareRouterContext();
 
-        $absoluteUrlOption = isset($options['absolute_url'])
-            ? $options['absolute_url']
-            : false;
-        $routeReferenceType = $this->getReferenceType($absoluteUrlOption);
+		$absoluteUrlOption = isset($options['absolute_url'])
+		? $options['absolute_url']
+		: false;
+		$routeReferenceType = $this->getReferenceType($absoluteUrlOption);
 
-        $generatedRoute = $this
-            ->router
-            ->generate($this->imageResizeControllerRouteName, [
-                'id' => (int) $imageMedia->getId(),
-                'height' => (int) $options['height'],
-                'width' => (int) $options['width'],
-                'type' => (int) $options['type'],
-                '_format' => $imageMedia->getExtension(),
-            ], $routeReferenceType);
+		$generatedRoute = $this
+			->router
+			->generate($this->imageResizeControllerRouteName, [
+				'id' => (int) $imageMedia->getId(),
+				'height' => (int) $options['height'],
+				'width' => (int) $options['width'],
+				'type' => (int) $options['type'],
+				'_format' => $imageMedia->getExtension(),
+			], $routeReferenceType);
 
-        $this->fixRouterContext();
+		$this->fixRouterContext();
 
-        return $generatedRoute;
-    }
+		return $generatedRoute;
+	}
 
-    /**
-     * Return route of image.
-     *
-     * @param ImageInterface $imageMedia  Imagemedia element
-     * @param bool           $absoluteUrl If the url generated shoud be absolute
-     *
-     * @return string image route
-     */
-    public function viewImage(ImageInterface $imageMedia, $absoluteUrl = false)
-    {
-        $this->prepareRouterContext();
+	/**
+	 * Return route of image.
+	 *
+	 * @param ImageInterface $imageMedia  Imagemedia element
+	 * @param bool           $absoluteUrl If the url generated shoud be absolute
+	 *
+	 * @return string image route
+	 */
+	public function viewImage(ImageInterface $imageMedia, $absoluteUrl = false) {
+		$this->prepareRouterContext();
 
-        $routeReferenceType = $this->getReferenceType($absoluteUrl);
+		$routeReferenceType = $this->getReferenceType($absoluteUrl);
 
-        $generatedRoute = $this
-            ->router
-            ->generate($this->imageViewControllerRouteName, [
-                'id' => (int) $imageMedia->getId(),
-                '_format' => $imageMedia->getExtension(),
-            ], $routeReferenceType);
+		$generatedRoute = $this
+			->router
+			->generate($this->imageViewControllerRouteName, [
+				'id' => (int) $imageMedia->getId(),
+				'_format' => $imageMedia->getExtension(),
+			], $routeReferenceType);
 
-        $this->fixRouterContext();
+		$this->fixRouterContext();
 
-        return $generatedRoute;
-    }
+		return $generatedRoute;
+	}
 
-    /**
-     * Return route of attachment.
-     *
-     * @param AttachmentInterface $attachmentMedia  Attachmentmedia element
-     * @param bool           $absoluteUrl If the url generated shoud be absolute
-     *
-     * @return string attachment route
-     */
-    public function attachmentSource($attachmentMedia, $absoluteUrl = false)
-    {
-        $this->prepareRouterContext();
-        // $routeReferenceType = $this->getReferenceType($absoluteUrl);
+	/**
+	 * Return route of attachment.
+	 *
+	 * @param AttachmentInterface $attachmentMedia  Attachmentmedia element
+	 * @param bool           $absoluteUrl If the url generated shoud be absolute
+	 *
+	 * @return string attachment route
+	 */
+	public function attachmentSource($attachmentMedia, $absoluteUrl = false) {
+		$this->prepareRouterContext();
+		// $routeReferenceType = $this->getReferenceType($absoluteUrl);
 
-        $generatedRoute = $this
-            ->router
-            ->generate('elcodi.route.attachment_download', [
-                'id' => (int) $attachmentMedia->getId(),
-            ]);
+		$generatedRoute = $this
+			->router
+			->generate('elcodi.route.attachment_download', [
+				'id' => (int) $attachmentMedia->getId(),
+			]);
 
-        $this->fixRouterContext();
+		$this->fixRouterContext();
 
-        return $generatedRoute;
-    }
+		return $generatedRoute;
+	}
 
-    /**
-     * Fixes a router Context back after changing the "Host" URL.
-     *
-     * @return $this Self object
-     */
-    private function fixRouterContext()
-    {
-        if ($this->generatedRouteHost) {
-            $this
-                ->router
-                ->setContext($this->originalContext);
-        }
+	/**
+	 * Return route of image.
+	 *
+	 * @param AttachmentInterface $attachmentMedia  AttachmentInterface element
+	 * @param bool           $absoluteUrl If the url generated shoud be absolute
+	 *
+	 * @return string image route
+	 */
+	public function viewAttachment($attachmentMedia, $absoluteUrl = false) {
+		$this->prepareRouterContext();
 
-        return $this;
-    }
+		$routeReferenceType = $this->getReferenceType($absoluteUrl);
 
-    /**
-     * return extension name.
-     *
-     * @return string extension name
-     */
-    public function getName()
-    {
-        return 'image_extension';
-    }
+		$generatedRoute = $this
+			->router
+			->generate('elcodi.route.attachment_view', [
+				'id' => (int) $attachmentMedia->getId(),
+				'_format' => $attachmentMedia->getExtension(),
+			], $routeReferenceType);
 
-    /**
-     * Prepares the Host part of a image resize URL.
-     *
-     * @return mixed Route reference type
-     */
-    private function prepareRouterContext()
-    {
-        if ($this->generatedRouteHost) {
-            $this
-                ->router
-                ->setContext($this->modifiedContext);
+		$this->fixRouterContext();
 
-            /**
-             * When a Host is set for the image route,
-             * we need to change the route context URL.
-             */
-            $this
-                ->router
-                ->getContext()
-                ->setHost($this->generatedRouteHost);
-        }
-    }
+		return $generatedRoute;
+	}
 
-    /**
-     * Gets the reference type depending on the option and the generated route
-     * host.
-     *
-     * @param bool $absoluteUrlOption The received absolute url option.
-     *
-     * @return bool The reference type.
-     */
-    private function getReferenceType($absoluteUrlOption = false)
-    {
-        return ($this->generatedRouteHost || $absoluteUrlOption)
-            ? UrlGeneratorInterface::ABSOLUTE_URL
-            : UrlGeneratorInterface::ABSOLUTE_PATH;
-    }
+	/**
+	 * Fixes a router Context back after changing the "Host" URL.
+	 *
+	 * @return $this Self object
+	 */
+	private function fixRouterContext() {
+		if ($this->generatedRouteHost) {
+			$this
+				->router
+				->setContext($this->originalContext);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * return extension name.
+	 *
+	 * @return string extension name
+	 */
+	public function getName() {
+		return 'image_extension';
+	}
+
+	/**
+	 * Prepares the Host part of a image resize URL.
+	 *
+	 * @return mixed Route reference type
+	 */
+	private function prepareRouterContext() {
+		if ($this->generatedRouteHost) {
+			$this
+				->router
+				->setContext($this->modifiedContext);
+
+			/**
+			 * When a Host is set for the image route,
+			 * we need to change the route context URL.
+			 */
+			$this
+				->router
+				->getContext()
+				->setHost($this->generatedRouteHost);
+		}
+	}
+
+	/**
+	 * Gets the reference type depending on the option and the generated route
+	 * host.
+	 *
+	 * @param bool $absoluteUrlOption The received absolute url option.
+	 *
+	 * @return bool The reference type.
+	 */
+	private function getReferenceType($absoluteUrlOption = false) {
+		return ($this->generatedRouteHost || $absoluteUrlOption)
+		? UrlGeneratorInterface::ABSOLUTE_URL
+		: UrlGeneratorInterface::ABSOLUTE_PATH;
+	}
 }
