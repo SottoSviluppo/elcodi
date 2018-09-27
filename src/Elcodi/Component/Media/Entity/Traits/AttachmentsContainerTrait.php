@@ -16,19 +16,21 @@ trait AttachmentsContainerTrait
      */
     protected $attachments;
 
-    /**
-     * Set add attachment.
-     *
-     * @param \Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface $attachment Attachment object to be added
-     *
-     * @return $this Self object
-     */
-    public function addAttachment( /*\Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface*/$attachment)
-    {
-        $this->attachments->add($attachment);
+	/**
+	 * Set add attachment.
+	 *
+	 * @param \Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface $attachment Attachment object to be added
+	 *
+	 * @return $this Self object
+	 */
+	public function addAttachment( /*\Elcodi\Component\Media\Entity\Interfaces\AttachmentInterface*/$attachment) {
+		if ($this->attachments == null) {
+			$this->attachments = new ArrayCollection();
+		}
+		$this->attachments->add($attachment);
 
-        return $this;
-    }
+		return $this;
+	}
 
     /**
      * Get if entity is enabled.
