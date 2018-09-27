@@ -11,6 +11,13 @@ services:
         parent: elcodi.abstract_repository
         arguments:
             - %elcodi.entity.customer.class%
+    #
+    # Repository for entity customer category
+    #
+    elcodi.repository.customer_category:
+        parent: elcodi.abstract_repository
+        arguments:
+            - %elcodi.entity.customer_category.class%
 
     #
     # Repository for entity admin

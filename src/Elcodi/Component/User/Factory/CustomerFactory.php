@@ -66,6 +66,7 @@ class CustomerFactory extends AbstractFactory
             ->setNewsletter(false)
             ->setCompany(false)
             ->setAddresses(new ArrayCollection())
+            ->setCustomerCategories(new ArrayCollection())
             ->setCarts(new ArrayCollection())
             ->setOrders(new ArrayCollection())
             ->setToken($this->generator->generate(2))

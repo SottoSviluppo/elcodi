@@ -467,6 +467,19 @@ class Customer extends AbstractUser implements CustomerInterface {
 		return $this;
 	}
 
+
+	/**
+	 * Add customerCategories.
+	 *
+	 * @param CustomerCategoryInterface $customerCategories
+	 *
+	 * @return $this Self object
+	 */
+	public function addCustomerCategories(CustomerCategory $customerCategories) {
+		$this->customerCategories->add($customerCategories);
+		return $this;
+	}
+
 	/**
 	 * Remove address.
 	 *
@@ -493,6 +506,11 @@ class Customer extends AbstractUser implements CustomerInterface {
 		return $this;
 	}
 
+        public function setCustomerCategories(Collection $customerCategories){
+		$this->customerCategories = $customerCategories;
+		return $this;
+	}
+        
 	/**
 	 * Get addresses.
 	 *
