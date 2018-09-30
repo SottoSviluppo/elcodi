@@ -53,12 +53,6 @@ class AddressFormatter
     {
         $cityLocationId = $address->getCity();
 
-        // removed to bypass location
-        // $cityHierarchy = $this
-        //     ->locationProvider
-        //     ->getHierarchy($cityLocationId);
-        // $cityHierarchyAsc = array_reverse($cityHierarchy);
-
         $addressArray = [
             'id' => $address->getId(),
             'name' => $address->getName(),
@@ -70,18 +64,14 @@ class AddressFormatter
             'country' => $this->getCountryName($address),
             'postalCode' => $address->getPostalcode(),
             'phone' => $address->getPhone(),
+            'province' => '',
             'mobile' => $address->getMobile(),
             'comment' => $address->getComments(),
         ];
 
-        // removed to bypass location
-        // foreach ($cityHierarchyAsc as $cityLocationNode) {
-        //     /**
-        //      * @var LocationData $cityLocationNode
-        //      */
-        //     $addressArray['city'][$cityLocationNode->getType()]
-        //         = $cityLocationNode->getName();
-        // }
+        if (method_exists($address, 'getProvince')) {
+            $addressArray['province'] = $address->getProvince();
+        }
 
         $addressArray['fullAddress'] =
         $this->buildFullAddressString(
