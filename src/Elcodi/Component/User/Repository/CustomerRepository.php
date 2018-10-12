@@ -84,4 +84,18 @@ class CustomerRepository extends EntityRepository implements UserEmaileableInter
 
         return false;
     }
+
+    public function findWithCustomerCategory($category)
+    {
+        $response = $this
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->innerJoin('c.customerCategories', 'customerCategory')
+            ->andWhere('customerCategory.id = :categoryId')
+            ->setParameter('categoryId', $category->getId())
+            ->getQuery()
+            ->getResult();
+
+        return $response;
+    }
 }

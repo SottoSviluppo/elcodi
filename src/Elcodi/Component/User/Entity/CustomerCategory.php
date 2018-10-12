@@ -53,7 +53,7 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 * Many-to-Many association between categories
 	 * and products. The resulting collection could be huge.
 	 */
-	protected $coupons;
+    protected $categories;
 
 	/**
 	 * Set name.
@@ -62,7 +62,8 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 *
 	 * @return $this Self object
 	 */
-	public function setName($name) {
+    public function setName($name)
+    {
 		$this->name = $name;
 
 		return $this;
@@ -73,7 +74,8 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 *
 	 * @return string name
 	 */
-	public function getName() {
+    public function getName()
+    {
 		return $this->name;
 	}
 
@@ -82,17 +84,19 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 *
 	 * @return Collection
 	 */
-	public function getCustomers() {
+    public function getCustomers()
+    {
 		return $this->customers;
 	}
 
 	/**
-	 * Get coupons.
+     * Get categories.
 	 *
 	 * @return Collection
 	 */
-	public function getCoupons() {
-		return $this->coupons;
+    public function getCategories()
+    {
+        return $this->categories;
 	}
 
 	/**
@@ -100,7 +104,8 @@ class CustomerCategory implements CustomerCategoryInterface {
 	 *
 	 * @return string
 	 */
-	public function __toString() {
+    public function __toString()
+    {
 		return (string) $this->getName();
 	}
 }

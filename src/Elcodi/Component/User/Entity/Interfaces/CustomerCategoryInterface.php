@@ -68,9 +68,9 @@ EnabledInterface {
 	public function getCustomers();
 
 	/**
-	 * Get coupons.
+     * Get categories.
 	 *
 	 * @return Collection
 	 */
-	public function getCoupons();
+    public function getCategories();
 }

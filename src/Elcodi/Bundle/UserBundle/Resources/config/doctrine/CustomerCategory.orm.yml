@@ -32,8 +32,8 @@ Elcodi\Component\User\Entity\CustomerCategory:
         customers:
             targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerInterface
             mappedBy: customerCategories
-        coupons:
-            targetEntity: Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface
+        categories:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerCategoryInterface
             mappedBy: customerCategories
         
     lifecycleCallbacks:
