@@ -32,9 +32,9 @@ Elcodi\Component\User\Entity\CustomerCategory:
         customers:
             targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerInterface
             mappedBy: customerCategories
-        categories:
-            targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerCategoryInterface
-            mappedBy: customerCategories
+        #categories:
+        #    targetEntity: Elcodi\Component\User\Entity\Interfaces\CustomerCategoryInterface
+        #    mappedBy: customerCategories
         
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

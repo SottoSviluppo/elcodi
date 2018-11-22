@@ -165,6 +165,37 @@ abstract class Purchasable implements PurchasableInterface
     protected $private;
 
     /**
+     * @var integer
+     *
+     * Indicate porchusable position in view.
+     */
+    protected $position;
+
+    /**
+     * Get Position.
+     *
+     * @return integer Position
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Sets Position.
+     *
+     * @param integer $position Position
+     *
+     * @return $this Self object
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
      * Get Slug.
      *
      * @return string Slug

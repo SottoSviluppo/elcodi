@@ -24,6 +24,7 @@ Elcodi\Component\CartCoupon\Entity\OrderCoupon:
     manyToOne:
         order:
             targetEntity: Elcodi\Component\Cart\Entity\Interfaces\OrderInterface
+            inversedBy: orderCoupons
             joinColumn:
                 name: order_id
                 referencedColumnName: id

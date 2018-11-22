@@ -127,6 +127,12 @@ Elcodi\Component\Product\Entity\Purchasable:
             column: private
             type: boolean
             nullable: true  
+        position:
+            column: position
+            type: integer
+            nullable: true
+            options:
+                default: '0'
     manyToOne:
         principalCategory:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface

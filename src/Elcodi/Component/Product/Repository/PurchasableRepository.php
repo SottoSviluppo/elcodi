@@ -43,6 +43,7 @@ class PurchasableRepository extends EntityRepository
             ->innerJoin('p.categories', 'c')
             ->where('c.id IN (:categories)')
             ->andWhere('p.enabled = true')
+            ->addOrderBy('p.position', 'ASC')
             ->addOrderBy('p.' . $orderByField, $orderByDirection)
             ->setParameters([
                 'categories' => $categories,
