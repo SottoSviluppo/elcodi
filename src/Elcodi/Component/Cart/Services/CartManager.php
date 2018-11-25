@@ -424,6 +424,17 @@ class CartManager
         return $this;
     }
 
+    public function removeEmptyLines(CartInterface $cart)
+    {
+        foreach ($cart->getCartLines() as $cartLine) {
+            if ($cartLine->getQuantity() <= 0) {
+                return $this->silentRemoveLine($cart, $cartLine);
+            }
+        }
+
+        return $this;
+    }
+
     protected function getTax($purchasable)
     {
         $tax = $this->store->getDefaultTax();
