@@ -65,6 +65,13 @@ class Pack extends Purchasable implements PackInterface
     protected $purchasables;
 
     /**
+     * @var Collection
+     *
+     * Variants for this product
+     */
+    protected $variants;
+
+    /**
      * Set stock type.
      *
      * @param int $stockType Stock type
@@ -294,6 +301,16 @@ class Pack extends Purchasable implements PackInterface
         $this->manufacturer = $manufacturer;
 
         return $this;
+    }
+
+    /**
+     * Tells if this product has variants.
+     *
+     * @return bool Product has variants
+     */
+    public function getVariants()
+    {
+        return $this->variants;
     }
 
     /**
