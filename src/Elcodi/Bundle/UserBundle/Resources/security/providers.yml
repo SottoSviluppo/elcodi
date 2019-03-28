@@ -4,7 +4,6 @@ security:
         customer:
             entity:
                 class: %elcodi.entity.customer.class%
-                property: email
         adminuser:
             entity:
                 class: %elcodi.entity.admin_user.class%
