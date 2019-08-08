@@ -191,6 +191,7 @@ class ImageExtension extends Twig_Extension {
 			->router
 			->generate('elcodi.route.attachment_download', [
 				'id' => (int) $attachmentMedia->getId(),
+				'_format' => $attachmentMedia->getExtension(),
 			]);
 
 		$this->fixRouterContext();

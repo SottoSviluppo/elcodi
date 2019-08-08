@@ -235,6 +235,7 @@ class AttachmentUploadController {
 			->headers
 			->add([
 				'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+				'Content-Type' => 'application/octet-stream',
 			]);
 
 		return $response;

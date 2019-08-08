@@ -33,7 +33,7 @@ elcodi.route.attachment_view:
         type: 0
 
 elcodi.route.attachment_download:
-    path: /attachments/download/{id}
+    path: /attachments/download/{id}.{_format}
     methods: GET
     defaults:
         _controller: elcodi.controller.attachment_upload:downloadAction
