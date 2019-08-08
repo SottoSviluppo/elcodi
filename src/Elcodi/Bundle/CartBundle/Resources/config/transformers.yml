@@ -18,3 +18,4 @@ services:
             - '@elcodi.event_dispatcher.order_line'
             - '@elcodi.factory.order_line'
             - '@elcodi.wrapper.customer'
+            - '@elcodi.store'

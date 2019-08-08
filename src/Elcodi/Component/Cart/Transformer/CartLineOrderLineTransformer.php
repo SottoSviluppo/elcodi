@@ -35,128 +35,129 @@ use Elcodi\Component\Cart\Factory\OrderLineFactory;
  *
  * @api
  */
-class CartLineOrderLineTransformer
-{
-    /**
-     * @var OrderLineEventDispatcher
-     *
-     * OrderLineEventDispatcher
-     */
-    private $orderLineEventDispatcher;
+class CartLineOrderLineTransformer {
+	/**
+	 * @var OrderLineEventDispatcher
+	 *
+	 * OrderLineEventDispatcher
+	 */
+	private $orderLineEventDispatcher;
 
-    /**
-     * @var OrderLineFactory
-     *
-     * OrderLine factory
-     */
-    private $orderLineFactory;
+	/**
+	 * @var OrderLineFactory
+	 *
+	 * OrderLine factory
+	 */
+	private $orderLineFactory;
 
-    private $customerWrapper;
+	private $customerWrapper;
+	private $store;
 
-    /**
-     * Construct method.
-     *
-     * @param OrderLineEventDispatcher $orderLineEventDispatcher Event dispatcher
-     * @param OrderLineFactory         $orderLineFactory         OrderLineFactory
-     */
-    public function __construct(
-        OrderLineEventDispatcher $orderLineEventDispatcher,
-        OrderLineFactory $orderLineFactory,
-        $customerWrapper
+	/**
+	 * Construct method.
+	 *
+	 * @param OrderLineEventDispatcher $orderLineEventDispatcher Event dispatcher
+	 * @param OrderLineFactory         $orderLineFactory         OrderLineFactory
+	 */
+	public function __construct(
+		OrderLineEventDispatcher $orderLineEventDispatcher,
+		OrderLineFactory $orderLineFactory,
+		$customerWrapper,
+		$store
+	) {
+		$this->orderLineEventDispatcher = $orderLineEventDispatcher;
+		$this->orderLineFactory = $orderLineFactory;
+		$this->customerWrapper = $customerWrapper;
+		$this->store = $store;
+	}
 
-    ) {
-        $this->orderLineEventDispatcher = $orderLineEventDispatcher;
-        $this->orderLineFactory = $orderLineFactory;
-        $this->customerWrapper = $customerWrapper;
-    }
+	/**
+	 * Given a set of CartLines, return a set of OrderLines.
+	 *
+	 * @param OrderInterface $order     Order
+	 * @param Collection     $cartLines Set of CartLines
+	 *
+	 * @return Collection Set of OrderLines
+	 */
+	public function createOrderLinesByCartLines(
+		OrderInterface $order,
+		Collection $cartLines
+	) {
+		$orderLines = new ArrayCollection();
 
-    /**
-     * Given a set of CartLines, return a set of OrderLines.
-     *
-     * @param OrderInterface $order     Order
-     * @param Collection     $cartLines Set of CartLines
-     *
-     * @return Collection Set of OrderLines
-     */
-    public function createOrderLinesByCartLines(
-        OrderInterface $order,
-        Collection $cartLines
-    ) {
-        $orderLines = new ArrayCollection();
+		/**
+		 * @var CartLineInterface $cartLine
+		 */
+		foreach ($cartLines as $cartLine) {
+			$orderLine = $this
+				->createOrderLineByCartLine(
+					$order,
+					$cartLine
+				);
 
-        /**
-         * @var CartLineInterface $cartLine
-         */
-        foreach ($cartLines as $cartLine) {
-            $orderLine = $this
-                ->createOrderLineByCartLine(
-                    $order,
-                    $cartLine
-                );
+			$cartLine->setOrderLine($orderLine);
+			$orderLines->add($orderLine);
+		}
 
-            $cartLine->setOrderLine($orderLine);
-            $orderLines->add($orderLine);
-        }
+		return $orderLines;
+	}
 
-        return $orderLines;
-    }
+	/**
+	 * Given a cart line, creates a new order line.
+	 *
+	 * @param OrderInterface    $order    Order
+	 * @param CartLineInterface $cartLine Cart Line
+	 *
+	 * @return OrderLineInterface OrderLine created
+	 */
+	public function createOrderLineByCartLine(
+		OrderInterface $order,
+		CartLineInterface $cartLine
+	) {
+		$orderLine = ($cartLine->getOrderLine() instanceof OrderLineInterface)
+		? $cartLine->getOrderLine()
+		: $this->orderLineFactory->create();
 
-    /**
-     * Given a cart line, creates a new order line.
-     *
-     * @param OrderInterface    $order    Order
-     * @param CartLineInterface $cartLine Cart Line
-     *
-     * @return OrderLineInterface OrderLine created
-     */
-    public function createOrderLineByCartLine(
-        OrderInterface $order,
-        CartLineInterface $cartLine
-    ) {
-        $orderLine = ($cartLine->getOrderLine() instanceof OrderLineInterface)
-        ? $cartLine->getOrderLine()
-        : $this->orderLineFactory->create();
+		/**
+		 * @var OrderLineInterface $orderLine
+		 */
 
-        /**
-         * @var OrderLineInterface $orderLine
-         */
+		$amount = $cartLine->getAmount();
+		if (!$this->store->getTaxIncluded()) {
+			$amount = $amount->add($cartLine->getTaxAmount());
+		}
 
-        $amount = $cartLine->getAmount();
-        if ($cartLine->getTaxAmount() !== null) {
-        $amount = $amount->add($cartLine->getTaxAmount());
-        }
+		$orderLine
+			->setOrder($order)
+			->setPurchasable($cartLine->getPurchasable())
+			->setQuantity($cartLine->getQuantity())
+			->setPurchasableAmount($cartLine->getPurchasableAmount())
+			->setTax($cartLine->getTax())
+			->setAmount($amount)
+			->setHeight($cartLine->getHeight())
+			->setWidth($cartLine->getWidth())
+			->setDepth($cartLine->getDepth())
+			->setWeight($cartLine->getWeight());
 
-        $orderLine
-            ->setOrder($order)
-            ->setPurchasable($cartLine->getPurchasable())
-            ->setQuantity($cartLine->getQuantity())
-            ->setPurchasableAmount($cartLine->getPurchasableAmount())
-            ->setTax($cartLine->getTax())
-            ->setAmount($amount)
-            ->setHeight($cartLine->getHeight())
-            ->setWidth($cartLine->getWidth())
-            ->setDepth($cartLine->getDepth())
-            ->setWeight($cartLine->getWeight());
+		// force different tax if customer has different tax
+		$customer = $this
+			->customerWrapper
+			->get();
 
-        // force different tax if customer has different tax
-        $customer = $this
-            ->customerWrapper
-            ->get();
+		if ($customer !== null &&
+			$customer->getTax() !== null &&
+			$customer->getTax() !== $cartLine->getTax()) {
+			$orderLine->setTax($customer->getTax());
+		}
 
-        if ($customer !== null &&
-            $customer->getTax() !== null &&
-            $customer->getTax() !== $cartLine->getTax()) {
-            $orderLine->setTax($customer->getTax());
-        }
+		$this
+			->orderLineEventDispatcher
+			->dispatchOrderLineOnCreatedEvent(
+				$order,
+				$cartLine,
+				$orderLine
+			);
 
-        $this
-            ->orderLineEventDispatcher
-            ->dispatchOrderLineOnCreatedEvent(
-                $order,
-                $cartLine,
-                $orderLine
-            );
-
-        return $orderLine;
-    }
+		return $orderLine;
+	}
 }
