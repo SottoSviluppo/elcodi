@@ -115,9 +115,15 @@ class CartCouponIncludeExcludeCategoriesValidator {
 
 		foreach ($couponCategories as $couponCategory) {
 			foreach ($purchasableCategories as $purchasableCategory) {
-				$purchasableParentCategoryId = $purchasableCategory->getParent()->getId();
-				if ($purchasableCategory->getId() == $couponCategory->getId() || $purchasableParentCategoryId == $couponCategory->getId()) {
-					return true;
+				if ($purchasableCategory->getParent() != null) {
+					$purchasableParentCategoryId = $purchasableCategory->getParent()->getId();
+					if ($purchasableCategory->getId() == $couponCategory->getId() || $purchasableParentCategoryId == $couponCategory->getId()) {
+						return true;
+					}
+				} else {
+					if ($purchasableCategory->getId() == $couponCategory->getId()) {
+						return true;
+					}
 				}
 			}
 		}

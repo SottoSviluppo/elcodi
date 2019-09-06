@@ -21,6 +21,7 @@ services:
         class: Elcodi\Component\CartCoupon\Services\PurchasableAmountCouponService
         arguments:
             - '@elcodi.wrapper.currency'
+            - '@elcodi.store'
 
     elcodi.service.customer_category:
         class: Elcodi\Component\CartCoupon\Services\CustomerCategoryService
