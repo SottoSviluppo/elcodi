@@ -20,7 +20,6 @@ namespace Elcodi\Component\CartCoupon\Applicator;
 use Elcodi\Component\CartCoupon\Applicator\Interfaces\CartCouponApplicatorInterface;
 use Elcodi\Component\CartCoupon\Services\PurchasableAmountCouponService;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
-use Elcodi\Component\Coupon\ElcodiCouponTypes;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Currency\Entity\Money;
@@ -92,15 +91,16 @@ class PercentCartCouponApplicator implements CartCouponApplicatorInterface {
 		CartInterface $cart,
 		CouponInterface $coupon
 	) {
-		$couponCategoriesType = $coupon->getIncludeCategories();
+		// $couponCategoriesType = $coupon->getIncludeCategories();
 		$couponPercent = $coupon->getDiscount();
 		// Se il $couponCategoriesType è del tipo INCLUDE_CATEGORY oppure EXCLUDE_CATEGORY calcolo l'ammontare del carrello sul quale applicare lo sconto percentuale
-		if ($couponCategoriesType == ElcodiCouponTypes::INCLUDE_CATEGORY || $couponCategoriesType == ElcodiCouponTypes::EXCLUDE_CATEGORY) {
-			$purchasableAmount = $this->purchasableAmountCouponService->getPurchasableAmount($cart, $coupon);
-		} elseif ($couponCategoriesType == null) {
-			//il coupon non ha nessuna regola sulle categorie pertanto ammontare del carrello sul quale applicare il coupon è l'importo totale del carrello
-			$purchasableAmount = $cart->getPurchasableAmount();
-		}
+		// if ($couponCategoriesType == ElcodiCouponTypes::INCLUDE_CATEGORY || $couponCategoriesType == ElcodiCouponTypes::EXCLUDE_CATEGORY) {
+		$purchasableAmount = $this->purchasableAmountCouponService->getPurchasableAmount($cart, $coupon);
+		// } elseif ($couponCategoriesType == null) {
+		//il coupon non ha nessuna regola sulle categorie pertanto l'ammontare del carrello sul quale applicare il coupon è l'importo totale del carrello
+		// $purchasableAmount = $cart->getPurchasableAmount();
+		// }
+		// \Doctrine\Common\Util\Debug::dump($purchasableAmount->multiply($couponPercent / 100));die();
 
 		return $purchasableAmount->multiply($couponPercent / 100);
 	}
