@@ -32,13 +32,12 @@ use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 /**
  * Class Category.
  */
-class Category implements CategoryInterface
-{
+class Category implements CategoryInterface {
 	use IdentifiableTrait,
 	DateTimeTrait,
 	EnabledTrait,
 	ImagesContainerTrait,
-    AttachmentsContainerTrait,
+	AttachmentsContainerTrait,
 	IconsContainerTrait,
 	PrincipalImageTrait,
 	MetaDataTrait, ExtraDataTrait;
@@ -49,6 +48,13 @@ class Category implements CategoryInterface
 	 * Category name
 	 */
 	protected $name;
+
+	/**
+	 * @var string
+	 *
+	 * Category description
+	 */
+	protected $description;
 
 	/**
 	 * @var string
@@ -135,6 +141,28 @@ class Category implements CategoryInterface
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * Set description.
+	 *
+	 * @param string $description description
+	 *
+	 * @return $this Self object
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Return description.
+	 *
+	 * @return string description
+	 */
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**
