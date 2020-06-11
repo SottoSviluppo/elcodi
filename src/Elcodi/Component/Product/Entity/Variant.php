@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
-
 use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface;
@@ -36,195 +35,198 @@ use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
  * A Variant will normally have a different SKU than its parent product,
  * so it can have independent stock and pricing informations.
  */
-class Variant extends Purchasable implements VariantInterface
-{
-    /**
-     * @var ProductInterface
-     *
-     * Parent product
-     */
-    protected $product;
+class Variant extends Purchasable implements VariantInterface {
+	/**
+	 * @var ProductInterface
+	 *
+	 * Parent product
+	 */
+	protected $product;
 
-    /**
-     * @var Collection
-     *
-     * Collection of possible options for this product
-     */
-    protected $options;
+	/**
+	 * @var Collection
+	 *
+	 * Collection of possible options for this product
+	 */
+	protected $options;
 
-    /**
-     * Gets parent product.
-     *
-     * @return ProductInterface
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
+	/**
+	 * Gets parent product.
+	 *
+	 * @return ProductInterface
+	 */
+	public function getProduct() {
+		return $this->product;
+	}
 
-    /**
-     * Sets parent product.
-     *
-     * @param ProductInterface $product
-     *
-     * @return $this Self object
-     */
-    public function setProduct(ProductInterface $product)
-    {
-        $this->product = $product;
+	/**
+	 * Sets parent product.
+	 *
+	 * @param ProductInterface $product
+	 *
+	 * @return $this Self object
+	 */
+	public function setProduct(ProductInterface $product) {
+		$this->product = $product;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Gets this variant option values.
-     *
-     * @return Collection
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
+	/**
+	 * Gets this variant option values.
+	 *
+	 * @return Collection
+	 */
+	public function getOptions() {
+		return $this->options;
+	}
 
-    /**
-     * Sets this variant option values.
-     *
-     * @param Collection $options
-     *
-     * @return $this Self object
-     */
-    public function setOptions(Collection $options)
-    {
-        /**
-         * We want to be able to assign an empty
-         * ArrayCollection to variant options.
-         *
-         * When the collection is not empty, each
-         * option in the collection will be added
-         * separately since it needs to update the
-         * parent product attribute list
-         */
-        if ($options->isEmpty()) {
-            $this->options = $options;
-        } else {
-            $this->options->clear();
-        }
+	/**
+	 * Sets this variant option values.
+	 *
+	 * @param Collection $options
+	 *
+	 * @return $this Self object
+	 */
+	public function setOptions(Collection $options) {
+		/**
+		 * We want to be able to assign an empty
+		 * ArrayCollection to variant options.
+		 *
+		 * When the collection is not empty, each
+		 * option in the collection will be added
+		 * separately since it needs to update the
+		 * parent product attribute list
+		 */
+		if ($options->isEmpty()) {
+			$this->options = $options;
+		} else {
+			$this->options->clear();
+		}
 
-        /**
-         * @var ValueInterface $option
-         */
-        foreach ($options as $option) {
+		/**
+		 * @var ValueInterface $option
+		 */
+		foreach ($options as $option) {
 
-            /**
-             * We need to update the parent product attribute collection.
-             */
-            $this->addOption($option);
-        }
+			/**
+			 * We need to update the parent product attribute collection.
+			 */
+			$this->addOption($option);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Adds an option to this variant.
-     *
-     * Passed option Attribute is also added to the attribute collection
-     * of the parent Product.
-     *
-     * If Variant::product is not set or does not implement ProductInterface
-     * a LogicException is thrown: presence of the parent product is mandatory
-     * since adding an Option to a Variant also updates the Parent product
-     * Attribute collection. This way Variant::options and Product::attributes
-     * are synchronized
-     *
-     * @param ValueInterface $option
-     *
-     * @throws \LogicException
-     *
-     * @return $this Self object
-     */
-    public function addOption(ValueInterface $option)
-    {
-        if (!$this->product instanceof ProductInterface) {
-            throw new \LogicException('Cannot add options to a Variant before setting a parent Product');
-        }
+	/**
+	 * Adds an option to this variant.
+	 *
+	 * Passed option Attribute is also added to the attribute collection
+	 * of the parent Product.
+	 *
+	 * If Variant::product is not set or does not implement ProductInterface
+	 * a LogicException is thrown: presence of the parent product is mandatory
+	 * since adding an Option to a Variant also updates the Parent product
+	 * Attribute collection. This way Variant::options and Product::attributes
+	 * are synchronized
+	 *
+	 * @param ValueInterface $option
+	 *
+	 * @throws \LogicException
+	 *
+	 * @return $this Self object
+	 */
+	public function addOption(ValueInterface $option) {
+		if (!$this->product instanceof ProductInterface) {
+			throw new \LogicException('Cannot add options to a Variant before setting a parent Product');
+		}
 
-        $this
-            ->options
-            ->add($option);
+		$this
+			->options
+			->add($option);
 
-        $this
-            ->product
-            ->addAttribute(
-                $option->getAttribute()
-            );
+		$this
+			->product
+			->addAttribute(
+				$option->getAttribute()
+			);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Removes an option from this variant.
-     *
-     * @param ValueInterface $option
-     *
-     * @return $this Self object
-     */
-    public function removeOption(ValueInterface $option)
-    {
-        $this
-            ->options
-            ->removeElement($option);
+	/**
+	 * Removes an option from this variant.
+	 *
+	 * @param ValueInterface $option
+	 *
+	 * @return $this Self object
+	 */
+	public function removeOption(ValueInterface $option) {
+		$this
+			->options
+			->removeElement($option);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get categories.
-     *
-     * @return Collection Categories
-     */
-    public function getCategories()
-    {
-        return $this
-            ->getProduct()
-            ->getCategories();
-    }
+	/**
+	 * Get categories.
+	 *
+	 * @return Collection Categories
+	 */
+	public function getCategories() {
 
-    /**
-     * Get the principalCategory.
-     *
-     * @return CategoryInterface Principal category
-     */
-    public function getPrincipalCategory()
-    {
-        return $this
-            ->getProduct()
-            ->getPrincipalCategory();
-    }
+		if ($this
+			->getProduct()) {
+			return $this
+				->getProduct()
+				->getCategories();
+		}
+		return;
+	}
 
-    /**
-     * Product manufacturer.
-     *
-     * @return ManufacturerInterface Manufacturer
-     */
-    public function getManufacturer()
-    {
-        return $this
-            ->getProduct()
-            ->getManufacturer();
-    }
+	/**
+	 * Get the principalCategory.
+	 *
+	 * @return CategoryInterface Principal category
+	 */
+	public function getPrincipalCategory() {
+		if ($this
+			->getProduct()) {
+			return $this
+				->getProduct()
+				->getPrincipalCategory();
+		}
 
-    /**
-     * Get purchasable type.
-     *
-     * @return string Purchasable type
-     */
-    public function getPurchasableType()
-    {
-        return 'product_variant';
-    }
+		return;
+	}
 
-    public function getVariants()
-    {
-        return array();
-    }
+	/**
+	 * Product manufacturer.
+	 *
+	 * @return ManufacturerInterface Manufacturer
+	 */
+	public function getManufacturer() {
+		if ($this
+			->getProduct()) {
+			return $this
+				->getProduct()
+				->getManufacturer();
+		}
+
+		return;
+	}
+
+	/**
+	 * Get purchasable type.
+	 *
+	 * @return string Purchasable type
+	 */
+	public function getPurchasableType() {
+		return 'product_variant';
+	}
+
+	public function getVariants() {
+		return array();
+	}
 }
