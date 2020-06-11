@@ -34,138 +34,153 @@ DateTimeInterface,
 MetaDataInterface,
 EnabledInterface,
 ImagesContainerWithPrincipalImageInterface,
-IconsContainerInterface
-{
-    /**
-     * Set id.
-     *
-     * @param string $id Id
-     *
-     * @return $this Self object
-     */
-    public function setId($id);
+IconsContainerInterface {
+	/**
+	 * Set id.
+	 *
+	 * @param string $id Id
+	 *
+	 * @return $this Self object
+	 */
+	public function setId($id);
 
-    /**
-     * Get id.
-     *
-     * @return string Id
-     */
-    public function getId();
+	/**
+	 * Get id.
+	 *
+	 * @return string Id
+	 */
+	public function getId();
 
-    /**
-     * Set name.
-     *
-     * @param string $name Name
-     *
-     * @return $this Self object
-     */
-    public function setName($name);
+	/**
+	 * Set name.
+	 *
+	 * @param string $name Name
+	 *
+	 * @return $this Self object
+	 */
+	public function setName($name);
 
-    /**
-     * Return name.
-     *
-     * @return string name
-     */
-    public function getName();
+	/**
+	 * Return name.
+	 *
+	 * @return string name
+	 */
+	public function getName();
 
-    /**
-     * Set slug.
-     *
-     * @param string $slug Slug
-     *
-     * @return $this Self object
-     */
-    public function setSlug($slug);
+	/**
+	 * Set description.
+	 *
+	 * @param string $description description
+	 *
+	 * @return $this Self object
+	 */
+	public function setDescription($description);
 
-    /**
-     * Get slug.
-     *
-     * @return string Slug
-     */
-    public function getSlug();
+	/**
+	 * Return description.
+	 *
+	 * @return string description
+	 */
+	public function getDescription();
 
-    /**
-     * Set subcategories.
-     *
-     * @param Collection $subCategories Sub categories
-     *
-     * @return $this Self object
-     */
-    public function setSubCategories(Collection $subCategories);
+	/**
+	 * Set slug.
+	 *
+	 * @param string $slug Slug
+	 *
+	 * @return $this Self object
+	 */
+	public function setSlug($slug);
 
-    /**
-     * Get subcategories.
-     *
-     * @return Collection Subcategories
-     */
-    public function getSubCategories();
+	/**
+	 * Get slug.
+	 *
+	 * @return string Slug
+	 */
+	public function getSlug();
 
-    /**
-     * Add Subcategory.
-     *
-     * @param CategoryInterface $category Category to add as subcategory
-     *
-     * @return $this Self object
-     */
-    public function addSubCategory(CategoryInterface $category);
+	/**
+	 * Set subcategories.
+	 *
+	 * @param Collection $subCategories Sub categories
+	 *
+	 * @return $this Self object
+	 */
+	public function setSubCategories(Collection $subCategories);
 
-    /**
-     * Remove subcategory.
-     *
-     * @param CategoryInterface $category
-     *
-     * @return $this Self object
-     */
-    public function removeSubCategory(CategoryInterface $category);
+	/**
+	 * Get subcategories.
+	 *
+	 * @return Collection Subcategories
+	 */
+	public function getSubCategories();
 
-    /**
-     * Set category parent.
-     *
-     * @param CategoryInterface|null $parent Category parent
-     *
-     * @return $this Self object
-     */
-    public function setParent(CategoryInterface $parent = null);
+	/**
+	 * Add Subcategory.
+	 *
+	 * @param CategoryInterface $category Category to add as subcategory
+	 *
+	 * @return $this Self object
+	 */
+	public function addSubCategory(CategoryInterface $category);
 
-    /**
-     * Get category parent.
-     *
-     * @return CategoryInterface Category parent
-     */
-    public function getParent();
+	/**
+	 * Remove subcategory.
+	 *
+	 * @param CategoryInterface $category
+	 *
+	 * @return $this Self object
+	 */
+	public function removeSubCategory(CategoryInterface $category);
 
-    /**
-     * @param bool $root
-     *
-     * @return $this Self object
-     */
-    public function setRoot($root);
+	/**
+	 * Set category parent.
+	 *
+	 * @param CategoryInterface|null $parent Category parent
+	 *
+	 * @return $this Self object
+	 */
+	public function setParent(CategoryInterface $parent = null);
 
-    /**
-     * Get if is root.
-     *
-     * @return bool
-     */
-    public function isRoot();
+	/**
+	 * Get category parent.
+	 *
+	 * @return CategoryInterface Category parent
+	 */
+	public function getParent();
 
-    /**
-     * Set position.
-     *
-     * @param int $position Category relative position
-     *
-     * @return $this Self object
-     */
-    public function setPosition($position);
+	/**
+	 * @param bool $root
+	 *
+	 * @return $this Self object
+	 */
+	public function setRoot($root);
 
-    /**
-     * Return Position.
-     *
-     * @return int Category relative position
-     */
-    public function getPosition();
+	/**
+	 * Get if is root.
+	 *
+	 * @return bool
+	 */
+	public function isRoot();
 
-    public function setCssClass($cssClass);
+	/**
+	 * Set position.
+	 *
+	 * @param int $position Category relative position
+	 *
+	 * @return $this Self object
+	 */
+	public function setPosition($position);
 
-    public function getCssClass();
+	/**
+	 * Return Position.
+	 *
+	 * @return int Category relative position
+	 */
+	public function getPosition();
+
+	public function setCssClass($cssClass);
+
+	public function getCssClass();
 
 }
