@@ -7,3 +7,5 @@ services:
         class: Elcodi\Component\EntityTranslator\Console\TranslationsWarmupCommand
         arguments:
             - '@elcodi.event_dispatcher.entity_translator'
+        tags:
+            - { name: console.command }
