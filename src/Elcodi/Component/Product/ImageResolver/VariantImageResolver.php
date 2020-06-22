@@ -26,41 +26,42 @@ use Elcodi\Component\Product\ImageResolver\Interfaces\PurchasableImageResolverIn
 /**
  * Class VariantImageResolver.
  */
-class VariantImageResolver extends AbstractImageResolverWithImageResolver implements PurchasableImageResolverInterface
-{
-    /**
-     * Get the entity interface.
-     *
-     * @return string Namespace
-     */
-    public function getPurchasableNamespace()
-    {
-        return 'Elcodi\Component\Product\Entity\Interfaces\VariantInterface';
-    }
+class VariantImageResolver extends AbstractImageResolverWithImageResolver implements PurchasableImageResolverInterface {
+	/**
+	 * Get the entity interface.
+	 *
+	 * @return string Namespace
+	 */
+	public function getPurchasableNamespace() {
+		return 'Elcodi\Component\Product\Entity\Interfaces\VariantInterface';
+	}
 
-    /**
-     * Get valid Image.
-     *
-     * @param PurchasableInterface $purchasable Purchasable
-     *
-     * @return ImageInterface|false Image resolved
-     */
-    public function getValidImage(PurchasableInterface $purchasable)
-    {
-        $namespace = $this->getPurchasableNamespace();
-        if (!$purchasable instanceof $namespace) {
-            return false;
-        }
+	/**
+	 * Get valid Image.
+	 *
+	 * @param PurchasableInterface $purchasable Purchasable
+	 *
+	 * @return ImageInterface|false Image resolved
+	 */
+	public function getValidImage(PurchasableInterface $purchasable) {
+		$namespace = $this->getPurchasableNamespace();
+		if (!$purchasable instanceof $namespace) {
+			return false;
+		}
 
-        /**
-         * @var VariantInterface $purchasable
-         */
-        $variantImage = $this
-            ->imageResolver
-            ->resolveImage($purchasable);
+		/**
+		 * @var VariantInterface $purchasable
+		 */
+		$variantImage = $this
+			->imageResolver
+			->resolveImage($purchasable);
 
-        return $variantImage instanceof ImageInterface
-            ? $variantImage
-            : $this->getValidImageByCollection($purchasable->getProduct());
-    }
+		if ($purchasable->getProduct()) {
+			return $variantImage instanceof ImageInterface
+			? $variantImage
+			: $this->getValidImageByCollection($purchasable->getProduct());
+		}
+
+		return $variantImage;
+	}
 }
