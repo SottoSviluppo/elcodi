@@ -27,299 +27,329 @@ use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 /**
  * Class Pack entity.
  */
-class Pack extends Purchasable implements PackInterface
-{
-    /**
-     * @var int
-     *
-     * Pack type
-     */
-    protected $type;
+class Pack extends Purchasable implements PackInterface {
+	/**
+	 * @var int
+	 *
+	 * Pack type
+	 */
+	protected $type;
 
-    /**
-     * @var int
-     *
-     * Discount
-     */
-    protected $discount = 0;
+	/**
+	 * @var int
+	 *
+	 * Discount
+	 */
+	protected $discount = 0;
 
-    /**
-     * @var int
-     *
-     * Stock Type
-     */
-    protected $stockType;
+	/**
+	 * @var int
+	 *
+	 * Stock Type
+	 */
+	protected $stockType;
 
-    /**
-     * @var CategoryInterface
-     *
-     * Principal category
-     */
-    protected $principalCategory;
+	/**
+	 * @var CategoryInterface
+	 *
+	 * Principal category
+	 */
+	protected $principalCategory;
 
-    /**
-     * @var Collection
-     *
-     * Purchasables
-     */
-    protected $purchasables;
+	/**
+	 * @var Collection
+	 *
+	 * Purchasables
+	 */
+	protected $purchasables;
 
-    /**
-     * @var Collection
-     *
-     * Variants for this product
-     */
-    protected $variants;
+	/**
+	 * @var Collection
+	 *
+	 * Variants for this product
+	 */
+	protected $variants;
 
-    /**
-     * Set stock type.
-     *
-     * @param int $stockType Stock type
-     *
-     * @return $this Self object
-     */
-    public function setStockType($stockType)
-    {
-        $this->stockType = $stockType;
+	/**
+	 * Set stock type.
+	 *
+	 * @param int $stockType Stock type
+	 *
+	 * @return $this Self object
+	 */
+	public function setStockType($stockType) {
+		$this->stockType = $stockType;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get stock type.
-     *
-     * @return int Stock type
-     */
-    public function getStockType()
-    {
-        return $this->stockType;
-    }
+	/**
+	 * Get stock type.
+	 *
+	 * @return int Stock type
+	 */
+	public function getStockType() {
+		return $this->stockType;
+	}
 
-    /**
-     * Get stock.
-     *
-     * @return int Stock
-     */
-    public function getStock()
-    {
-        if ($this->getStockType() !== ElcodiProductStock::INHERIT_STOCK) {
-            return $this->stock;
-        }
+	/**
+	 * Get stock.
+	 *
+	 * @return int Stock
+	 */
+	public function getStock() {
+		if ($this->getStockType() !== ElcodiProductStock::INHERIT_STOCK) {
+			return $this->stock;
+		}
 
-        $stock = ElcodiProductStock::INFINITE_STOCK;
-        foreach ($this->getPurchasables() as $purchasable) {
-            $purchasableStock = $purchasable->getStock();
-            if (is_int($purchasableStock) && (
-                !is_int($stock) ||
-                $purchasableStock < $stock
-            )) {
-                $stock = $purchasableStock;
-            }
-        }
+		$stock = ElcodiProductStock::INFINITE_STOCK;
+		foreach ($this->getPurchasables() as $purchasable) {
+			$purchasableStock = $purchasable->getStock();
+			if (is_int($purchasableStock) && (
+				!is_int($stock) ||
+				$purchasableStock < $stock
+			)) {
+				$stock = $purchasableStock;
+			}
+		}
 
-        return $stock;
-    }
+		return $stock;
+	}
 
-    /**
-     * Sets Type.
-     *
-     * @param int $type Type
-     *
-     * @return $this Self object
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
+	/**
+	 * Sets Type.
+	 *
+	 * @param int $type Type
+	 *
+	 * @return $this Self object
+	 */
+	public function setType($type) {
+		$this->type = $type;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get Type.
-     *
-     * @return int Type
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+	/**
+	 * Get Type.
+	 *
+	 * @return int Type
+	 */
+	public function getType() {
+		return $this->type;
+	}
 
-    /**
-     * Set discount.
-     *
-     * @param int $discount Discount
-     *
-     * @return $this Self object
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = $discount;
+	/**
+	 * Set discount.
+	 *
+	 * @param int $discount Discount
+	 *
+	 * @return $this Self object
+	 */
+	public function setDiscount($discount) {
+		$this->discount = $discount;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get discount.
-     *
-     * @return int discount
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
+	/**
+	 * Get discount.
+	 *
+	 * @return int discount
+	 */
+	public function getDiscount() {
+		return $this->discount;
+	}
 
-    /**
-     * Adds an purchasable if not already in the collection.
-     *
-     * @param PurchasableInterface $purchasable Purchasable
-     *
-     * @return $this Self object;
-     */
-    public function addPurchasable(PurchasableInterface $purchasable)
-    {
-        $this
-            ->purchasables
-            ->add($purchasable);
+	/**
+	 * Adds an purchasable if not already in the collection.
+	 *
+	 * @param PurchasableInterface $purchasable Purchasable
+	 *
+	 * @return $this Self object;
+	 */
+	public function addPurchasable(PurchasableInterface $purchasable) {
+		$this
+			->purchasables
+			->add($purchasable);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Removes an purchasable from the collection.
-     *
-     * @param PurchasableInterface $purchasable Purchasable to be removed
-     *
-     * @return $this Self object
-     */
-    public function removePurchasable(PurchasableInterface $purchasable)
-    {
-        $this
-            ->purchasables
-            ->removeElement($purchasable);
+	/**
+	 * Removes an purchasable from the collection.
+	 *
+	 * @param PurchasableInterface $purchasable Purchasable to be removed
+	 *
+	 * @return $this Self object
+	 */
+	public function removePurchasable(PurchasableInterface $purchasable) {
+		$this
+			->purchasables
+			->removeElement($purchasable);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns purchasable purchasables.
-     *
-     * @return Collection Purchasables
-     */
-    public function getPurchasables()
-    {
-        return $this->purchasables;
-    }
+	/**
+	 * Returns purchasable purchasables.
+	 *
+	 * @return Collection Purchasables
+	 */
+	public function getPurchasables() {
+		return $this->purchasables;
+	}
 
-    /**
-     * Sets purchasable purchasables.
-     *
-     * @param Collection $purchasables Purchasables
-     *
-     * @return $this Self object
-     */
-    public function setPurchasables(Collection $purchasables)
-    {
-        $this->purchasables = $purchasables;
+	/**
+	 * Sets purchasable purchasables.
+	 *
+	 * @param Collection $purchasables Purchasables
+	 *
+	 * @return $this Self object
+	 */
+	public function setPurchasables(Collection $purchasables) {
+		$this->purchasables = $purchasables;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set categories.
-     *
-     * @param Collection $categories Categories
-     *
-     * @return $this Self object
-     */
-    public function setCategories(Collection $categories)
-    {
-        $this->categories = $categories;
+	/**
+	 * Set categories.
+	 *
+	 * @param Collection $categories Categories
+	 *
+	 * @return $this Self object
+	 */
+	public function setCategories(Collection $categories) {
+		$this->categories = $categories;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Add category.
-     *
-     * @param CategoryInterface $category Category
-     *
-     * @return $this Self object
-     */
-    public function addCategory(CategoryInterface $category)
-    {
-        if (!$this
-            ->categories
-            ->contains($category)
-        ) {
-            $this
-                ->categories
-                ->add($category);
-        }
+	/**
+	 * Add category.
+	 *
+	 * @param CategoryInterface $category Category
+	 *
+	 * @return $this Self object
+	 */
+	public function addCategory(CategoryInterface $category) {
+		if (!$this
+			->categories
+			->contains($category)
+		) {
+			$this
+				->categories
+				->add($category);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Remove category.
-     *
-     * @param CategoryInterface $category Category
-     *
-     * @return $this Self object
-     */
-    public function removeCategory(CategoryInterface $category)
-    {
-        $this
-            ->categories
-            ->removeElement($category);
+	/**
+	 * Remove category.
+	 *
+	 * @param CategoryInterface $category Category
+	 *
+	 * @return $this Self object
+	 */
+	public function removeCategory(CategoryInterface $category) {
+		$this
+			->categories
+			->removeElement($category);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set the principalCategory.
-     *
-     * @param CategoryInterface $principalCategory Principal category
-     *
-     * @return $this Self object
-     */
-    public function setPrincipalCategory(CategoryInterface $principalCategory = null)
-    {
-        $this->principalCategory = $principalCategory;
+	/**
+	 * Set the principalCategory.
+	 *
+	 * @param CategoryInterface $principalCategory Principal category
+	 *
+	 * @return $this Self object
+	 */
+	public function setPrincipalCategory(CategoryInterface $principalCategory = null) {
+		$this->principalCategory = $principalCategory;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set product manufacturer.
-     *
-     * @param ManufacturerInterface $manufacturer Manufacturer
-     *
-     * @return $this Self object
-     */
-    public function setManufacturer(ManufacturerInterface $manufacturer = null)
-    {
-        $this->manufacturer = $manufacturer;
+	/**
+	 * Set product manufacturer.
+	 *
+	 * @param ManufacturerInterface $manufacturer Manufacturer
+	 *
+	 * @return $this Self object
+	 */
+	public function setManufacturer(ManufacturerInterface $manufacturer = null) {
+		$this->manufacturer = $manufacturer;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Tells if this product has variants.
-     *
-     * @return bool Product has variants
-     */
-    public function getVariants()
-    {
-        return $this->variants;
-    }
+	/**
+	 * Gets product variants.
+	 *
+	 * @return Collection Variants
+	 */
+	public function getVariants() {
+		return $this->variants;
+	}
 
-    /**
-     * Get purchasable type.
-     *
-     * @return string Purchasable type
-     */
-    public function getPurchasableType()
-    {
-        return 'purchasable_pack';
-    }
+	/**
+	 * Adds a Variant for this Product.
+	 *
+	 * @param VariantInterface $variant
+	 *
+	 * @return $this Self object
+	 */
+	public function addVariant(VariantInterface $variant) {
+		if (!$this
+			->variants
+			->contains($variant)) {
+			$this
+				->variants
+				->add($variant);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Sets product variants.
+	 *
+	 * @param Collection $variants Variants
+	 *
+	 * @return $this Self object
+	 */
+	public function setVariants(Collection $variants) {
+		$this->variants = $variants;
+
+		return $this;
+	}
+
+	/**
+	 * Tells if this product has variants.
+	 *
+	 * @return bool Product has variants
+	 */
+	public function hasVariants() {
+
+		if ($this->variants) {
+			# code...
+			return !$this
+				->variants
+				->isEmpty();
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get purchasable type.
+	 *
+	 * @return string Purchasable type
+	 */
+	public function getPurchasableType() {
+		return 'purchasable_pack';
+	}
 }
