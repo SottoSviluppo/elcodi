@@ -484,6 +484,49 @@ abstract class Purchasable implements PurchasableInterface {
 	}
 
 	/**
+	 * Get the principalCategory.
+	 *
+	 * @return CategoryInterface Principal category
+	 */
+	public function setPrincipalCategory(CategoryInterface $principalCategory) {
+		$this->principalCategory = $principalCategory;
+	}
+
+	/**
+	 * Add category.
+	 *
+	 * @param CategoryInterface $category Category
+	 *
+	 * @return $this Self object
+	 */
+	public function addCategory(CategoryInterface $category) {
+		if (!$this
+			->categories
+			->contains($category)
+		) {
+			$this
+				->categories
+				->add($category);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Remove category.
+	 *
+	 * @param CategoryInterface $category Category
+	 *
+	 * @return $this Self object
+	 */
+	public function removeCategory(CategoryInterface $category) {
+		$this
+			->categories
+			->removeElement($category);
+
+		return $this;
+	}
+	/**
 	 * Get purchasable type.
 	 *
 	 * @return string Purchasable type
