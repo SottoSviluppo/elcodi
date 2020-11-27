@@ -488,7 +488,7 @@ abstract class Purchasable implements PurchasableInterface {
 	 *
 	 * @return CategoryInterface Principal category
 	 */
-	public function setPrincipalCategory(CategoryInterface $principalCategory) {
+	public function setPrincipalCategory(CategoryInterface $principalCategory = null) {
 		$this->principalCategory = $principalCategory;
 	}
 
