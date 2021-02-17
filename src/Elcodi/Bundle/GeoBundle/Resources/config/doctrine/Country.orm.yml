@@ -24,6 +24,16 @@ Elcodi\Component\Geo\Entity\Country:
             type: boolean
             options:
                 default: false
+        assoggetatoIVA:
+            column: assoggetato_IVA
+            type: boolean
+            options:
+                default: false
+        dicituraFattura:
+            column: dicitura_fattura
+            type: string
+            length: 255
+            nullable: true
         enabled:
             column: enabled
             type: boolean

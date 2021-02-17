@@ -18,7 +18,6 @@
 namespace Elcodi\Component\Geo\Entity\Interfaces;
 
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
-// use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 
 /**
@@ -27,7 +26,6 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 interface CountryInterface extends
 IdentifiableInterface,
 DateTimeInterface
-// EnabledInterface
 
 {
 
@@ -62,4 +60,36 @@ DateTimeInterface
      * @return string IsUe
      */
     public function getIsUe();
+
+    /**
+     * Sets assoggetatoIVA.
+     *
+     * @param boolean $assoggetatoIVA
+     *
+     * @return $this Self object
+     */
+    public function setAssoggetatoIVA($assoggetatoIVA);
+
+    /**
+     * Get assoggetatoIVA.
+     *
+     * @return boolean assoggetatoIVA
+     */
+    public function getAssoggetatoIVA();
+
+    /**
+     * Sets dicituraFattura.
+     *
+     * @param string $dicituraFattura
+     *
+     * @return $this Self object
+     */
+    public function setDicituraFattura($dicituraFattura);
+
+    /**
+     * Get dicituraFattura.
+     *
+     * @return string dicituraFattura
+     */
+    public function getDicituraFattura();
 }

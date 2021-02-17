@@ -31,9 +31,7 @@ class Country implements CountryInterface
 {
     use IdentifiableTrait,
     DateTimeTrait,
-    ExtraDataTrait,
-        EnabledTrait
-    ;
+    ExtraDataTrait,EnabledTrait;
 
     /**
      * @var string
@@ -46,6 +44,18 @@ class Country implements CountryInterface
      *
      */
     protected $isUe;
+
+    /**
+     * @var bool
+     *
+     */
+    protected $assoggetatoIVA;
+
+     /**
+     * @var string
+     *
+     */
+    protected $dicituraFattura;
 
     public function __construct()
     {
@@ -97,6 +107,54 @@ class Country implements CountryInterface
     public function getIsUe()
     {
         return $this->isUe;
+    }
+
+    /**
+     * Sets assoggetatoIVA.
+     *
+     * @param boolean $assoggetatoIVA
+     *
+     * @return $this Self object
+     */
+    public function setAssoggetatoIVA($assoggetatoIVA)
+    {
+        $this->assoggetatoIVA = $assoggetatoIVA;
+
+        return $this;
+    }
+
+    /**
+     * Get assoggetatoIVA.
+     *
+     * @return boolean assoggetatoIVA
+     */
+    public function getAssoggetatoIVA()
+    {
+        return $this->assoggetatoIVA;
+    }
+
+    /**
+     * Sets dicituraFattura.
+     *
+     * @param string $dicituraFattura
+     *
+     * @return $this Self object
+     */
+    public function setDicituraFattura($dicituraFattura)
+    {
+        $this->dicituraFattura = $dicituraFattura;
+
+        return $this;
+    }
+
+    /**
+     * Get dicituraFattura.
+     *
+     * @return string dicituraFattura
+     */
+    public function getDicituraFattura()
+    {
+        return $this->dicituraFattura;
     }
 
     public function __toString()
