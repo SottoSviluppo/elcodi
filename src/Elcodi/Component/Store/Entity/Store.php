@@ -19,6 +19,7 @@ namespace Elcodi\Component\Store\Entity;
 
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
