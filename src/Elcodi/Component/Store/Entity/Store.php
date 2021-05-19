@@ -34,7 +34,8 @@ class Store implements StoreInterface
 {
     use IdentifiableTrait,
     DateTimeTrait,
-        EnabledTrait;
+    EnabledTrait,
+    ExtraDataTrait;
 
     /**
      * @var string
