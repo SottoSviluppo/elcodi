@@ -22,13 +22,11 @@ Elcodi\Component\Geo\Entity\Country:
         isUe:
             column: is_ue
             type: boolean
-            options:
-                default: false
+            nullable: true
         assoggetatoIVA:
             column: assoggetato_IVA
             type: boolean
-            options:
-                default: false
+            nullable: true
         dicituraFattura:
             column: dicitura_fattura
             type: string
