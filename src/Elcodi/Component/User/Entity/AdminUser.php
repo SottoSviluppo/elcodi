@@ -21,12 +21,15 @@ use Symfony\Component\Security\Core\Role\Role;
 
 use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
+use Elcodi\Component\Core\Entity\Traits\ExtraDataTrait;
 
 /**
  * Class AdminUser.
  */
 class AdminUser extends AbstractUser implements AdminUserInterface
 {
+    use ExtraDataTrait;
+
     /**
      * Admin User roles.
      *

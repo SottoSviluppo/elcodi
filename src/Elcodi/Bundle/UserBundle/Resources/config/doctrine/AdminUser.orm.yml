@@ -7,6 +7,11 @@ Elcodi\Component\User\Entity\AdminUser:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        extraData:
+            column: extra_data
+            type: json_array
+            nullable: true 
 
     lifecycleCallbacks:
             preUpdate: [loadUpdateAt]
