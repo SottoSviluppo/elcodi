@@ -30,6 +30,9 @@ class PurchasableAmountCouponService {
 			foreach ($purchasable->getCategories() as $purchasableCategory) {
 				//prezzo per la quantità
 				$purchasablePrice = $purchasable->getPrice();
+                if ($purchasable->inOffer()){
+                    $purchasablePrice = $purchasable->getReducedPrice();
+                }
 				$purchasableAmount = $purchasablePrice->multiply($cartLine->getQuantity());
 
 				//controllo se i prezzi sono comprensivi di tasse, se non lo sono applico l'iva
