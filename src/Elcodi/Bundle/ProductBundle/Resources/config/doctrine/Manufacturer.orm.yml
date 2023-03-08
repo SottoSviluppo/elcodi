@@ -12,12 +12,12 @@ Elcodi\Component\Product\Entity\Manufacturer:
             column: name
             type: string
             length: 255
-            nullable: false
+            nullable: true
         slug:
             column: slug
             type: string
             length: 255
-            nullable: false
+            nullable: true
         description:
             column: description
             type: text
