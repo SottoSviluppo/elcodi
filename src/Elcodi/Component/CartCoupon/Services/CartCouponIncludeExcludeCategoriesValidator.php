@@ -41,11 +41,12 @@ class CartCouponIncludeExcludeCategoriesValidator {
 	private $currencyConverter;
 	private $purchasableAmountCouponService;
 
-	/**
-	 * Construct.
-	 *
-	 * @param CurrencyConverter $currencyConverter
-	 */
+    /**
+     * Construct.
+     *
+     * @param CurrencyConverter $currencyConverter
+     * @param $purchasableAmountCouponService
+     */
 	public function __construct(CurrencyConverter $currencyConverter, $purchasableAmountCouponService) {
 		$this->currencyConverter = $currencyConverter;
 		$this->purchasableAmountCouponService = $purchasableAmountCouponService;

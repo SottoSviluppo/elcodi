@@ -50,17 +50,20 @@ class CartCouponCustomerCategoriesValidator {
 		if (count($couponCustomerCategories) == 0) {
 			return;
 		}
-		$loggedCustomer = $this->securityTokenStorage->getToken()->getUser();
 
-		if ($loggedCustomer instanceof CustomerInterface) {
-			$categoriesLoggedCustomer = $loggedCustomer->getCustomerCategories();
+        if($this->securityTokenStorage->getToken()) {
+            $loggedCustomer = $this->securityTokenStorage->getToken()->getUser();
 
-			$haveCustomerCategory = $this->customerCategoryService->haveCustomerCategories($loggedCustomer, $categoriesLoggedCustomer, $couponCustomerCategories);
-			if (!$haveCustomerCategory) {
-				throw new CouponCustomerCategoriesException();
-			}
+            if ($loggedCustomer instanceof CustomerInterface) {
+                $categoriesLoggedCustomer = $loggedCustomer->getCustomerCategories();
 
-		}
+                $haveCustomerCategory = $this->customerCategoryService->haveCustomerCategories($loggedCustomer, $categoriesLoggedCustomer, $couponCustomerCategories);
+                if (!$haveCustomerCategory) {
+                    throw new CouponCustomerCategoriesException();
+                }
+
+            }
+        }
 
 		return;
 
